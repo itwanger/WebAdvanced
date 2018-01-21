@@ -1,3 +1,3 @@
 # WebAdvanced
 
-第二章，导入jQuery1
+基础版
