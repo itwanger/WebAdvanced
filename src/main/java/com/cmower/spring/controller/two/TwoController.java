@@ -10,4 +10,9 @@ public class TwoController {
 	public String index() {
 		return "two/index";
 	}
+	
+	@RequestMapping("jslib")
+	public String jslib() {
+		return "two/jslib";
+	}
 }

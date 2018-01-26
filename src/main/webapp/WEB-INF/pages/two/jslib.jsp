@@ -4,12 +4,10 @@
 <html lang="zh-CN">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>jQuery的第一行代码</title>
-<!-- <script src="resources/js/jquery-3.3.1.js"></script> -->
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<title>JS库文件管理</title>
 </head>
 <body>
+	<%@ include file="/resources/common/jslib.jsp"%>
 	<script type="text/javascript">
 	<!--
 		$(function() {
@@ -18,5 +16,6 @@
 		});
 	//-->
 	</script>
+	
 </body>
 </html>
