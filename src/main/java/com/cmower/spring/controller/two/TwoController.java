@@ -12,7 +12,7 @@ public class TwoController {
 	}
 	
 	@RequestMapping("jslib")
-	public String jslib() {
-		return "two/jslib";
+	public String index2() {
+		return "two/index2";
 	}
 }
