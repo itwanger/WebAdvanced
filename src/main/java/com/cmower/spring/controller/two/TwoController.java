@@ -1,6 +1,7 @@
 package com.cmower.spring.controller.two;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -12,7 +13,12 @@ public class TwoController {
 	}
 	
 	@RequestMapping("jslib")
-	public String index2() {
+	public String jslib() {
+		return "two/index2";
+	}
+	
+	@RequestMapping("jslib/{id}")
+	public String jslib(@PathVariable String id) {
 		return "two/index2";
 	}
 }
