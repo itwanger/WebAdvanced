@@ -27,31 +27,32 @@
 	<label for="c6">尚未设置checked</label>
 
 	<%@ include file="/resources/common/jslib.jsp"%>
-	<script type="text/javascript">
-		$(function() {
-			var attrs = [], props = [];
+<script type="text/javascript">
+	$(function() {
+		var attrs = [], props = [];
 
-			$("input").each(function(i, n) {
-				var attr = {}, prop = {};
+		$("input").each(function(i, n) {
+			var attr = {}, prop = {}, $this = $(this);
 
-				attr.id = $(this).attr("id");
-				attr.name = $(this).attr("name");
-				attr.cmower = $(this).attr("cmower");
-				attr.type = $(this).attr("type");
-				attr.checked = $(this).attr("checked");
-				attrs[i] = attr;
+			attr.id = $this.attr("id");
+			attr.name = $this.attr("name");
+			attr.cmower = $this.attr("cmower");
+			attr.type = $this.attr("type");
+			attr.checked = $this.attr("checked");
+			attrs[i] = attr;
 
-				prop.id = $(this).prop("id");
-				prop.name = $(this).prop("name");
-				prop.cmower = $(this).prop("cmower");
-				prop.type = $(this).prop("type");
-				prop.checked = $(this).prop("checked");
-				props[i] = prop;
-			});
-
-			console.table(attrs);
-			console.table(props);
+			prop.id = $this.prop("id");
+			prop.name = $this.prop("name");
+			prop.cmower = $this.prop("cmower");
+			prop.type = $this.prop("type");
+			prop.checked = $this.prop("checked");
+			props[i] = prop;
 		});
-	</script>
+		console.log("attr()方法获取属性结果");
+		console.table(attrs);
+		console.log("prop()方法获取属性结果");
+		console.table(props);
+	});
+</script>
 </body>
 </html>

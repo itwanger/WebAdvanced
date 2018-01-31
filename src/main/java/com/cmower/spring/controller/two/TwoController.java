@@ -22,8 +22,13 @@ public class TwoController {
 		return "two/index2";
 	}
 	
-	@RequestMapping("attrVsProp")
-	public String attrVsProp() {
-		return "two/attr_prop";
+	@RequestMapping("attrVsPropGetter")
+	public String attrVsPropGetter() {
+		return "two/attr_prop_getter";
+	}
+	
+	@RequestMapping("attrVsPropSetter")
+	public String attrVsPropSetter() {
+		return "two/attr_prop_setter";
 	}
 }
