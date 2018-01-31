@@ -21,4 +21,9 @@ public class TwoController {
 	public String jslib(@PathVariable String id) {
 		return "two/index2";
 	}
+	
+	@RequestMapping("attrVsProp")
+	public String attrVsProp() {
+		return "two/attr_prop";
+	}
 }
