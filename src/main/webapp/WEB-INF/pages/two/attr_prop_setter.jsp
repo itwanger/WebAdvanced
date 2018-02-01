@@ -6,53 +6,43 @@
 <title>通过attr()和prop()设置HTML属性值</title>
 </head>
 <body>
+	<input id="c1" type="checkbox" />
+	<label for="c1">attr选中</label>
 	<br>
+	<input id="c2" type="checkbox" name="checkbox" cmower="沉默王二" checked="checked" />
+	<label for="c2">attr取消</label>
 	<br>
-	<input id="c1" type="checkbox" checked="checked" />
-	<label for="c1">checked="checked"</label>
+	<input id="c3" type="checkbox" />
+	<label for="c3">prop选中</label>
 	<br>
-	<input id="c2" type="checkbox" checked="true" />
-	<label for="c2">checked="true"</label>
+	<input id="c4" type="checkbox" name="checkbox" cmower="沉默王二" checked="checked" />
+	<label for="c4">prop取消</label>
 	<br>
-	<input id="c3" type="checkbox" checked="" />
-	<label for="c3">checked=""</label>
-	<br>
-	<input id="c4" type="checkbox" checked />
-	<label for="c4">checked</label>
-	<br>
-	<input id="c5" type="checkbox" checked="false" />
-	<label for="c5">checked="false"</label>
-	<br>
-	<input id="c6" type="checkbox" />
-	<label for="c6">尚未设置checked</label>
 
 	<%@ include file="/resources/common/jslib.jsp"%>
-	<script type="text/javascript">
-		$(function() {
-			var attrs = [], props = [];
-
-			$("input").each(function(i, n) {
-				var attr = {}, prop = {}, $this = $(this);
-
-				attr.id = $this.attr("id");
-				attr.name = $this.attr("name");
-				attr.cmower = $this.attr("cmower");
-				attr.type = $this.attr("type");
-				attr.checked = $this.attr("checked");
-				attrs[i] = attr;
-
-				prop.id = $this.prop("id");
-				prop.name = $this.prop("name");
-				prop.cmower = $this.prop("cmower");
-				prop.type = $this.prop("type");
-				prop.checked = $this.prop("checked");
-				props[i] = prop;
-			});
-			console.log("attr()方法获取属性结果");
-			console.table(attrs);
-			console.log("prop()方法获取属性结果");
-			console.table(props);
-		});
-	</script>
+<script type="text/javascript">
+	$(function() {
+		$("#c1").attr({
+			name : "checkbox",
+			cmower : "沉默王二",
+			checked : true,
+		}).next().html($("#c1").attr("name") + "," + $("#c1").attr("cmower") + "," + $("#c1").attr("checked"));
+		$("#c2").attr({
+			name : "",
+			cmower : "",
+			checked : false,
+		}).next().html($("#c2").attr("name") + "," + $("#c2").attr("cmower") + "," + $("#c2").attr("checked"));
+		$("#c3").prop({
+			name : "checkbox",
+			cmower : "沉默王二",
+			checked : true,
+		}).next().html($("#c3").prop("name") + "," + $("#c3").prop("cmower") + "," + $("#c3").prop("checked"));
+		$("#c4").prop({
+			name : "",
+			cmower : "",
+			checked : false,
+		}).next().html($("#c4").prop("name") + "," + $("#c4").prop("cmower") + "," + $("#c4").prop("checked"));
+	});
+</script>
 </body>
 </html>
