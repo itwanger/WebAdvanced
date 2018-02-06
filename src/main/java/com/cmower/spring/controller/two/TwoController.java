@@ -31,4 +31,14 @@ public class TwoController {
 	public String attrVsPropSetter() {
 		return "two/attr_prop_setter";
 	}
+	
+	@RequestMapping("attrSetter")
+	public String attrSetter() {
+		return "two/attr_setter";
+	}
+	
+	@RequestMapping("valGetter")
+	public String valGetter() {
+		return "two/val_getter";
+	}
 }

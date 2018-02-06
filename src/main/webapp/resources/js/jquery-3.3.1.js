@@ -3837,7 +3837,8 @@ var readyList = jQuery.Deferred();
 jQuery.fn.ready = function( fn ) {
 
 	readyList
-		.then( fn ).catch( function( error ) {
+		.then( fn ).
+		catch( function( error ) {
 			jQuery.readyException( error );
 		} );
 
