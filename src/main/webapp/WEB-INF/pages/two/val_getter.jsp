@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>通过val()获取Form表单值</title>
+<title>通过val()获取Form表单域的值</title>
 </head>
 <body>
 	<form>

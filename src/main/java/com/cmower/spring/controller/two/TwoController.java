@@ -41,4 +41,9 @@ public class TwoController {
 	public String valGetter() {
 		return "two/val_getter";
 	}
+	
+	@RequestMapping("valSetter")
+	public String valSetter() {
+		return "two/val_setter";
+	}
 }
