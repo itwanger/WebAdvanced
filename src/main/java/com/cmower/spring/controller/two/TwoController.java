@@ -46,4 +46,15 @@ public class TwoController {
 	public String valSetter() {
 		return "two/val_setter";
 	}
+	
+	@RequestMapping("textVsHtmlGSetter")
+	public String textVsHtmlSGetter() {
+		return "two/text_html_gsetter";
+	}
+	
+	@RequestMapping("dataGSetter")
+	public String dataGSetter() {
+		return "two/data_gsetter";
+	}
+	
 }
