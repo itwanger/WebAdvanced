@@ -57,4 +57,9 @@ public class TwoController {
 		return "two/data_gsetter";
 	}
 	
+	@RequestMapping("domOperation")
+	public String domOperation() {
+		return "two/dom_operation";
+	}
+	
 }
