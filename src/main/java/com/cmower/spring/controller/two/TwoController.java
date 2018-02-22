@@ -3,6 +3,7 @@ package com.cmower.spring.controller.two;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("two")
@@ -60,6 +61,17 @@ public class TwoController {
 	@RequestMapping("domOperation")
 	public String domOperation() {
 		return "two/dom_operation";
+	}
+	
+	@RequestMapping("initAjaxNprogress")
+	public String initAjaxNprogress() {
+		return "two/ajax_nprogress";
+	}
+	
+	@RequestMapping("ajaxNprogress")
+	@ResponseBody
+	public String ajaxNprogress() {
+		return "你好";
 	}
 	
 }

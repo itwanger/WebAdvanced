@@ -31,6 +31,13 @@
 	</li>
 	<li class="item-iii">III</li>
 </ul>
+
+<p class="blessing">
+  新春快乐, <span>沉默王二</span> <em>恭祝大家狗年旺旺旺。</em>.
+</p>
+<p class="blessing1">
+  新春快乐, <span>沉默王二</span> <em>恭祝大家狗年旺旺旺。</em>.
+</p>
 <script type="text/javascript">
 	$(function() {
 		// 2.4.1 查找节点
@@ -61,6 +68,14 @@
 		console.log("li.item-ii的前一个元素 " + $("li.item-ii").prev().map(_toString).get());// li.item-i
 		
 		console.log("li.item-ii的同辈元素 " + $("li.item-ii").siblings().map(_toString).get().join("，"));// li.item-i，li.item-iii
+		
+		// 2.4.3 创建并插入节点
+		var hello = $("<p>新年好</p>");
+		$("body").append(hello);
+		
+		// 2.4.4 删除节点
+		$(".blessing").empty();
+		$(".blessing1").remove();
 	});
 </script>
 </body>
