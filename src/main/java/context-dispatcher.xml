@@ -27,10 +27,16 @@
 		<!-- 通过设置前缀和后缀来缩短view的路径，例如在controller中指定“1/adminlte”就代表的是“/WEB-INF/pages/1/adminlte.jsp” -->
 	</bean>
 
-	<!-- MVC Annotation Driven -->
-	<mvc:annotation-driven />
+	<mvc:annotation-driven>
+		<!-- 消息转换器 -->
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes" value="text/html;charset=UTF-8" />
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
 
 	<!-- 静态资源（常用组件、图片、样式表、JavaScript、上传文件目录） -->
-	<mvc:resources location="/resources/" mapping="/resources/**"/>
+	<mvc:resources location="/resources/" mapping="/resources/**" />
 
 </beans>  
