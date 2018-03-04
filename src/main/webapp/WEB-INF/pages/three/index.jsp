@@ -5,6 +5,32 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Bootstrap粘页脚</title>
 <%@ include file="/resources/common/csslib.jsp"%>
+<style type="text/css">
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* 按页脚高度计算出body的底部边距  */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* 在这里设置页脚的固定高度  */
+  height: 60px;
+  background-color: #000000;
+}
+
+.text-muted {
+    color: white;
+}
+
+.container .text-muted {
+	margin: 20px 0;
+}
+</style>
 </head>
 <body>
 	<div class="container">
