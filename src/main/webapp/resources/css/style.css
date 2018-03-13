@@ -1,0 +1,49 @@
+/*
+ * Examples
+ *
+ * Isolated sections of example content for each component or feature. Usually
+ * followed by a code snippet.
+ */
+
+.bs-example {
+  position: relative;
+  padding: 45px 15px 15px;
+  margin: 0 -15px 15px;
+  border-color: #e5e5e5 #eee #eee;
+  border-style: solid;
+  border-width: 1px 0;
+  -webkit-box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
+          box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
+}
+/* Echo out a label for the example */
+.bs-example:after {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #959595;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  content: "示例：";
+}
+
+.bs-example-padded-bottom {
+  padding-bottom: 24px;
+}
+@media (min-width: 768px) {
+  .bs-example {
+    margin-right: 0;
+    margin-left: 0;
+    background-color: #fff;
+    border-color: #ddd;
+    border-width: 1px;
+    border-radius: 4px 4px 0 0;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
+}
+
+.iconfont {
+	display: inline-block;
+}
