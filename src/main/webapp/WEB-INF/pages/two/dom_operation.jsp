@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+<%@ include file="/resources/common/taglib.jsp"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>通过jQuery方法操作DOM节点</title>
 <%@ include file="/resources/common/jslib.jsp"%>
@@ -63,6 +64,7 @@
 		
 		console.log("li.item-a的父元素 " + $("li.item-a").parent().map(_toString).get());// ul.level-2
 		console.log("li.item-a的祖先元素 " + $("li.item-a").parents().map(_toString).get().join("，")); // ul.level-2，li.item-ii，ul.level-1，body，html
+		console.log("li.item-a的邻近元素 " + $("li.item-a").closest("ul").map(_toString).get());// ul.level-2
 
 		console.log("li.item-ii的后一个元素 " + $("li.item-ii").next().map(_toString).get());// li.item-iii
 		console.log("li.item-ii的前一个元素 " + $("li.item-ii").prev().map(_toString).get());// li.item-i

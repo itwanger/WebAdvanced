@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
+<%@ include file="/resources/common/taglib.jsp"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>通过attr()设置HTML属性值</title>
 </head>
 <body>
-	<img id="cmower1" src="${pageContext.request.contextPath}/resources/images/cmower160x160.jpg" alt="沉默王二">
-	<img id="cmower2" src="${pageContext.request.contextPath}/resources/images/cmower160x160.jpg" alt="沉默王二">
-	<img id="cmower" src="${pageContext.request.contextPath}/resources/images/cmower160x160.jpg" alt="沉默王二">
-	<img id="cmower3" src="${pageContext.request.contextPath}/resources/images/cmower160x160.jpg" alt="沉默王二">
-	<img id="cmower4" src="${pageContext.request.contextPath}/resources/images/cmower160x160.jpg" alt="沉默王二">
+	<img id="cmower1" src="${ctx}/resources/images/cmower160x160.jpg" alt="沉默王二">
+	<img id="cmower2" src="${ctx}/resources/images/cmower160x160.jpg" alt="沉默王二">
+	<img id="cmower" src="${ctx}/resources/images/cmower160x160.jpg" alt="沉默王二">
+	<img id="cmower3" src="${ctx}/resources/images/cmower160x160.jpg" alt="沉默王二">
+	<img id="cmower4" src="${ctx}/resources/images/cmower160x160.jpg" alt="沉默王二">
 
 	<%@ include file="/resources/common/jslib.jsp"%>
 	<script type="text/javascript">
