@@ -55,5 +55,19 @@ public class ThreeController {
 	public String icon() {
 		return "three/icon";
 	}
+	
+	@RequestMapping("nav")
+	public String nav() {
+		return "three/nav";
+	}
+	@RequestMapping("accordion")
+	public String accordion() {
+		return "three/accordion";
+	}
+	
+	@RequestMapping("topNav")
+	public String topNav() {
+		return "three/top_nav";
+	}
 
 }
