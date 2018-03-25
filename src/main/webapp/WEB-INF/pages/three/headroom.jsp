@@ -4,14 +4,29 @@
 <%@ include file="/resources/common/taglib.jsp"%>
 <head>
 <%@ include file="/resources/common/meta.jsp"%>
-<title>Bootstrap的顶部固定的导航条</title>
+<title>Bootstrap顶部固定的导航条结合headroom.js</title>
 <link href="${ctx}/resources/components/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="${ctx}/resources/components/flat-ui/css/flat-ui.css" rel="stylesheet">
 <link href="${ctx}/resources/components/flat-ui/assets/css/demo.css" rel="stylesheet">
-<link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<style type="text/css">
+.headroom {
+	will-change: transform; /* 增强页面渲染性能 */
+	transition: transform 200ms linear; /* 以transform的形式来进行过渡，持续时间为200ms，运动形式为linear(匀速) */
+}
+
+.headroom--pinned {
+	/* display: block; */
+	transform: translateY(0%); /* 基于原来的位置,沿Y轴平移 */
+}
+
+.headroom--unpinned {
+	/* display: none; */
+	transform: translateY(-100%); /* -100% 总能保证元素完全从视窗中移除 */
+}
+</style>
 </head>
 <body>
-	<nav class="navbar navbar-default navbar-fixed-top animated fadeInDown">
+	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#">沉默王二</a>
@@ -878,6 +893,26 @@
 	<script src="${ctx}/resources/components/flat-ui/js/vendor/video.js"></script>
 	<script>
 		videojs.options.flash.swf = "${ctx}/resources/components/flat-ui/js/vendors/video-js.swf"
+	</script>
+
+<script src="https://cdn.bootcss.com/headroom/0.9.4/headroom.js"></script>
+<script src="https://cdn.bootcss.com/headroom/0.9.4/jQuery.headroom.js"></script>
+	<script>
+		$("nav.navbar-fixed-top").headroom({
+			// 状态改变之前的容差
+			tolerance : 5,
+			// 在元素没有固定之前，垂直方向的偏移量（以px为单位）
+			offset : 505,
+			// 对于每个状态都可以自定义css classes 
+			classes : {
+				// 当元素初始化后所设置的class
+				initial : "headroom",
+				// 向上滚动时设置的class
+				pinned : "headroom--pinned",
+				// 向下滚动时所设置的class
+				unpinned : "headroom--unpinned"
+			}
+		});
 	</script>
 </body>
 </html>

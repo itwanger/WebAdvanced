@@ -69,5 +69,15 @@ public class ThreeController {
 	public String topNav() {
 		return "three/top_nav";
 	}
+	
+	@RequestMapping("headroom")
+	public String headroom() {
+		return "three/headroom";
+	}
+	
+	@RequestMapping("headroomAnimated")
+	public String headroomAnimated() {
+		return "three/headroom_animated";
+	}
 
 }

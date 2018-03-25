@@ -4,21 +4,24 @@
 <%@ include file="/resources/common/taglib.jsp"%>
 <head>
 <%@ include file="/resources/common/meta.jsp"%>
-<title>Bootstrap的顶部固定的导航条</title>
+<title>headroom.js的游戏室</title>
 <link href="${ctx}/resources/components/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="${ctx}/resources/components/flat-ui/css/flat-ui.css" rel="stylesheet">
 <link href="${ctx}/resources/components/flat-ui/assets/css/demo.css" rel="stylesheet">
 <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+<link href="${ctx}/resources/css/style.css" rel="stylesheet">
 </head>
 <body>
-	<nav class="navbar navbar-default navbar-fixed-top animated fadeInDown">
+	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">沉默王二</a>
+				<a class="navbar-brand" href="javascript:;">样式</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">jQuery</a></li>
-				<li><a href="#">Bootstrap</a></li>
+<li><a href="javascript:;" data-headroom-classes='{"initial":"animated","pinned":"slideDown","unpinned":"slideUp"}'>滑动</a></li>
+<li><a href="javascript:;" data-headroom-classes='{"initial":"animated","pinned":"swingInX","unpinned":"swingOutX"}'>摇摆</a></li>
+<li><a href="javascript:;" data-headroom-classes='{"initial":"animated","pinned":"flipInX","unpinned":"flipOutX"}'>翻动</a></li>
+<li><a href="javascript:;" data-headroom-classes='{"initial":"animated","pinned":"bounceInDown","unpinned":"bounceOutUp"}'>弹跳</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -878,6 +881,27 @@
 	<script src="${ctx}/resources/components/flat-ui/js/vendor/video.js"></script>
 	<script>
 		videojs.options.flash.swf = "${ctx}/resources/components/flat-ui/js/vendors/video-js.swf"
+	</script>
+
+	<script src="https://cdn.bootcss.com/headroom/0.9.4/headroom.js"></script>
+	<script src="https://cdn.bootcss.com/headroom/0.9.4/jQuery.headroom.js"></script>
+	<script>
+		var navbar_fixed_top = $("nav.navbar-fixed-top");
+		var defaults = {
+			"tolerance" : 5,
+			"offset" : 505,
+			"classes" : {
+				"initial" : "animated",
+				"pinned" : "slideDown",
+				"unpinned" : "slideUp"
+			}
+		};
+		navbar_fixed_top.find("ul.navbar-nav li a").click(function(event) {
+			var $this = $(this),classes = $this.data("headroom-classes");
+			options = $.extend(defaults, {"classes" : classes});
+			navbar_fixed_top.headroom("destroy").headroom(options);
+			event.preventDefault();
+		});
 	</script>
 </body>
 </html>
