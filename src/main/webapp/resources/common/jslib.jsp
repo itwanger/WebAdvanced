@@ -6,4 +6,10 @@
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
 <script src="https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
-<script src="${ctx}/resources/components/flat-ui/js/flat-ui.js"></script>
+
+<!-- 图像延迟加载 -->
+<%-- <script src="${ctx}/resources/components/lazyload/1.x/jquery.lazyload.js"></script> --%>
+<script src="https://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.js"></script>
+
+<script src="${ctx}/resources/components/qinge/qinge.core.js"></script>
+<script src="${ctx}/resources/components/qinge/qinge.ui.js"></script>
