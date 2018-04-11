@@ -11,7 +11,7 @@
 	<div class="bs-example">
 		<c:forEach begin="1" end="100">
 			<div class="row">
-				<img class="lazyload" data-original="https://avatars1.githubusercontent.com/u/6011374?s=460&v=4&<%=Math.random() %>"
+				<img class="lazyload" data-original="https://avatars1.githubusercontent.com/u/6011374?s=460&v=4&<%=Math.random() %>" 
 					style="width: 140px; height: 140px;">
 			</div>
 		</c:forEach>
