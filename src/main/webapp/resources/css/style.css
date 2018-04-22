@@ -527,3 +527,50 @@
     -o-animation-name: bounceOutUp;
     animation-name: bounceOutUp
 }
+
+/* icheck的例子 */
+.demo-title {
+	text-align: center;
+    padding-bottom: 6px;
+    font-size: 26px;
+    letter-spacing: -1px;
+}
+.demo-list {
+    position: relative;
+    padding: 33px 57px 17px;
+    color: #555;
+    background: #fff;
+    border: 3px solid #ddd8ce;
+}
+.demo-list ul:first-child {
+    float: left;
+}
+.demo-list ul {
+	float:right;
+    white-space: nowrap;
+}
+.demo-list ul li {
+    position: relative;
+    padding: 0 0 18px 42px;
+}
+.demo-list label {
+	cursor: pointer;
+}
+.demo-list ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.icheckbox_flat, .icheckbox_flat-red, .icheckbox_flat-green, .icheckbox_flat-blue, .icheckbox_flat-aero, .icheckbox_flat-grey, .icheckbox_flat-orange, .icheckbox_flat-yellow, .icheckbox_flat-pink, .icheckbox_flat-purple, .iradio_flat, .iradio_flat-red, .iradio_flat-green, .iradio_flat-blue, .iradio_flat-aero, .iradio_flat-grey, .iradio_flat-orange, .iradio_flat-yellow, .iradio_flat-pink, .iradio_flat-purple {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.icheckbox_square, .icheckbox_square-red, .icheckbox_square-green, .icheckbox_square-blue, .icheckbox_square-aero, .icheckbox_square-grey, .icheckbox_square-orange, .icheckbox_square-yellow, .icheckbox_square-pink, .icheckbox_square-purple, .iradio_square, .iradio_square-red, .iradio_square-green, .iradio_square-blue, .iradio_square-aero, .iradio_square-grey, .iradio_square-orange, .iradio_square-yellow, .iradio_square-pink, .iradio_square-purple {
+    position: absolute;
+    top: -1px;
+    left: 0;
+}
+.demo-list ul span {
+    color: #bbb;
+}

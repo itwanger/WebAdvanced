@@ -11,5 +11,8 @@
 <%-- <script src="${ctx}/resources/components/lazyload/1.x/jquery.lazyload.js"></script> --%>
 <script src="https://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.js"></script>
 
+<!-- 超级复选框和单选按钮 -->
+<script src="https://cdn.bootcss.com/iCheck/1.0.2/icheck.js"></script>
+
 <script src="${ctx}/resources/components/qinge/qinge.core.js"></script>
 <script src="${ctx}/resources/components/qinge/qinge.ui.js"></script>

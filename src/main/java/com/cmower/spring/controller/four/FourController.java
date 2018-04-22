@@ -18,4 +18,16 @@ public class FourController {
 	public String lazyload2() {
 		return "four/lazyload2";
 	}
+	@RequestMapping("icheck1")
+	public String icheck1() {
+		return "four/icheck1";
+	}
+	@RequestMapping("icheck2")
+	public String icheck2() {
+		return "four/icheck2";
+	}
+	@RequestMapping("icheck3")
+	public String icheck3() {
+		return "four/icheck3";
+	}
 }
