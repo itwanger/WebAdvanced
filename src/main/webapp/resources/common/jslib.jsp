@@ -14,5 +14,8 @@
 <!-- 超级复选框和单选按钮 -->
 <script src="https://cdn.bootcss.com/iCheck/1.0.2/icheck.js"></script>
 
+<!-- Bootstrap的开关组件 -->
+<script src="https://cdn.bootcss.com/bootstrap-switch/3.3.4/js/bootstrap-switch.js"></script>
+
 <script src="${ctx}/resources/components/qinge/qinge.core.js"></script>
 <script src="${ctx}/resources/components/qinge/qinge.ui.js"></script>

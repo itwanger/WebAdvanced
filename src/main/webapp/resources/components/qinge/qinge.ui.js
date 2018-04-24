@@ -48,6 +48,13 @@ function initUI($p) {
 			});
 		}
 	});
+	
+	// -----------------
+	// - Switch——Bootstrap的开关组件
+	// -----------------
+	$('input.switch').bootstrapSwitch().on('switchChange.bootstrapSwitch', function(event, state) {
+		console.log(state); // true | false
+	});
 }
 
 $(function() {

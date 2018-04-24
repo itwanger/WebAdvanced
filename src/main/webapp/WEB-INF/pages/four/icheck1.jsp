@@ -35,7 +35,6 @@
 		</div>
 	</div>
 	<script src="${ctx}/resources/components/jquery/jquery-3.3.1.js"></script>
-	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
 	<script src="https://cdn.bootcss.com/iCheck/1.0.2/icheck.js"></script>
 
 	<script>

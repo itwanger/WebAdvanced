@@ -574,3 +574,9 @@
 .demo-list ul span {
     color: #bbb;
 }
+.blank10 {
+	clear: both;
+	height: 10px;
+	line-height: 10px;
+	visibility: hidden;
+}

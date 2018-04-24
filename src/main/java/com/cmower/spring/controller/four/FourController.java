@@ -30,4 +30,13 @@ public class FourController {
 	public String icheck3() {
 		return "four/icheck3";
 	}
+	
+	@RequestMapping("switch1")
+	public String switch1() {
+		return "four/switch1";
+	}
+	@RequestMapping("switch2")
+	public String switch2() {
+		return "four/switch2";
+	}
 }
