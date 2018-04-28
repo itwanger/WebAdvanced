@@ -55,6 +55,19 @@ function initUI($p) {
 	$('input.switch').bootstrapSwitch().on('switchChange.bootstrapSwitch', function(event, state) {
 		console.log(state); // true | false
 	});
+	
+	// -----------------
+	// - Datetime Picker——Bootstrap 日期时间选择器
+	// -----------------
+	$('.datetime').each(function() {
+		var $this = $(this), format = $this.data("format");
+		$this.datetimepicker({
+			locale : 'zh-cn',
+			format : format,
+			showTodayButton : true,
+			showClear : true,
+		});
+	});
 }
 
 $(function() {

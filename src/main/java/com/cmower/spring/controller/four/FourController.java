@@ -2,13 +2,14 @@ package com.cmower.spring.controller.four;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("four")
 public class FourController {
 	@RequestMapping("")
-	public String index() {
-		return "four/index";
+	public String index(@RequestParam(required=false, defaultValue="index") String p) {
+		return "four/"+p;
 	}
 	@RequestMapping("lazyload1")
 	public String lazyload1() {
@@ -38,5 +39,13 @@ public class FourController {
 	@RequestMapping("switch2")
 	public String switch2() {
 		return "four/switch2";
+	}
+	@RequestMapping("datetimepicker1")
+	public String datetimepicker1() {
+		return "four/datetimepicker1";
+	}
+	@RequestMapping("datetimepicker2")
+	public String datetimepicker2() {
+		return "four/datetimepicker2";
 	}
 }
