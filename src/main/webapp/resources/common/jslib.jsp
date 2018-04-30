@@ -17,9 +17,10 @@
 <!-- Bootstrap的开关组件 -->
 <script src="https://cdn.bootcss.com/bootstrap-switch/3.3.4/js/bootstrap-switch.js"></script>
 
-<!-- Bootstrap 日期时间选择器 -->
 <script src="https://cdn.bootcss.com/moment.js/2.22.1/moment-with-locales.js"></script>
+<!-- Bootstrap 日期时间选择器 -->
 <script src="https://cdn.bootcss.com/eonasdan-bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.27/daterangepicker.js"></script>
 
 <script src="${ctx}/resources/components/qinge/qinge.core.js"></script>
 <script src="${ctx}/resources/components/qinge/qinge.ui.js"></script>

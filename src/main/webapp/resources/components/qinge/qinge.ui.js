@@ -68,6 +68,50 @@ function initUI($p) {
 			showClear : true,
 		});
 	});
+	
+	// -----------------
+	// - DateRange Picker——Bootstrap 日期范围选择器
+	// -----------------
+$('.daterange input').each(function() {
+	var $this = $(this);
+	$this.daterangepicker({
+		// 指示日期范围选择器是否应自动更新其<input>在初始化时以及选定日期更改时所附的元素的值。
+		// 默认为true
+		autoUpdateInput : false,
+		locale : {
+			customRangeLabel : '自定义',
+			// 显示的日期格式为 年-月-日
+			"format" : "YYYY-MM-DD",
+			// 两个日期之间的分隔符为“/”
+			"separator" : " / ",
+			// 点击“确定”按钮把选择的日期范围带回到文本输入框
+			"applyLabel" : "确定",
+			"cancelLabel" : "清除",
+			//星期日、星期一，一直到星期六
+			"daysOfWeek" : [ "日", "一", "二", "三", "四", "五", "六" ],
+			// 从一月到十二月
+			"monthNames" : [ "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月" ],
+			// 取值范围为0-6，即从周日到周六
+			// 我们中国人的习惯是从周一开始
+			"firstDay" : 1
+		},
+		"ranges" : {
+			'今日' : [ moment().startOf('day'), moment() ],
+			'昨日' : [ moment().subtract('days', 1).startOf('day'), moment().subtract('days', 1).endOf('day') ],
+			'最近7日' : [ moment().subtract('days', 6), moment() ],
+			'最近30日' : [ moment().subtract('days', 29), moment() ],
+			'上个月' : [ moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf("month") ]
+		},
+	}).on('apply.daterangepicker', function(ev, picker) {
+		// 点击确定按钮的时候，需要把选择的日期范围进行组合，然后赋值给当前组件
+		$(this).val(picker.startDate.format('YYYY-MM-DD') + ' / ' + picker.endDate.format('YYYY-MM-DD'));
+	}).on('cancel.daterangepicker', function(ev, picker) {
+		// 点击清除按钮的时候，设为空
+		$(this).val('');
+	}).css("min-width", "210px").next("span").click(function() {
+		$(this).parent().find('input').click();
+	});
+});
 }
 
 $(function() {
