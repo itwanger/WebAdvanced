@@ -22,5 +22,8 @@
 <script src="https://cdn.bootcss.com/eonasdan-bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.27/daterangepicker.js"></script>
 
+<!-- Bootstrap风格的标签输入组件 -->
+<script src="https://cdn.bootcss.com/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"></script>
+
 <script src="${ctx}/resources/components/qinge/qinge.core.js"></script>
 <script src="${ctx}/resources/components/qinge/qinge.ui.js"></script>

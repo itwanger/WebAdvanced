@@ -10,4 +10,5 @@
 <link href="https://cdn.bootcss.com/eonasdan-bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css"
 	rel="stylesheet">
 <link href="https://cdn.bootcss.com/bootstrap-daterangepicker/2.1.27/daterangepicker.css" rel="stylesheet">
+<link href="https://cdn.bootcss.com/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet">
 <link href="${ctx}/resources/css/style.css" rel="stylesheet">
