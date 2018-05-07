@@ -124,6 +124,17 @@ function initUI($p) {
 			trimValue : true
 		});
 	});
+	
+	// -----------------
+	// - Star Rating——简单而强大的星级评分插件
+	// -----------------
+	$('input.star-rating', $p).each(function() {
+		var $this = $(this), displayOnly = $this.is("[displayOnly]");
+		$this.rating({
+			language : "zh",
+			displayOnly : displayOnly,
+		});
+	});
 }
 
 $(function() {

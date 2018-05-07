@@ -25,5 +25,9 @@
 <!-- Bootstrap风格的标签输入组件 -->
 <script src="https://cdn.bootcss.com/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"></script>
 
+<!-- 简单而强大的星级评分插件 -->
+<script src="https://cdn.bootcss.com/bootstrap-star-rating/4.0.3/js/star-rating.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-star-rating/4.0.3/js/locales/zh.js"></script>
+
 <script src="${ctx}/resources/components/qinge/qinge.core.js"></script>
 <script src="${ctx}/resources/components/qinge/qinge.ui.js"></script>
