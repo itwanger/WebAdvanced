@@ -1,10 +1,12 @@
 package com.cmower.spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cmower.database.entity.Users;
 import com.cmower.database.mapper.UserMapper;
 
+@Service
 public class UserService {
 	@Autowired
 	private UserMapper userMapper;

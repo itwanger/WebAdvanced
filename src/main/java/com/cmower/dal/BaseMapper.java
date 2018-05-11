@@ -4,7 +4,7 @@ public interface BaseMapper<T extends DataEntity<T>, PK extends java.io.Serializ
 
 	PK insert(T model);
 
-	void delete(PK modelPK);
+	PK delete(PK modelPK);
 
 	PK updateSelective(T model);
 
