@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmower.database.mapper.UserMapper">
+	<!-- CONFIG -->
+	<resultMap id="BaseResultMap" type="Users">
+		<result column="id" property="id" />
+		<result column="username" property="username" />
+		<result column="password" property="password" />
+		<result column="create_date" property="create_date" />
+		<result column="update_date" property="update_date" />
+		<result column="del_flag" property="del_flag" />
+	</resultMap>
+
+	<!--列 -->
+	<sql id="Base_Column_List">
+		id, username, password,
+		create_date,update_date,del_flag
+	</sql>
+
+	<!-- 增 -->
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		insert into users (username, password, create_date, update_date)
+		values (#{username}, #{password}, #{create_date}, #{update_date})
+	</insert>
+	
+	<!-- 逻辑删除 -->
+	<update id="delete">
+  		update users set del_flag = 1 where id=#{id}
+  	</update>
+  	
+  	<!-- 更新用户信息 -->
+	<update id="updateSelective">
+		update users
+		<set>
+			<if test="username != null">
+				username = #{username},
+			</if>
+			<if test="password != null">
+				password = #{password},
+			</if>
+			<if test="del_flag != null">
+				del_flag = #{del_flag},
+			</if>
+			<if test="update_date != null">
+				update_date = #{update_date},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<!-- 查 -->
+	<select id="load" resultMap="BaseResultMap" parameterType="Long">
+		select
+		<include refid="Base_Column_List" />
+		from users as u
+		where u.id = #{id} and u.del_flag = 0
+	</select>
+	
+	<select id="get4MapList" resultType="hashmap">
+		select
+			u.id,
+			u.username,
+			u.update_date
+		from users u
+		where u.del_flag=0
+	</select>
+
+</mapper>
