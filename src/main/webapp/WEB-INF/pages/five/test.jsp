@@ -7,6 +7,6 @@
 <title>测试</title>
 </head>
 <body>
-    Hello ${name}！
+    报告主人 ${name}！数据库连接已打通！
 </body>
 </html>
