@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmower.database.mapper.RoleMapper">
+	<!-- CONFIG -->
+	<resultMap id="BaseResultMap" type="Role">
+	    <result column="id"  property="id" />
+	    <result column="name" property="name" />
+	    <result column="description" property="description" />
+	    <result column="parent_id" property="parent_id" />
+	    <result column="create_date" property="create_date" />
+		<result column="update_date" property="update_date" />
+		<result column="del_flag" property="del_flag" />
+	</resultMap>
+	
+	<resultMap id="BaseResultMap2" type="RoleResource">
+		<id property="id" column="id"  />
+		<result column="role_id" property="role_id"  />
+		<result column="resource_id" property="resource_id"  />
+	</resultMap>
+	
+	<!--列 -->
+	<sql id="Base_Column_List">
+		r.*
+	</sql>
+	
+	<sql id="queryJoins">
+	</sql>
+	
+	<sql id="Base4List">
+		from
+			role r
+			left join role_resource rr on rr.role_id=r.id
+			left join resource rs on rr.resource_id=rs.id
+		where 1=1
+		<if test="mo.role_serial != null and mo.role_serial != ''">
+			and r.role_serial like CONCAT(#{mo.role_serial}, '%')
+		</if>
+		<if test="mo.name != null and mo.name != ''">
+			and r.name like concat('%','${mo.name}','%')
+		</if>
+		<if test="mo.rolename != null and mo.rolename != '' ">
+			AND r.name=#{mo.rolename}
+		</if>
+		group by r.id,r.name
+	</sql>
+	
+	<select id="getList" resultType="hashmap" parameterType="map">
+		select
+			r.id,
+			r.name,
+			group_concat(rs.description SEPARATOR ',' ) resource_name
+		<include refid="Base4List" />
+		<choose>
+			<when test="orderField !=null and orderField !=''">
+				ORDER BY ${orderField}
+				<if test="orderDirection != null and orderDirection != ''">${orderDirection}</if>
+			</when>
+			<otherwise>
+				order by r.id DESC
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="countTotal" resultType="integer" parameterType="map">
+		select count(temp.id) from
+		(select r.id
+		<include refid="Base4List" />
+		) as temp
+	</select>
+	
+	<select id="load" resultMap="BaseResultMap" >
+        select 
+        <include refid="Base_Column_List" />
+	    from role r
+	    <include refid="queryJoins"/>
+	    where r.id = #{0} and r.del_flag = 0
+  	</select>
+  	
+	<select id="loadOne" resultMap="BaseResultMap" >
+         select 
+        <include refid="Base_Column_List" />
+	    from role r
+	    <include refid="queryJoins"/>
+	    where r.del_flag = 0
+	    <if test="name != null and name != ''">
+			and r.name = #{name}
+		</if>
+  	</select>
+  	
+  	<select id="selectRoleResources" resultMap="BaseResultMap2">
+		select id,role_id,resource_id from role_resource where role_id = #{roleid} ORDER BY role_id, resource_id;
+	</select>
+  	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		insert into role (name,description)
+		values (#{name}, #{description})
+	</insert>
+	
+	<insert id="insertRoleResource" useGeneratedKeys="true" keyProperty="id">
+		insert into role_resource (role_id,resource_id)
+		values (#{role_id}, #{resource_id})
+	</insert>
+	
+   
+     <update id="updateSelective"  parameterType="Role">
+       update role
+    	<set>
+    		<if test="description != null">
+				description = #{description},
+			</if>
+			<if test="name != null">
+				name = #{name},
+			</if>
+    	</set>	
+   			 where id = #{id}
+  	</update>	
+  	
+  	<delete id="delete">
+  		delete from role where id=#{id}
+  	</delete>
+</mapper>

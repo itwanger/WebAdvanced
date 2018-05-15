@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmower.database.mapper.UserRoleMapper">
+	<!-- CONFIG -->
+	<resultMap id="BaseResultMap" type="UserRole">
+	    <result column="id"  property="id" />
+	    <result column="member_id"  property="memberId" />
+	    <result column="role_id"  property="roleId" />
+	</resultMap>
+	
+	<select id="selectByUserid" resultMap="BaseResultMap" >
+        select *
+	    from user_role
+	    where member_id = #{userid}
+  	</select>	
+  	
+  	<!--插入用户对应的角色信息-->
+ 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="UserRole">
+        insert into user_role (id, member_id, role_id) values (#{id}, #{memberId}, #{roleId})
+   </insert>
+   
+   <select id="countByRoleids" resultType="java.lang.Integer">
+		select count(0)
+		from  
+			user_role
+    	where 1=1 and role_id in (#{ids})
+	</select>
+
+</mapper>

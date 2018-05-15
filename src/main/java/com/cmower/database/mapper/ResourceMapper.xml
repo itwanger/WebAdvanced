@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmower.database.mapper.ResourceMapper">
+	<resultMap id="BaseResultMap" type="Resource">
+		<result column="id" property="id"  />
+		<result column="name" property="name" />
+		<result column="parentid" property="parentid" />
+		<result column="parent_description" property="parent_description" />
+		<result column="url" property="url"  />
+		<result column="weight" property="weight"  />
+		<result column="iconfont" property="iconfont"  />
+		<result column="type" property="type"  />
+		<result column="description" property="description"  />
+	</resultMap>
+	
+	<!--列 -->
+	<sql id="Base_Column_List">
+		r.name,
+		r.parentid,
+		(select p.description from resource p where p.id = r.parentid) as parent_description,
+		r.id,
+		r.url,
+		r.weight,
+		r.type,
+		r.iconfont,
+		r.description
+	</sql>
+	
+	<sql id="queryJoins">
+	</sql>
+	
+	<sql id="Base4List">
+		from resource r
+		<include refid="queryJoins"/>
+		<where>
+			<if test="mo.type != null"> and r.type=#{mo.type}</if>
+		</where>
+	</sql>
+	
+	<select id="getList" resultMap="BaseResultMap" parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		<include refid="Base4List" />
+		<choose>
+			<when test="orderField !=null and orderField !=''">
+				ORDER BY ${orderField}
+				<if test="orderDirection != null and orderDirection != ''">${orderDirection}</if>
+			</when>
+			<otherwise>
+				order by r.parentid,r.weight desc
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="countTotal" resultType="java.lang.Integer" parameterType="map">
+		select count(0)
+		<include refid="Base4List" />
+	</select>
+	
+	<select id="selectList" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from resource r
+		<include refid="queryJoins"/>
+		where 1=1
+		<if test="role_id != null">r.id in (SELECT rr.resource_id FROM role_resource rr WHERE rr.role_id = #{role_id})</if>
+		<if test="type != null">and r.type = #{type}</if>
+		order by r.parentid,r.weight desc;
+	</select>
+
+	
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		insert into resource (url,description,parentid,type,weight,iconfont,name)
+		values (#{url}, #{description},#{parentid},#{type},#{weight},#{iconfont},#{name})
+	</insert>
+	
+	<select id="load" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from resource r
+		<include refid="queryJoins"/>
+		where r.id = #{id}
+	</select>
+
+	<update id="updateSelective" parameterType="Resource">
+		update resource
+		<set>
+			<if test="url != null">url = #{url},</if>
+			<if test="description != null">description = #{description},</if>
+			<if test="weight != null">weight = #{weight},</if>
+			<if test="type != null">type = #{type},</if>
+			<if test="iconfont != null">iconfont = #{iconfont},</if>
+			<if test="name != null">name = #{name},</if>
+			<if test="parentid != null">parentid = #{parentid},</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+  		delete from resource where id=#{id}
+  	</delete>
+
+</mapper>
