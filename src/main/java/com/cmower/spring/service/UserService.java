@@ -28,4 +28,11 @@ public class UserService {
 	public Users load(long userid) {
 		return this.userMapper.load(userid);
 	}
+	
+	public Users loadOne(String username) {
+		Users param = new Users();
+		param.setUsername(username);
+		return this.userMapper.loadOne(param);
+	}
+
 }

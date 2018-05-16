@@ -1,7 +1,4 @@
-package com.cmower.common.persistence;
-
-import java.util.HashMap;
-import java.util.Map;
+package com.cmower.dal;
 
 import org.apache.ibatis.session.RowBounds;
 
@@ -17,18 +14,13 @@ import org.apache.ibatis.session.RowBounds;
  * 6.orderDirection──排序的方向。
  * </P>
  */
-public class BaseConditionVO {
+public class Page extends BaseEntity<Page> {
 	public static int PAGE_SHOW_COUNT = 50;
 	private int pageNum = 1;
 	private int numPerPage = 0;
 	private long totalCount = 0;
 	private String orderField = "";
 	private String orderDirection = "";
-
-	/**
-	 * @Fields ps : 对参数类型进行封装.
-	 */
-	private Map<String, Object> mo = new HashMap<String, Object>();
 
 	public int getPageNum() {
 		return pageNum;
@@ -37,7 +29,7 @@ public class BaseConditionVO {
 	public void setPageNum(int pageNum) {
 		this.pageNum = pageNum;
 	}
-	
+
 	public void setDefaultPageCount(int count) {
 		if (count > 0) {
 			PAGE_SHOW_COUNT = count;
@@ -84,41 +76,6 @@ public class BaseConditionVO {
 	public RowBounds createRowBounds() {
 		RowBounds ro = new RowBounds(this.getStartIndex(), this.getNumPerPage());
 		return ro;
-	}
-
-	/**
-	 * @Title: addParams
-	 * @Description: 添加查询条件
-	 * @param key
-	 * @param value
-	 */
-	public void addParams(String key, Object value) {
-		this.getMo().put(key, value);
-	}
-
-	/**
-	 * @Title: getParams
-	 * @Description: 获取查询条件
-	 * @param key
-	 * @return
-	 */
-	public Object getParams(String key) {
-		return this.getMo().get(key);
-	}
-
-	/**
-	 * @return the mo
-	 */
-	public Map<String, Object> getMo() {
-		return mo;
-	}
-
-	/**
-	 * @param mo
-	 *            the mo to set
-	 */
-	public void setMo(Map<String, Object> mo) {
-		this.mo = mo;
 	}
 
 	@Override

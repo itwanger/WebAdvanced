@@ -1,11 +1,9 @@
 package com.cmower.dal;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
-public abstract class DataEntity<T> implements Serializable {
-	private static final long serialVersionUID = 2210598609745930327L;
+@SuppressWarnings("serial")
+public abstract class DataEntity<T> extends BaseEntity<T> implements Serializable {
 
 	private Long id;
 	protected Long create_date;
@@ -46,35 +44,6 @@ public abstract class DataEntity<T> implements Serializable {
 
 	public void setDel_flag(Integer del_flag) {
 		this.del_flag = del_flag;
-	}
-
-	/**
-	 * Attributes of this model
-	 * 
-	 */
-	private Map<String, Object> attrs = getAttrsMap(); 
-
-	private Map<String, Object> getAttrsMap() {
-		return new HashMap<String, Object>();
-	}
-
-	@SuppressWarnings("unchecked")
-	public T put(String key, Object value) {
-		attrs.put(key, value);
-		return (T) this;
-	}
-
-	@SuppressWarnings("unchecked")
-	public <M> M get(String attr) {
-		return (M) (attrs.get(attr));
-	}
-
-	public Map<String, Object> getAttrs() {
-		return attrs;
-	}
-
-	public void setAttrs(Map<String, Object> attrs) {
-		this.attrs = attrs;
 	}
 
 	public Long getId() {

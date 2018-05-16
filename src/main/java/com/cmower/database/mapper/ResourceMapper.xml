@@ -5,25 +5,25 @@
 		<result column="id" property="id"  />
 		<result column="name" property="name" />
 		<result column="parentid" property="parentid" />
-		<result column="parent_description" property="parent_description" />
+		<result column="parent_name" property="parent_name" />
 		<result column="url" property="url"  />
 		<result column="weight" property="weight"  />
 		<result column="iconfont" property="iconfont"  />
 		<result column="type" property="type"  />
-		<result column="description" property="description"  />
+		<result column="permission" property="permission"  />
 	</resultMap>
 	
 	<!--列 -->
 	<sql id="Base_Column_List">
 		r.name,
 		r.parentid,
-		(select p.description from resource p where p.id = r.parentid) as parent_description,
+		(select p.name from resource p where p.id = r.parentid) as parent_name,
 		r.id,
 		r.url,
 		r.weight,
 		r.type,
 		r.iconfont,
-		r.description
+		r.permission
 	</sql>
 	
 	<sql id="queryJoins">
@@ -37,7 +37,7 @@
 		</where>
 	</sql>
 	
-	<select id="getList" resultMap="BaseResultMap" parameterType="map">
+	<select id="getList" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		<include refid="Base4List" />
@@ -52,7 +52,7 @@
 		</choose>
 	</select>
 	
-	<select id="countTotal" resultType="java.lang.Integer" parameterType="map">
+	<select id="countTotal" resultType="java.lang.Integer">
 		select count(0)
 		<include refid="Base4List" />
 	</select>
@@ -63,7 +63,7 @@
 		from resource r
 		<include refid="queryJoins"/>
 		where 1=1
-		<if test="role_id != null">r.id in (SELECT rr.resource_id FROM role_resource rr WHERE rr.role_id = #{role_id})</if>
+		<if test="mo.roleId != null">r.id in (SELECT rr.resource_id FROM role_resource rr WHERE rr.role_id = #{mo.roleId})</if>
 		<if test="type != null">and r.type = #{type}</if>
 		order by r.parentid,r.weight desc;
 	</select>
@@ -71,8 +71,8 @@
 	
 
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
-		insert into resource (url,description,parentid,type,weight,iconfont,name)
-		values (#{url}, #{description},#{parentid},#{type},#{weight},#{iconfont},#{name})
+		insert into resource (url,permission,parentid,type,weight,iconfont,name)
+		values (#{url}, #{permission},#{parentid},#{type},#{weight},#{iconfont},#{name})
 	</insert>
 	
 	<select id="load" resultMap="BaseResultMap">
@@ -83,11 +83,11 @@
 		where r.id = #{id}
 	</select>
 
-	<update id="updateSelective" parameterType="Resource">
+	<update id="updateSelective">
 		update resource
 		<set>
 			<if test="url != null">url = #{url},</if>
-			<if test="description != null">description = #{description},</if>
+			<if test="permission != null">permission = #{permission},</if>
 			<if test="weight != null">weight = #{weight},</if>
 			<if test="type != null">type = #{type},</if>
 			<if test="iconfont != null">iconfont = #{iconfont},</if>

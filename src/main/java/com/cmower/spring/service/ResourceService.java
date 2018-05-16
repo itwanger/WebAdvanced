@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cmower.common.persistence.BaseConditionVO;
+import com.cmower.dal.Page;
 import com.cmower.database.entity.Resource;
 import com.cmower.database.mapper.ResourceMapper;
 
@@ -47,20 +47,20 @@ public class ResourceService {
 		}
 	}
 
-	public List<Resource> selectList(int type) {
+	public List<Resource> selectList(Integer type, Long roleId) {
 		// 根据登陆用户获取对应权限
 		Resource param = new Resource();
 		param.setType(type);
+		param.put("roleId", roleId);
 		return this.resourceMapper.selectList(param);
-
 	}
 
 	@SuppressWarnings("rawtypes")
-	public List getList(BaseConditionVO vo, RowBounds createRowBounds) {
+	public List getList(Page vo, RowBounds createRowBounds) {
 		return this.resourceMapper.getList(vo, createRowBounds);
 	}
 
-	public long countTotal(BaseConditionVO vo) {
+	public long countTotal(Page vo) {
 		return this.resourceMapper.countTotal(vo);
 	}
 

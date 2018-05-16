@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cmower.common.exception.OrderException;
-import com.cmower.common.persistence.BaseConditionVO;
+import com.cmower.dal.Page;
 import com.cmower.database.entity.Role;
 import com.cmower.database.entity.RoleResource;
 import com.cmower.database.mapper.RoleMapper;
@@ -85,11 +85,11 @@ public class RoleService {
 	}
 
 	@SuppressWarnings("rawtypes")
-	public List getList(BaseConditionVO vo, RowBounds createRowBounds) {
+	public List getList(Page vo, RowBounds createRowBounds) {
 		return this.roleMapper.getList(vo, createRowBounds);
 	}
 
-	public int countTotal(BaseConditionVO vo) {
+	public int countTotal(Page vo) {
 		return this.roleMapper.countTotal(vo);
 	}
 

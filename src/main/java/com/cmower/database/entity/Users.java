@@ -7,6 +7,9 @@ public class Users extends DataEntity<Users> {
 	private String username;
 	private String password;
 
+	private String roleName;
+	private Long roleId;
+
 	public String getUsername() {
 		return this.username;
 	}
@@ -21,6 +24,22 @@ public class Users extends DataEntity<Users> {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
+	public Long getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
 	}
 
 }

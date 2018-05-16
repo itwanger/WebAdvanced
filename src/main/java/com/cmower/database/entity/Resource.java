@@ -7,8 +7,8 @@ public class Resource extends DataEntity<Resource> {
 	private String name;
 	private Integer parentid;
 	private String url;
-	private String description;
-	private String parent_description;
+	private String permission;
+	private String parent_name;
 	private String iconfont;
 	private Integer weight;
 	private Integer type;
@@ -27,14 +27,6 @@ public class Resource extends DataEntity<Resource> {
 
 	public void setParentid(Integer parentid) {
 		this.parentid = parentid;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public Integer getWeight() {
@@ -69,12 +61,20 @@ public class Resource extends DataEntity<Resource> {
 		this.iconfont = iconfont;
 	}
 
-	public String getParent_description() {
-		return parent_description;
+	public String getPermission() {
+		return permission;
 	}
 
-	public void setParent_description(String parent_description) {
-		this.parent_description = parent_description;
+	public void setPermission(String permission) {
+		this.permission = permission;
+	}
+
+	public String getParent_name() {
+		return parent_name;
+	}
+
+	public void setParent_name(String parent_name) {
+		this.parent_name = parent_name;
 	}
 
 }
