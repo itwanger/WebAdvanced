@@ -2,8 +2,6 @@
 <%@ page pageEncoding="UTF-8"%>
 <!-- jQuery程序库 -->
 <script src="${ctx}/resources/components/jquery/jquery-3.3.1.js"></script>
-<!-- <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
 <script src="https://cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
 
@@ -28,6 +26,10 @@
 <!-- 简单而强大的星级评分插件 -->
 <script src="https://cdn.bootcss.com/bootstrap-star-rating/4.0.3/js/star-rating.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap-star-rating/4.0.3/js/locales/zh.js"></script>
+
+<!-- AdminLTE -->
+<script src="${ctx}/resources/components/adminlte/js/adminlte.js"></script>
+<script src="${ctx}/resources/components/adminlte/js/righter.js"></script>
 
 <script src="${ctx}/resources/components/qinge/qinge.core.js"></script>
 <script src="${ctx}/resources/components/qinge/qinge.ui.js"></script>
