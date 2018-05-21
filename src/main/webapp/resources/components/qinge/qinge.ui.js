@@ -136,18 +136,18 @@ function initUI($p) {
 		});
 	});
 
-// -----------------
-// - BootstrapValidator——好用的Bootstrap表单验证插件
-// -----------------
-$('form.bootstrap-validator', $p).each(function() {
-	var $form = $(this);
-	$form.bootstrapValidator({
-		live : 'enabled',
-	}).on('success.form.bv', function(e) {
-		// Prevent form submission
-		e.preventDefault();
+	// -----------------
+	// - BootstrapValidator——好用的Bootstrap表单验证插件
+	// -----------------
+	$('form.bootstrap-validator', $p).each(function() {
+		var $form = $(this);
+		$form.bootstrapValidator({
+			live : 'enabled',
+		}).on('success.form.bv', function(e) {
+			// Prevent form submission
+			e.preventDefault();
+		});
 	});
-});
 }
 
 $(function() {

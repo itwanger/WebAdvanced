@@ -31,6 +31,7 @@
 <script src="${ctx}/resources/components/adminlte/js/adminlte.js"></script>
 <script src="${ctx}/resources/components/adminlte/js/righter.js"></script>
 
+
 <!-- 好用的Bootstrap表单验证插件 -->
 <script src="https://cdn.bootcss.com/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.js"></script>
 <script src="https://cdn.bootcss.com/jquery.bootstrapvalidator/0.5.3/js/language/zh_CN.js"></script>
