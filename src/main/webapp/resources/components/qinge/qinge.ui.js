@@ -124,7 +124,7 @@ function initUI($p) {
 			trimValue : true
 		});
 	});
-	
+
 	// -----------------
 	// - Star Rating——简单而强大的星级评分插件
 	// -----------------
@@ -135,6 +135,19 @@ function initUI($p) {
 			displayOnly : displayOnly,
 		});
 	});
+
+// -----------------
+// - BootstrapValidator——好用的Bootstrap表单验证插件
+// -----------------
+$('form.bootstrap-validator', $p).each(function() {
+	var $form = $(this);
+	$form.bootstrapValidator({
+		live : 'enabled',
+	}).on('success.form.bv', function(e) {
+		// Prevent form submission
+		e.preventDefault();
+	});
+});
 }
 
 $(function() {
