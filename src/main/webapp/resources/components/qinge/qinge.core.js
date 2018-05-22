@@ -1,5 +1,14 @@
 var QINGE = {
 	regPlugins : [],// 注册方法
+	keys : {
+		statusCode : "statusCode",
+		message : "message"
+	},
+	statusCode : {// 服务端响应状态码
+		ok : 200,// 正常
+		error : 300,// 出错了
+		timeout : 301,// 超时
+	},
 };
 
 (function($) {

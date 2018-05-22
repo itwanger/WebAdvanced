@@ -140,14 +140,45 @@ function initUI($p) {
 	// - BootstrapValidator——好用的Bootstrap表单验证插件
 	// -----------------
 	$('form.bootstrap-validator', $p).each(function() {
-		var $form = $(this);
-		$form.bootstrapValidator({
-			live : 'enabled',
-		}).on('success.form.bv', function(e) {
-			// Prevent form submission
-			e.preventDefault();
-		});
+		var $form = $(this), formId = $form.attr("id");
 
+		if (formId == "loginForm") {
+			$form.bootstrapValidator({
+				fields : {
+					username : {
+						validators : {
+							blank : {}
+						}
+					}
+				}
+			}).on('success.form.bv', function(e) {
+				e.preventDefault();
+
+				var bv = $form.data('bootstrapValidator'); // BootstrapValidator
+															// 实例
+
+				if (formId == "loginForm") {
+					_callback = function(json) {
+						if (json.statusCode == "ok") {
+							window.location.href = json.forwardUrl;
+						} else {
+							bv.updateMessage(json.field, 'blank', json.message);
+							bv.updateStatus(json.field, 'INVALID', 'blank');
+						}
+					}
+				}
+
+				$.ajax({
+					type : $form.attr("method") || 'POST',
+					url : $form.attr("action"),
+					data : $form.serializeArray(),
+					cache : false,
+					dataType : "json",
+					success : _callback,
+				});
+
+			});
+		}
 	});
 }
 
