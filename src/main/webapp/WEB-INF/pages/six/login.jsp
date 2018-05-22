@@ -17,7 +17,7 @@
 		<div class="login-box-body">
 			<p class="login-box-msg">登录系统，开启崭新旅程</p>
 
-			<form class="bootstrap-validator" action="${ctx}/five/checkLogin" method="post">
+			<form class="bootstrap-validator" action="${ctx}/six/checkLogin" method="post">
 				<div class="form-group has-feedback">
 					<input type="text" class="form-control" name="username" data-bv-notempty placeholder="账号">
 					<span class="glyphicon glyphicon-envelope form-control-feedback"></span>

@@ -147,6 +147,7 @@ function initUI($p) {
 			// Prevent form submission
 			e.preventDefault();
 		});
+
 	});
 }
 
