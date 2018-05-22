@@ -137,6 +137,15 @@ function initUI($p) {
 	});
 
 	// -----------------
+	// - 登录表单进行BootstrapValidator初始化
+	// -----------------
+	$('#loginForm', $p).bootstrapValidator({
+		live : 'enabled'
+	}).on('success.form.bv', function(e) {
+		e.preventDefault();
+	});
+
+	// -----------------
 	// - BootstrapValidator——好用的Bootstrap表单验证插件
 	// -----------------
 	$('form.bootstrap-validator', $p).each(function() {
@@ -155,7 +164,7 @@ function initUI($p) {
 				e.preventDefault();
 
 				var bv = $form.data('bootstrapValidator'); // BootstrapValidator
-															// 实例
+				// 实例
 
 				if (formId == "loginForm") {
 					_callback = function(json) {
@@ -185,4 +194,5 @@ function initUI($p) {
 $(function() {
 	QINGE.regPlugins.push(initUI);
 	$(document).initUI();
+
 });
