@@ -1,3 +1,29 @@
+function initOnce() {
+	// -----------------
+	// - 登录表单进行BootstrapValidator初始化
+	// -----------------
+	$('#loginForm').bootstrapValidator({}).on('success.form.bv', function(e) {
+		e.preventDefault();
+
+		var $form = $(e.target), bv = $form.data('bootstrapValidator'); // BootstrapValidator
+		$.ajax({
+			type : $form.attr("method") || 'POST',
+			url : $form.attr("action"),
+			data : $form.serializeArray(),
+			cache : false,
+			dataType : "json",
+			success : function(json) {
+				if (json.statusCode == 200) {
+					window.location.href = json.forwardUrl;
+				} else {
+					bv.updateMessage(json.field, 'blank', json.message);
+					bv.updateStatus(json.field, 'INVALID', 'blank');
+				}
+			},
+		});
+	});
+}
+
 function initUI($p) {
 	// -----------------
 	// - lazy load 图片延迟加载
@@ -137,15 +163,6 @@ function initUI($p) {
 	});
 
 	// -----------------
-	// - 登录表单进行BootstrapValidator初始化
-	// -----------------
-	$('#loginForm', $p).bootstrapValidator({
-		live : 'enabled'
-	}).on('success.form.bv', function(e) {
-		e.preventDefault();
-	});
-
-	// -----------------
 	// - BootstrapValidator——好用的Bootstrap表单验证插件
 	// -----------------
 	$('form.bootstrap-validator', $p).each(function() {
@@ -192,6 +209,8 @@ function initUI($p) {
 }
 
 $(function() {
+	initOnce();
+
 	QINGE.regPlugins.push(initUI);
 	$(document).initUI();
 
