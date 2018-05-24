@@ -37,7 +37,7 @@
 <script src="https://cdn.bootcss.com/jquery.bootstrapvalidator/0.5.3/js/language/zh_CN.js"></script>
 
 <!-- Validform -->
-<script src="${ctx}/resources/components/validform/Validform_v5.3.2.js"></script>
+<script src="${ctx}//resources/components/validform/js/Validform_v5.3.2.js"></script>
 
 <script src="${ctx}/resources/components/qinge/qinge.core.js"></script>
 <script src="${ctx}/resources/components/qinge/qinge.ui.js"></script>

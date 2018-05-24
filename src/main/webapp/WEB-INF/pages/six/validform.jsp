@@ -19,11 +19,11 @@
 
 			<form id="validForm" action="${ctx}/six/checkLogin" method="post">
 				<div class="form-group has-feedback">
-					<input type="text" class="form-control" name="username" data-bv-notempty data-bv-blank placeholder="账号">
+					<input type="text" class="form-control" name="username" datatype="*" nullmsg="请输入账号！" placeholder="账号">
 					<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
-					<input type="password" class="form-control" name="password" data-bv-notempty data-bv-blank placeholder="密码">
+					<input type="password" class="form-control" name="password" datatype="*" nullmsg="请输入密码！" placeholder="密码">
 					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div>
 				<div class="row">
@@ -40,15 +40,6 @@
 					</div>
 				</div>
 			</form>
-
-			<div class="social-auth-links text-center">
-				<p>- OR -</p>
-				<a href="#" class="btn btn-block btn-social btn-microsoft btn-flat">
-					<i class="fa fa-qq"></i> 使用QQ登录
-				</a>
-			</div>
-
-			<a href="#">找回密码</a><a href="#" class="pull-right">注册账号</a>
 		</div>
 	</div>
 

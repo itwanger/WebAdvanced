@@ -17,6 +17,6 @@
 <link rel="stylesheet" href="${ctx}/resources/components/adminlte/css/skins/_all-skins.css">
 
 <link href="https://cdn.bootcss.com/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.css" rel="stylesheet">
-<link rel="stylesheet" href="${ctx}/resources/components/validform/style.css">
+<link rel="stylesheet" href="${ctx}/resources/components/validform/css/style.css">
 
 <link href="${ctx}/resources/css/style.css" rel="stylesheet">

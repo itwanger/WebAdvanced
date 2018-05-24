@@ -22,6 +22,13 @@ function initOnce() {
 			},
 		});
 	});
+	// -----------------
+	// - 登录表单进行Validform初始化
+	// -----------------
+	$('#validForm').Validform({
+		tiptype : 3,
+		showAllError:true,
+	});
 }
 
 function initUI($p) {
