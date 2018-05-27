@@ -1,5 +1,7 @@
 package com.cmower.spring.controller.six;
 
+import java.util.HashMap;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -69,4 +71,29 @@ public class SixController extends BaseController {
 		return response;
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("check")
+	@ResponseBody
+	public HashMap check(@RequestParam(value = "name", required = false) String name,
+			@RequestParam(value = "param", required = false) String param) {
+		logger.debug("检查属性{}的值{}是否存在", name, param);
+
+		HashMap result = new HashMap();
+		if (StringUtils.isEmpty(param)) {
+			result.put("status", "n");
+			result.put("info", "请输入账号");
+			return result;
+		}
+		
+		Users user = this.userService.loadOne(param);
+		if (user != null) {
+			result.put("status", "n");
+			result.put("info", "账号已存在");
+			return result;
+		}
+		
+		result.put("status", "y");
+		result.put("info", "账号可以使用");
+		return result;
+	}
 }

@@ -22,12 +22,70 @@ function initOnce() {
 			},
 		});
 	});
+
+	$('#bvMessageForm').bootstrapValidator().on('success.form.bv', function(e) {
+		e.preventDefault();
+		// 验证通过时清除提示信息
+		$('#errors').html('');
+	}).on('error.field.bv', function(e, data) {
+		// data.bv --> BootstrapValidator实例
+		// data.field --> 字段名
+		// data.element --> 字段元素
+
+		// 清除该字段原有的提示信息
+		$('#errors').find('li[data-field="' + data.field + '"]').remove();
+
+		// 获取该字段现有的所有提示信息
+		var messages = data.bv.getMessages(data.field);
+
+		// 对信息进行遍历
+		for ( var i in messages) {
+			// 创建一个<li>元素来显示提示信息
+			$('<li/>').attr('data-field', data.field).wrapInner($('<a/>').attr('href', 'javascript: void(0);').html(messages[i]).on('click', function(e) {
+				// 点击提示信息时，把焦点聚焦到对应的元素上
+				data.element.focus();
+			}))
+			// 提示信息添加到指定的容器中
+			.appendTo('#errors');
+		}
+
+		// 隐藏默认的提示信息
+		// data.element.data('bv.messages') 返回字段默认的提示信息元素
+		data.element.data('bv.messages').find('.help-block[data-bv-for="' + data.field + '"]').hide();
+	}).on('success.field.bv', function(e, data) {
+		// 该字段验证成功时移除对应的提示信息
+		$('#errors').find('li[data-field="' + data.field + '"]').remove();
+	});
+
 	// -----------------
 	// - 登录表单进行Validform初始化
 	// -----------------
-	$('#validForm').Validform({
+$('#validForm').Validform({
+	ajaxPost:true,
+	callback:function(json){
+		if (json.statusCode == 200) {
+			window.location.href = json.forwardUrl;
+		} else {
+			$.Showmsg(json.message);
+		}
+	}
+});
+	// -----------------
+	// - Validform实现用户名的实时验证
+	// -----------------
+	$('#vfAjaxurlForm').Validform({
 		tiptype : 3,
-		showAllError:true,
+		showAllError : true,
+	});
+	// -----------------
+	// - Validform——在自定义区域中显示错误消息
+	// -----------------
+	$('#vfMessageForm').Validform({
+		tiptype : function(msg, o, cssctl) {
+			var objtip = $("#errors");
+			cssctl(objtip, o.type);
+			objtip.text(msg);
+		},
 	});
 }
 
@@ -173,45 +231,8 @@ function initUI($p) {
 	// - BootstrapValidator——好用的Bootstrap表单验证插件
 	// -----------------
 	$('form.bootstrap-validator', $p).each(function() {
-		var $form = $(this), formId = $form.attr("id");
+		var $form = $(this);
 
-		if (formId == "loginForm") {
-			$form.bootstrapValidator({
-				fields : {
-					username : {
-						validators : {
-							blank : {}
-						}
-					}
-				}
-			}).on('success.form.bv', function(e) {
-				e.preventDefault();
-
-				var bv = $form.data('bootstrapValidator'); // BootstrapValidator
-				// 实例
-
-				if (formId == "loginForm") {
-					_callback = function(json) {
-						if (json.statusCode == "ok") {
-							window.location.href = json.forwardUrl;
-						} else {
-							bv.updateMessage(json.field, 'blank', json.message);
-							bv.updateStatus(json.field, 'INVALID', 'blank');
-						}
-					}
-				}
-
-				$.ajax({
-					type : $form.attr("method") || 'POST',
-					url : $form.attr("action"),
-					data : $form.serializeArray(),
-					cache : false,
-					dataType : "json",
-					success : _callback,
-				});
-
-			});
-		}
 	});
 }
 
