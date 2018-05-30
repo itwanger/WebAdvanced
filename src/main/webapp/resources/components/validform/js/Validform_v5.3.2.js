@@ -177,9 +177,11 @@
 			
 		});
 		
-		//预创建pop box;
-		if( settings.tiptype==1 || (settings.tiptype==2 || settings.tiptype==3) && settings.ajaxPost ){		
-			creatMsgbox();
+		if (forms.length > 0) {
+			//预创建pop box;
+			if( settings.tiptype==1 || (settings.tiptype==2 || settings.tiptype==3) && settings.ajaxPost ){		
+				creatMsgbox();
+			}
 		}
 	}
 	

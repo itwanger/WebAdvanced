@@ -60,22 +60,19 @@ function initOnce() {
 	// -----------------
 	// - 登录表单进行Validform初始化
 	// -----------------
-$('#validForm').Validform({
-	ajaxPost:true,
-	callback:function(json){
-		if (json.statusCode == 200) {
-			window.location.href = json.forwardUrl;
-		} else {
-			$.Showmsg(json.message);
+	$('#validForm').Validform({
+		tiptype : function(msg, o, cssctl) {
+			$.error(msg);
+		},
+		tipSweep : true,
+		ajaxPost : true,
+		callback : function(json) {
+			if (json.statusCode == 200) {
+				window.location.href = json.forwardUrl;
+			} else {
+				$.error(msg);
+			}
 		}
-	}
-});
-	// -----------------
-	// - Validform实现用户名的实时验证
-	// -----------------
-	$('#vfAjaxurlForm').Validform({
-		tiptype : 3,
-		showAllError : true,
 	});
 	// -----------------
 	// - Validform——在自定义区域中显示错误消息
