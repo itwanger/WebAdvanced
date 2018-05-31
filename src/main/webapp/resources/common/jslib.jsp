@@ -42,6 +42,9 @@
 <!-- Layer——更友好的Web弹层组件 -->
 <script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
 
+<!-- Geetest——更可靠的安全验证工具 -->
+<script src="${ctx}/resources/js/gt.js"></script>
+
 <script src="${ctx}/resources/components/qinge/qinge.core.js"></script>
 <script src="${ctx}/resources/components/qinge/qinge.util.js"></script>
 <script src="${ctx}/resources/components/qinge/qinge.ui.js"></script>

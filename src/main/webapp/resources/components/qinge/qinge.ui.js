@@ -84,6 +84,67 @@ function initOnce() {
 			objtip.text(msg);
 		},
 	});
+
+	// -----------------
+	// - 登录表单进行BootstrapValidator初始化
+	// -----------------
+	if ($('#geetestForm').length > 0) {
+		var $form = $('#geetestForm'), $geetest = $form.find(".geetest"), url = $geetest.data("url"), username = $form.find("input[name=username]").val();
+
+		$.ajax({
+			type : 'GET',
+			url : url,
+			dataType : "json",
+			data : {
+				"username" : username
+			},
+			cache : false,
+			success : function(response) {
+				var json = $.parseJSON(response);
+
+				initGeetest({
+					gt : json.gt,
+					challenge : json.challenge,
+					offline : !json.success, // 表示用户后台检测极验服务器是否宕机，一般不需要关注
+					product : "float", // 产品形式，包括：float，popup
+					width : "100%"
+				}, function(captchaObj) {
+					captchaObj.appendTo($geetest);
+					captchaObj.onReady(function() {
+						$geetest.find(".wait").hide();
+					});
+				});
+			},
+			error : function() {
+				console.log("geetest error");
+			}
+		});
+		
+		var handler = function(captchaObj) {
+			
+		}
+
+		$('#geetestForm').bootstrapValidator({}).on('success.form.bv', function(e) {
+			e.preventDefault();
+
+			var $form = $(e.target), bv = $form.data('bootstrapValidator'); // BootstrapValidator
+			$.ajax({
+				type : $form.attr("method") || 'POST',
+				url : $form.attr("action"),
+				data : $form.serializeArray(),
+				cache : false,
+				dataType : "json",
+				success : function(json) {
+					if (json.statusCode == 200) {
+						window.location.href = json.forwardUrl;
+					} else {
+						bv.updateMessage(json.field, 'blank', json.message);
+						bv.updateStatus(json.field, 'INVALID', 'blank');
+					}
+				},
+			});
+		});
+	}
 }
 
 function initUI($p) {
@@ -232,6 +293,7 @@ function initUI($p) {
 		$this.attr("src", $this.attr("src") + "?r=" + Math.random());
 		$kaptchaCode.val("");
 	});
+
 }
 
 $(function() {
