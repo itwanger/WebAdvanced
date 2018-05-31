@@ -10,7 +10,7 @@
 	
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:application-context.xml,classpath:spring-shiro.xml</param-value>
+		<param-value>classpath:application-context.xml</param-value>
 	</context-param>
 
 	<listener>
@@ -32,20 +32,6 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
-	  <!-- apache-shiro 核心拦截器 -->
-    <filter>
-        <filter-name>shiroFilter</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-        <init-param>
-            <param-name>targetFilterLifecycle</param-name>
-            <param-value>true</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>shiroFilter</filter-name>
-        <url-pattern>/five/*</url-pattern>
-    </filter-mapping>
-
 	<error-page>
 		<error-code>404</error-code>
 		<location>/404.jsp</location>

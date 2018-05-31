@@ -26,6 +26,19 @@
 					<input type="password" class="form-control" name="password" data-bv-notempty data-bv-blank placeholder="密码">
 					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 				</div>
+
+				<div class="row kaptcha">
+					<div class="col-xs-8">
+						<div class="form-group has-feedback">
+							<input type="text" class="form-control" name="kaptchaCode" data-bv-notempty data-bv-blank placeholder="验证码">
+							<span class="glyphicon glyphicon-screenshot form-control-feedback"></span>
+						</div>
+					</div>
+					<div class="col-xs-4">
+						<img class="img-responsive" src="${ctx}/six/kaptcha" />
+					</div>
+				</div>
+
 				<div class="row">
 					<div class="col-xs-8">
 						<div class="checkbox icheck" data-skin="square">
@@ -48,7 +61,8 @@
 				</a>
 			</div>
 
-			<a href="#">找回密码</a><a href="#" class="pull-right">注册账号</a>
+			<a href="#">找回密码</a>
+			<a href="#" class="pull-right">注册账号</a>
 		</div>
 	</div>
 

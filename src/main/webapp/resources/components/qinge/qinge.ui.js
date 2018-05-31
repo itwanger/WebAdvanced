@@ -225,11 +225,12 @@ function initUI($p) {
 	});
 
 	// -----------------
-	// - BootstrapValidator——好用的Bootstrap表单验证插件
+	// - kaptcha验证码
 	// -----------------
-	$('form.bootstrap-validator', $p).each(function() {
-		var $form = $(this);
-
+	$('.kaptcha img', $p).click(function() {
+		var $this = $(this), $kaptchaCode = $this.closest(".kaptcha").find("input[name=kaptchaCode]");
+		$this.attr("src", $this.attr("src") + "?r=" + Math.random());
+		$kaptchaCode.val("");
 	});
 }
 

@@ -585,3 +585,8 @@
 .icheck > label {
     padding-left: 30px;
 }
+
+/* 验证码鼠标样式 */
+.kaptcha img {
+ cursor:pointer
+}
