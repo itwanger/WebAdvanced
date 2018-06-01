@@ -117,7 +117,7 @@ public class SixController extends BaseController {
 
 	@RequestMapping("geetest")
 	@ResponseBody
-	public String geetest(HttpServletResponse response) {
+	public String geetest() {
 		try {
 			GeetestLib gtSdk = new GeetestLib(Constants.Geetest.ID, Constants.Geetest.KEY,
 					Constants.Geetest.NEWFAILBACK);
@@ -144,14 +144,14 @@ public class SixController extends BaseController {
 			return null;
 		}
 	}
-	
+
 	@RequestMapping("checkGeetest")
 	@ResponseBody
 	public AjaxResponse checkGeetest() {
 		logger.debug("用户准备登录");
 
 		AjaxResponse response = AjaxResponseUtils.getFailureResponse();
-		
+
 		String username = getPara("username");
 		if (StringUtils.isEmpty(username)) {
 			response.setField("username");
@@ -165,96 +165,59 @@ public class SixController extends BaseController {
 			response.setMessage("密码为空");
 			return response;
 		}
-		
-		GeetestLib gtSdk = new GeetestLib(Constants.Geetest.ID, Constants.Geetest.KEY,
-				Constants.Geetest.NEWFAILBACK);
-			
+
+		GeetestLib gtSdk = new GeetestLib(Constants.Geetest.ID, Constants.Geetest.KEY, Constants.Geetest.NEWFAILBACK);
+
 		String challenge = getPara(GeetestLib.fn_geetest_challenge);
 		String validate = getPara(GeetestLib.fn_geetest_validate);
 		String seccode = getPara(GeetestLib.fn_geetest_seccode);
-		
-		//从session中获取gt-server状态
-		int gt_server_status_code = getSessionAttr(gtSdk.gtServerStatusSessionKey);
-		
-		//自定义参数,可选择添加
-		HashMap<String, String> param = new HashMap<String, String>(); 
-		param.put("client_type", "web"); //web:电脑上的浏览器；h5:手机上的浏览器，包括移动应用内完全内置的web_view；native：通过原生SDK植入APP应用的方式
-		param.put("ip_address", "127.0.0.1"); //传输用户请求验证时所携带的IP
-		
+
 		int gtResult = 0;
 
-		if (gt_server_status_code == 1) {
-			//gt-server正常，向gt-server进行二次验证
-				
+		// 从session中获取gt-server状态
+		int gt_server_status = getSessionAttr(gtSdk.gtServerStatusSessionKey);
+		if (gt_server_status == 1) {
+			// gt-server正常，向gt-server进行二次验证
+
+			// 自定义参数,可选择添加
+			HashMap<String, String> param = new HashMap<String, String>();
+			param.put("client_type", "web"); // web:电脑上的浏览器；h5:手机上的浏览器，包括移动应用内完全内置的web_view；native：通过原生SDK植入APP应用的方式
+			param.put("ip_address", "127.0.0.1"); // 传输用户请求验证时所携带的IP
+
 			gtResult = gtSdk.enhencedValidateRequest(challenge, validate, seccode, param);
-			logger.debug("gt-server二次验证结果{}",gtResult);
+			logger.debug("gt-server二次验证结果{}", gtResult);
+
 		} else {
 			// gt-server非正常情况下，进行failback模式验证
-				
+
 			logger.warn("failback:use your own server captcha validate");
 			gtResult = gtSdk.failbackValidateRequest(challenge, validate, seccode);
-			logger.debug("failback模式验证验证结果{}",gtResult);
-			
-			if (StringUtils.isEmpty(kaptchaCode)) {
-				response.setField("kaptchaCode");
-				response.setMessage("验证码为空");
-				return response;
-			}
+			logger.debug("failback模式验证验证结果{}", gtResult);
 
-			String sesssionKaptchaCode = getSessionAttr(Constants.SESSION_KAPTCHA_CODE);
-			if (!sesssionKaptchaCode.equalsIgnoreCase(kaptchaCode)) {
-				response.setField("kaptchaCode");
-				response.setMessage("验证码不正确");
-				return response;
-			}
 		}
 
-
+		// 1表示验证成功0表示验证失败
 		if (gtResult == 1) {
-			// 验证成功
-			PrintWriter out = response.getWriter();
-			JSONObject data = new JSONObject();
-			try {
-				data.put("status", "success");
-				data.put("version", gtSdk.getVersionInfo());
-			} catch (JSONException e) {
-				e.printStackTrace();
+			Users user = this.userService.loadOne(username);
+			if (user == null) {
+				response.setField("username");
+				response.setMessage("账号不存在");
+				return response;
 			}
-			out.println(data.toString());
-		}
-		else {
-			// 验证失败
-			JSONObject data = new JSONObject();
-			try {
-				data.put("status", "fail");
-				data.put("version", gtSdk.getVersionInfo());
-			} catch (JSONException e) {
-				e.printStackTrace();
+
+			if (!CipherUtils.generatePassword(password).equals(user.getPassword())) {
+				response.setField("password");
+				response.setMessage("密码不正确");
+				return response;
 			}
-			PrintWriter out = response.getWriter();
-			out.println(data.toString());
-		}
 
-		
-
-		
-
-		Users user = this.userService.loadOne(username);
-		if (user == null) {
-			response.setField("username");
-			response.setMessage("账号不存在");
+			response = AjaxResponseUtils.getSuccessResponse();
+			response.setForwardUrl(Variables.ctx + "/six");
+			return response;
+		} else {
+			response.setMessage("验证失败，请稍后再试");
 			return response;
 		}
-
-		if (!CipherUtils.generatePassword(password).equals(user.getPassword())) {
-			response.setField("password");
-			response.setMessage("密码不正确");
-			return response;
-		}
-
-		response = AjaxResponseUtils.getSuccessResponse();
-		response.setForwardUrl(Variables.ctx + "/six");
-		return response;
 	}
 
 }

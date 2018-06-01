@@ -86,61 +86,84 @@ function initOnce() {
 	});
 
 	// -----------------
-	// - 登录表单进行BootstrapValidator初始化
+	// - Geetest——更可靠的安全验证工具
 	// -----------------
 	if ($('#geetestForm').length > 0) {
+		// 对表单进行BootstrapValidator初始化，并取出BootstrapValidator对象
+		var $form = $('#geetestForm').bootstrapValidator(), bv = $form.data('bootstrapValidator');
+
+		// Geetest初始化后的回调函数，captchaObj为Geetest的验证码实例
 		var handler = function(captchaObj) {
-			$('#geetestForm').bootstrapValidator({}).on('success.form.bv', function(e) {
+
+			// 插入验证结果的三个 input 标签到指定的表单中。
+			captchaObj.bindForm($form);
+
+			// 表单提交时
+			$form.on('success.form.bv', function(e) {
+				console.log("success.form.bv事件");
 				e.preventDefault();
 
-				var $form = $(e.target), bv = $form.data('bootstrapValidator'); // BootstrapValidator
-
-				captchaObj.bindForm('#geetestForm');
+				// 当product为bind类型时，可以调用verify接口进行验证，此时将弹出Geetest
 				captchaObj.verify();
-				captchaObj.onSuccess(function() {
-					var result = captchaObj.getValidate();
+			});
 
-					$.ajax({
-						type : $form.attr("method") || 'POST',
-						url : $form.attr("action"),
-						data : $form.serializeArray(),
-						cache : false,
-						dataType : "json",
-						success : function(json) {
-							if (json.statusCode == 200) {
-								window.location.href = json.forwardUrl;
-							} else {
+			// 监听验证成功事件。
+			captchaObj.onSuccess(function() {
+				console.log("onSuccess事件");
+
+				// 获取用户进行成功验证(onSuccess)所得到的结果，该结果用于进行服务端 SDK 进行二次验证。
+				var result = captchaObj.getValidate();
+
+				// 使用Ajax的方式提交表单
+				$.ajax({
+					type : $form.attr("method") || 'POST',
+					url : $form.attr("action"),
+					data : $form.serializeArray(),
+					cache : false,
+					dataType : "json",
+					success : function(json) {
+						if (json.statusCode == 200) {
+							window.location.href = json.forwardUrl;
+						} else {
+							if (json.field) {
 								bv.updateMessage(json.field, 'blank', json.message);
 								bv.updateStatus(json.field, 'INVALID', 'blank');
-								captchaObj.reset(); // 调用该接口进行重置
+							} else {
+								$.error(json.message);
 							}
-						},
-					});
+
+							captchaObj.reset(); // 调用reset接口进行Geetest重置
+						}
+					},
 				});
 
-				captchaObj.onClose(function() {
-					// 用户把验证关闭了，这时你可以提示用户需要把验证通过后才能进行后续流程
-					bv.disableSubmitButtons(false);
-				});
 			});
+
+			// 用户把验证关闭了，启用提交按钮
+			captchaObj.onClose(function() {
+				bv.disableSubmitButtons(false);
+			});
+
 		}
 
-		var $form = $('#geetestForm'), geetest_url = $form.data("geetest_url");
-
+		// 页面加载完成后发起Ajax请求，拿到Geetest的配置参数，对行为验证进行初始化
 		$.ajax({
 			type : 'GET',
-			url : geetest_url,
+			url : $form.data("geetest_url"),
 			dataType : "json",
 			cache : false,
 			success : function(response) {
+
+				// 把JSON字符串转换成JSON对象
 				var json = $.parseJSON(response);
 
+				// 调用初始化函数进行初始化
 				initGeetest({
 					gt : json.gt,
 					challenge : json.challenge,
 					offline : !json.success, // 表示用户后台检测极验服务器是否宕机，一般不需要关注
-					product : "bind", // 产品形式，包括：float，popup
-					width : "100%"
+					new_captcha : json.new_captcha,
+					product : "bind", // 产品形式
 				}, handler);
 			},
 			error : function() {
