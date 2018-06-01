@@ -17,7 +17,7 @@
 		<div class="login-box-body">
 			<p class="login-box-msg">更可靠的安全验证工具</p>
 
-			<form id="geetestForm" class="bootstrap-validator" action="${ctx}/six/checkGeetest" method="post">
+			<form id="geetestForm" class="bootstrap-validator" action="${ctx}/six/checkGeetest" data-geetest_url="${ctx}/six/geetest" method="post">
 				<div class="form-group has-feedback">
 					<input type="text" class="form-control" name="username" data-bv-notempty data-bv-blank placeholder="账号">
 					<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -25,10 +25,6 @@
 				<div class="form-group has-feedback">
 					<input type="password" class="form-control" name="password" data-bv-notempty data-bv-blank placeholder="密码">
 					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
-				</div>
-
-				<div class="form-group geetest" data-url="${ctx}/six/geetest">
-					<p class="wait">正在加载验证码......</p>
 				</div>
 
 				<div class="row">

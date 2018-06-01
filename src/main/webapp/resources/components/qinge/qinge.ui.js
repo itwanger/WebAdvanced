@@ -89,15 +89,48 @@ function initOnce() {
 	// - 登录表单进行BootstrapValidator初始化
 	// -----------------
 	if ($('#geetestForm').length > 0) {
-		var $form = $('#geetestForm'), $geetest = $form.find(".geetest"), url = $geetest.data("url"), username = $form.find("input[name=username]").val();
+		var handler = function(captchaObj) {
+			$('#geetestForm').bootstrapValidator({}).on('success.form.bv', function(e) {
+				e.preventDefault();
+
+				var $form = $(e.target), bv = $form.data('bootstrapValidator'); // BootstrapValidator
+
+				captchaObj.bindForm('#geetestForm');
+				captchaObj.verify();
+				captchaObj.onSuccess(function() {
+					var result = captchaObj.getValidate();
+
+					$.ajax({
+						type : $form.attr("method") || 'POST',
+						url : $form.attr("action"),
+						data : $form.serializeArray(),
+						cache : false,
+						dataType : "json",
+						success : function(json) {
+							if (json.statusCode == 200) {
+								window.location.href = json.forwardUrl;
+							} else {
+								bv.updateMessage(json.field, 'blank', json.message);
+								bv.updateStatus(json.field, 'INVALID', 'blank');
+								captchaObj.reset(); // 调用该接口进行重置
+							}
+						},
+					});
+				});
+
+				captchaObj.onClose(function() {
+					// 用户把验证关闭了，这时你可以提示用户需要把验证通过后才能进行后续流程
+					bv.disableSubmitButtons(false);
+				});
+			});
+		}
+
+		var $form = $('#geetestForm'), geetest_url = $form.data("geetest_url");
 
 		$.ajax({
 			type : 'GET',
-			url : url,
+			url : geetest_url,
 			dataType : "json",
-			data : {
-				"username" : username
-			},
 			cache : false,
 			success : function(response) {
 				var json = $.parseJSON(response);
@@ -106,43 +139,13 @@ function initOnce() {
 					gt : json.gt,
 					challenge : json.challenge,
 					offline : !json.success, // 表示用户后台检测极验服务器是否宕机，一般不需要关注
-					product : "float", // 产品形式，包括：float，popup
+					product : "bind", // 产品形式，包括：float，popup
 					width : "100%"
-				}, function(captchaObj) {
-					captchaObj.appendTo($geetest);
-					captchaObj.onReady(function() {
-						$geetest.find(".wait").hide();
-					});
-				});
+				}, handler);
 			},
 			error : function() {
 				console.log("geetest error");
 			}
-		});
-		
-		var handler = function(captchaObj) {
-			
-		}
-
-		$('#geetestForm').bootstrapValidator({}).on('success.form.bv', function(e) {
-			e.preventDefault();
-
-			var $form = $(e.target), bv = $form.data('bootstrapValidator'); // BootstrapValidator
-			$.ajax({
-				type : $form.attr("method") || 'POST',
-				url : $form.attr("action"),
-				data : $form.serializeArray(),
-				cache : false,
-				dataType : "json",
-				success : function(json) {
-					if (json.statusCode == 200) {
-						window.location.href = json.forwardUrl;
-					} else {
-						bv.updateMessage(json.field, 'blank', json.message);
-						bv.updateStatus(json.field, 'INVALID', 'blank');
-					}
-				},
-			});
 		});
 	}
 }
