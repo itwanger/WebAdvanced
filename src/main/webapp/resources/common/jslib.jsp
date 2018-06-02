@@ -27,11 +27,6 @@
 <script src="https://cdn.bootcss.com/bootstrap-star-rating/4.0.3/js/star-rating.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap-star-rating/4.0.3/js/locales/zh.js"></script>
 
-<!-- AdminLTE -->
-<script src="${ctx}/resources/components/adminlte/js/adminlte.js"></script>
-<script src="${ctx}/resources/components/adminlte/js/righter.js"></script>
-
-
 <!-- 好用的Bootstrap表单验证插件 -->
 <script src="https://cdn.bootcss.com/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.js"></script>
 <script src="https://cdn.bootcss.com/jquery.bootstrapvalidator/0.5.3/js/language/zh_CN.js"></script>
@@ -44,6 +39,12 @@
 
 <!-- Geetest——更可靠的安全验证工具 -->
 <script src="${ctx}/resources/js/gt.js"></script>
+
+<!-- SlimScroll -->
+<script src="https://cdn.bootcss.com/jQuery-slimScroll/1.3.8/jquery.slimscroll.js"></script>
+<!-- AdminLTE -->
+<script src="${ctx}/resources/components/adminlte/js/adminlte.js"></script>
+<script src="${ctx}/resources/components/adminlte/js/righter.js"></script>
 
 <script src="${ctx}/resources/components/qinge/qinge.core.js"></script>
 <script src="${ctx}/resources/components/qinge/qinge.util.js"></script>
