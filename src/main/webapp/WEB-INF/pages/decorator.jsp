@@ -72,9 +72,9 @@
 						</span>
 					</div>
 				</form>
-				<ul class="sidebar-menu" data-widget="tree">
+				<ul class="sidebar-menu" data-widget="tree" data-sidekey="<sitemesh:write property='sidekey' />">
 					<li class="header">内容导航</li>
-					<li class="treeview active">
+					<li class="treeview dashboard">
 						<a href="#"> <i class="fa fa-dashboard"></i> <span>首页</span> <span class="pull-right-container"> <i
 								class="fa fa-angle-left pull-right"></i>
 						</span>
@@ -90,11 +90,11 @@
 							</li>
 						</ul>
 					</li>
-					<li>
-						<a href="${ctx}/one"> <i class="fa fa-bookmark"></i> <span>Web项目的快速实现</span>
+					<li class="one">
+						<a href="${ctx}/one"> <i class="fa fa-bookmark"></i> <span>第一章</span>
 						</a>
 					</li>
-					<li class="treeview">
+					<li class="treeview two">
 						<a href="#"> <i class="fa fa-book"></i> <span>第二章</span> <span class="pull-right-container"> <i
 								class="fa fa-angle-left pull-right"></i>
 						</span>
@@ -114,7 +114,7 @@
 							</li>
 						</ul>
 					</li>
-					<li class="treeview">
+					<li class="treeview three">
 						<a href="#"> <i class="fa fa-book"></i> <span>第三章</span> <span class="pull-right-container"> <i
 								class="fa fa-angle-left pull-right"></i>
 						</span>
@@ -130,7 +130,7 @@
 							</li>
 						</ul>
 					</li>
-					<li class="treeview">
+					<li class="treeview four">
 						<a href="#"> <i class="fa fa-book"></i> <span>第四章</span> <span class="pull-right-container"> <i
 								class="fa fa-angle-left pull-right"></i>
 						</span>
@@ -170,11 +170,11 @@
 							</li>
 						</ul>
 					</li>
-					<li>
-						<a href="${ctx}/user/test"> <i class="fa fa-bookmark"></i> <span>不可或缺的数据库</span>
+					<li class="five">
+						<a href="${ctx}/user/test"> <i class="fa fa-bookmark"></i> <span>第五章</span>
 						</a>
 					</li>
-					<li class="treeview">
+					<li class="treeview six">
 						<a href="#"> <i class="fa fa-book"></i> <span>第六章</span> <span class="pull-right-container"> <i
 								class="fa fa-angle-left pull-right"></i>
 						</span>
@@ -196,7 +196,7 @@
 								<a href="${ctx}/six?p=geetest"> <i class="fa fa-circle-o"></i> Geetest
 								</a>
 							</li>
-							<li>
+							<li class="sitemesh">
 								<a href="${ctx}"> <i class="fa fa-circle-o"></i> SiteMesh
 								</a>
 							</li>

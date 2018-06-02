@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemesh>
-	<!-- 指明满足“/*”的页面，将被“/WEB-INF/pages/seller/decorator.jsp”所装饰 -->
 	<mapping path="/*" decorator="/WEB-INF/pages/decorator.jsp" />
-	
+
 	<mapping path="/one*" exclue="true" />
 	<mapping path="/two*" exclue="true" />
 	<mapping path="/three*" exclue="true" />
 	<mapping path="/four*" exclue="true" />
 	<mapping path="/user*" exclue="true" />
 	<mapping path="/six*" exclue="true" />
+
+	<content-processor>
+		<tag-rule-bundle class="com.cmower.common.tagrules.SidekeyTagRuleBundle" />
+	</content-processor>
 </sitemesh>

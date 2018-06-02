@@ -173,6 +173,24 @@ function initOnce() {
 	}
 }
 
+/**
+ * AdminLTE主页的左侧菜单选中项
+ * 
+ * @returns
+ */
+function activeSidebar() {
+	var sidekey = $('.sidebar-menu').data("sidekey");
+	if (sidekey) {
+		if (sidekey.indexOf("-") == -1) {
+			$(".sidebar-menu li").addClass("active");
+		} else {
+			var sidekeys = sidekey.split("-");
+			$(".sidebar-menu li.treeview." + sidekeys[0]).addClass("active");
+			$(".sidebar-menu .treeview-menu li." + sidekeys[1]).addClass("active");
+		}
+	}
+}
+
 function initUI($p) {
 	// -----------------
 	// - lazy load 图片延迟加载
@@ -324,6 +342,7 @@ function initUI($p) {
 
 $(function() {
 	initOnce();
+	activeSidebar();
 
 	QINGE.regPlugins.push(initUI);
 	$(document).initUI();
