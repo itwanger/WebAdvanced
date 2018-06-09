@@ -14,6 +14,13 @@
 		<property name="ignoreResourceNotFound" value="true" />
 		<property name="locations" value="classpath:config.properties" />
 	</bean>
+	
+	<bean id="log-filter" class="com.alibaba.druid.filter.logging.Slf4jLogFilter">
+        <property name="connectionLogEnabled" value="false"/>
+        <property name="statementLogEnabled" value="false"/>
+        <property name="resultSetLogEnabled" value="true"/>
+        <property name="statementExecutableSqlLogEnable" value="true"/>
+    </bean>
 
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
 		<!-- Connection Info -->
@@ -41,7 +48,12 @@
 		<property name="testOnReturn" value="false" />
 
 		<!-- 配置监控统计拦截的filters -->
-		<property name="filters" value="stat,slf4j,config" />
+		<property name="filters" value="stat,config" />
+		<property name="proxyFilters">
+            <list>
+                <ref bean="log-filter"/>
+            </list>
+        </property>
 
 		<property name="connectionProperties" value="config.decrypt=true;config.decrypt.key=${publicKey}" />
 	</bean>

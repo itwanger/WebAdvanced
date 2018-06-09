@@ -220,4 +220,23 @@ public class SixController extends BaseController {
 		}
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("username/check")
+	@ResponseBody
+	public HashMap checkUsernameo() {
+		HashMap result = new HashMap<>();
+		String username = getPara("username");
+		String email = getPara("email");
+		logger.debug("用户名{}，邮箱{}", username, email);
+
+		Users user = this.userService.loadOne(username);
+		if (user != null) {
+			result.put("valid", false);
+			return result;
+		}
+
+		result.put("valid", true);
+		return result;
+	}
+
 }

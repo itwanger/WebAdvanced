@@ -58,6 +58,38 @@ function initOnce() {
 	});
 
 	// -----------------
+	// - 注册表单进行BootstrapValidator初始化
+	// -----------------
+	$('#bvRemoteForm').bootstrapValidator({
+		fields : {
+			username : {
+				verbose: false,
+				validators : {
+					notEmpty : {
+						message : '账号是必须的'
+					},
+					stringLength : {
+						min : 4,
+						max : 8,
+						message : '账号的长度在4-8个字符'
+					},
+					remote : {
+						url : '/WebAdvanced/six/username/check',
+						data : function(validator, $field, value) {
+							return {
+								email : validator.getFieldElements('email').val()
+							};
+						},
+						message : '账号不可用',
+					}
+				}
+			},
+		}
+	}).on('success.form.bv', function(e) {
+		e.preventDefault();
+	});
+
+	// -----------------
 	// - 登录表单进行Validform初始化
 	// -----------------
 	$('#validForm').Validform({
