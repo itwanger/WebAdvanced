@@ -40,6 +40,9 @@
 <!-- Geetest——更可靠的安全验证工具 -->
 <script src="${ctx}/resources/js/gt.js"></script>
 
+<!-- Chart.js——简单而灵活的图表库 -->
+<script src="https://cdn.bootcss.com/Chart.js/2.7.2/Chart.js"></script>
+
 <!-- SlimScroll -->
 <script src="https://cdn.bootcss.com/jQuery-slimScroll/1.3.8/jquery.slimscroll.js"></script>
 <!-- AdminLTE -->

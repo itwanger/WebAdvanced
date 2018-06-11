@@ -200,6 +200,10 @@
 								<a href="${ctx}"> <i class="fa fa-circle-o"></i> SiteMesh
 								</a>
 							</li>
+							<li class="chartjs">
+								<a href="${ctx}/sitemesh?p=chartjs"> <i class="fa fa-circle-o"></i> Chart.js
+								</a>
+							</li>
 						</ul>
 					</li>
 					<li>
