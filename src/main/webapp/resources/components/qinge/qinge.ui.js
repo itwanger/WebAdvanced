@@ -210,6 +210,12 @@ var ctx = $("#barChart");
 if (ctx.length > 0) {
 	var barChart = new Chart(ctx, {
 	    type: 'bar',
+	    options: {
+	        title: {
+	            display: true,
+	            text: '柱状图'
+	        }
+	    },
 	    data: {
 	        labels: ["红色", "蓝色", "黄色", "绿色", "紫色", "橙色"],
 	        datasets: [{
