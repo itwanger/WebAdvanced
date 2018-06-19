@@ -247,6 +247,63 @@ function initOnce() {
 	if (toolTipPositionNearestCtx.length > 0) {
 		var toolTipPositionNearestChart = new Chart(toolTipPositionNearestCtx, chartjs.createToolTipPositionConfig('nearest'));
 	}
+	
+	// -----------------
+	// - Chart.js——Tooltip Mode: point
+	// -----------------
+	var toolTipModePointCtx = $("#toolTipModePoint");
+	if (toolTipModePointCtx.length > 0) {
+		var toolTipModePointChart = new Chart(toolTipModePointCtx, chartjs.createToolTipModeConfig('point'));
+	}
+	// -----------------
+	// - Chart.js——Tooltip Mode: dataset
+	// -----------------
+	var toolTipModeDatasetCtx = $("#toolTipModeDataset");
+	if (toolTipModeDatasetCtx.length > 0) {
+		var toolTipModeDatasetChart = new Chart(toolTipModeDatasetCtx, chartjs.createToolTipModeConfig('dataset'));
+	}
+	// -----------------
+	// - Chart.js——Tooltip Mode: toolTipCallbacksLabel
+	// -----------------
+	var toolTipCallbacksLabelCtx = $("#toolTipCallbacksLabel");
+	if (toolTipCallbacksLabelCtx.length > 0) {
+		var toolTipCallbacksLabelChart = new Chart(toolTipCallbacksLabelCtx, {
+			type: 'line',
+			data: {
+				labels: ['一月', '二月', '三月', '四月', '五月', '六月', '七月'],
+				datasets: [{
+					label: '红色',
+					borderColor: QINGE.chartjsColors.red,
+					backgroundColor: QINGE.chartjsColors.red,
+					data: [10, 30, 46, 2, 8, 50, 0],
+					fill: false,
+				}, {
+					label: '蓝色',
+					borderColor: QINGE.chartjsColors.blue,
+					backgroundColor: QINGE.chartjsColors.blue,
+					data: [7, 49, 46, 13, 25, 30, 22],
+					fill: false,
+				}]
+			},
+			options: {
+				responsive: true,
+				tooltips: {
+					mode: 'index',
+					callbacks: {
+						footer: function(tooltipItems, data) {
+							var sum = 0;
+
+							$(tooltipItems).each(function(i, tooltipItem) {
+								sum += data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+							});
+							return '总和: ' + sum;
+						},
+		            },
+		            footerFontStyle: 'normal'
+				},
+			}
+		});
+	}
 }
 
 /**
