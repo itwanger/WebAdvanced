@@ -206,7 +206,7 @@ function initOnce() {
 	// -----------------
 	// - Chart.js——柱状图
 	// -----------------
-	var barChartCtx = $("#barChart");
+	var barChartCtx = $("#barChart"), barChartProgress = $("#barChartProgress");
 	if (barChartCtx.length > 0) {
 		var barChart = new Chart(barChartCtx, {
 			type : 'bar',
@@ -214,9 +214,6 @@ function initOnce() {
 				title : {
 					display : true,
 					text : '柱状图'
-				},
-				tooltips : {
-					position : 'nearest',
 				}
 			},
 			data : {
@@ -224,14 +221,30 @@ function initOnce() {
 				datasets : [ {
 					label : '得票数',
 					data : [ 12, 19, 3, 5, 2, 3 ],
-					backgroundColor : [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
-					borderColor : [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
+					backgroundColor : [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)',
+							'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
+					borderColor : [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+							'rgba(255, 159, 64, 1)' ],
 					borderWidth : 1,
 				} ]
 			},
+			options : {
+				animation : {
+					duration : 2000,
+					easing : 'easeOutBounce',
+					onProgress : function(animation) {
+						barChartProgress.val(animation.currentStep / animation.numSteps);
+					},
+					onComplete : function() {
+						window.setTimeout(function() {
+							barChartProgress.val(0);
+						}, 2000);
+					}
+				},
+			}
 		});
 	}
-	
+
 	// -----------------
 	// - Chart.js——Tooltip Position: average
 	// -----------------
@@ -239,7 +252,7 @@ function initOnce() {
 	if (toolTipPositionAverageCtx.length > 0) {
 		var toolTipPositionAverageChart = new Chart(toolTipPositionAverageCtx, chartjs.createToolTipPositionConfig('average'));
 	}
-	
+
 	// -----------------
 	// - Chart.js——Tooltip Position: nearest
 	// -----------------
@@ -247,7 +260,7 @@ function initOnce() {
 	if (toolTipPositionNearestCtx.length > 0) {
 		var toolTipPositionNearestChart = new Chart(toolTipPositionNearestCtx, chartjs.createToolTipPositionConfig('nearest'));
 	}
-	
+
 	// -----------------
 	// - Chart.js——Tooltip Mode: point
 	// -----------------
@@ -268,29 +281,29 @@ function initOnce() {
 	var toolTipCallbacksLabelCtx = $("#toolTipCallbacksLabel");
 	if (toolTipCallbacksLabelCtx.length > 0) {
 		var toolTipCallbacksLabelChart = new Chart(toolTipCallbacksLabelCtx, {
-			type: 'line',
-			data: {
-				labels: ['一月', '二月', '三月', '四月', '五月', '六月', '七月'],
-				datasets: [{
-					label: '红色',
-					borderColor: QINGE.chartjsColors.red,
-					backgroundColor: QINGE.chartjsColors.red,
-					data: [10, 30, 46, 2, 8, 50, 0],
-					fill: false,
+			type : 'line',
+			data : {
+				labels : [ '一月', '二月', '三月', '四月', '五月', '六月', '七月' ],
+				datasets : [ {
+					label : '红色',
+					borderColor : QINGE.chartjsColors.red,
+					backgroundColor : QINGE.chartjsColors.red,
+					data : [ 10, 30, 46, 2, 8, 50, 0 ],
+					fill : false,
 				}, {
-					label: '蓝色',
-					borderColor: QINGE.chartjsColors.blue,
-					backgroundColor: QINGE.chartjsColors.blue,
-					data: [7, 49, 46, 13, 25, 30, 22],
-					fill: false,
-				}]
+					label : '蓝色',
+					borderColor : QINGE.chartjsColors.blue,
+					backgroundColor : QINGE.chartjsColors.blue,
+					data : [ 7, 49, 46, 13, 25, 30, 22 ],
+					fill : false,
+				} ]
 			},
-			options: {
-				responsive: true,
-				tooltips: {
-					mode: 'index',
-					callbacks: {
-						footer: function(tooltipItems, data) {
+			options : {
+				responsive : true,
+				tooltips : {
+					mode : 'index',
+					callbacks : {
+						footer : function(tooltipItems, data) {
 							var sum = 0;
 
 							$(tooltipItems).each(function(i, tooltipItem) {
@@ -298,8 +311,8 @@ function initOnce() {
 							});
 							return '总和: ' + sum;
 						},
-		            },
-		            footerFontStyle: 'normal'
+					},
+					footerFontStyle : 'normal'
 				},
 			}
 		});
