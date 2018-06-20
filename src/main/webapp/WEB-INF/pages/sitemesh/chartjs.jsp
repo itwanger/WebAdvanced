@@ -92,6 +92,7 @@
             <div class="box-body">
               <div class="chart">
                 <canvas id="barChart" style="height:250px"></canvas>
+                <progress id="barChartProgress" max="1" value="0" style="width: 100%"></progress>
               </div>
             </div>
             <!-- /.box-body -->
