@@ -221,10 +221,8 @@ function initOnce() {
 				datasets : [ {
 					label : '得票数',
 					data : [ 12, 19, 3, 5, 2, 3 ],
-					backgroundColor : [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)',
-							'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
-					borderColor : [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
-							'rgba(255, 159, 64, 1)' ],
+					backgroundColor : [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
+					borderColor : [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
 					borderWidth : 1,
 				} ]
 			},
@@ -243,6 +241,41 @@ function initOnce() {
 				},
 			}
 		});
+	}
+	// -----------------
+	// - Chart.js——混合型
+	// -----------------
+	var mixedChartCtx = $("#mixedChart");
+	if (mixedChartCtx.length > 0) {
+var mixedChartChart = new Chart(mixedChartCtx, {
+	type : 'bar',
+	options : {
+		title : {
+			display : true,
+			text : '混合型图表'
+		},
+		tooltips: {
+			mode: 'index',
+			intersect: true
+		}
+	},
+	data : {
+		labels: ['三月', '四月', '五月', '六月', '七月', '八月'],
+		datasets : [ {
+			label : '得票数',
+			data : [ 12, 19, 3, 5, 2, 3 ],
+			backgroundColor : QINGE.chartjsColors.red,
+			borderColor: 'white',
+			borderWidth: 2
+		},{
+			type: 'line',
+			label : '投票数',
+			data : [ 22, 29, 13, 15, 12, 13 ],
+			backgroundColor : QINGE.chartjsColors.blue,
+			borderWidth: 2
+		} ]
+	},
+});
 	}
 
 	// -----------------
@@ -314,6 +347,97 @@ function initOnce() {
 					},
 					footerFontStyle : 'normal'
 				},
+			}
+		});
+	}
+	// -----------------
+	// - Chart.js——Radar Chart
+	// -----------------
+	var radarChartCtx = $("#radarChart");
+	if (radarChartCtx.length > 0) {
+		var color = Chart.helpers.color;
+		var radarChart = new Chart(radarChartCtx, {
+			type : 'radar',
+			data : {
+				labels : [ '场次', '进球', '助攻', '犯规', '抢断', '解围' ],
+				datasets : [ {
+					label : 'C罗',
+					borderColor : QINGE.chartjsColors.red,
+					backgroundColor : color(QINGE.chartjsColors.red).alpha(0.2).rgbString(),
+					pointBackgroundColor : QINGE.chartjsColors.red,
+					data : [ 2, 3, 2, 1, 0, 1 ],
+				}, {
+					label : '梅西',
+					borderColor : QINGE.chartjsColors.blue,
+					backgroundColor : color(QINGE.chartjsColors.blue).alpha(0.2).rgbString(),
+					pointBackgroundColor : QINGE.chartjsColors.blue,
+					data : [ 2, 0, 0, 1, 1, 0 ],
+				} ]
+			},
+			options : {
+				scale : {
+					ticks : {
+						beginAtZero : true
+					}
+				},
+				tooltips : {
+					mode : 'index',
+				},
+			}
+		});
+	}
+	// -----------------
+	// - Chart.js——DONUT CHART
+	// -----------------
+	var doughnutChartCtx = $("#doughnutChart");
+	if (doughnutChartCtx.length > 0) {
+		var radarChart = new Chart(doughnutChartCtx, {
+			type : 'doughnut',
+			data : {
+				labels : [ '几乎不可能', '看别人脸色', '天佑梅西' ],
+				datasets : [ {
+					label : '投票人数：',
+					backgroundColor : [ QINGE.chartjsColors.red, QINGE.chartjsColors.orange, QINGE.chartjsColors.green ],
+					data : [ 20, 50, 30 ],
+				} ]
+			},
+			options : {
+				title : {
+					display : true,
+					text : '阿根廷能否出现？'
+				},
+				animation : {
+					animateScale : true,
+					animateRotate : true
+				}
+			}
+		});
+	}
+	// -----------------
+	// - Chart.js——Polar Area Chart
+	// -----------------
+	var polarAreaChartCtx = $("#polarAreaChart");
+	if (polarAreaChartCtx.length > 0) {
+		var color = Chart.helpers.color;
+		var polarAreaChart = new Chart(polarAreaChartCtx, {
+			type : 'polarArea',
+			data : {
+				labels : [ '几乎不可能', '看别人脸色', '天佑梅西' ],
+				datasets : [ {
+					label : '投票人数：',
+					backgroundColor : [ color(QINGE.chartjsColors.red).alpha(0.8).rgbString(), color(QINGE.chartjsColors.orange).alpha(0.8).rgbString(), color(QINGE.chartjsColors.green).alpha(0.8).rgbString() ],
+					data : [ 20, 50, 30 ],
+				} ]
+			},
+			options : {
+				title : {
+					display : true,
+					text : '阿根廷能否出现？'
+				},
+				animation : {
+					animateScale : true,
+					animateRotate : true
+				}
 			}
 		});
 	}
