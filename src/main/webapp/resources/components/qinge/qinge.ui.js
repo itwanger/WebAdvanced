@@ -221,8 +221,10 @@ function initOnce() {
 				datasets : [ {
 					label : '得票数',
 					data : [ 12, 19, 3, 5, 2, 3 ],
-					backgroundColor : [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
-					borderColor : [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
+					backgroundColor : [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)',
+							'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
+					borderColor : [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+							'rgba(255, 159, 64, 1)' ],
 					borderWidth : 1,
 				} ]
 			},
@@ -247,35 +249,35 @@ function initOnce() {
 	// -----------------
 	var mixedChartCtx = $("#mixedChart");
 	if (mixedChartCtx.length > 0) {
-var mixedChartChart = new Chart(mixedChartCtx, {
-	type : 'bar',
-	options : {
-		title : {
-			display : true,
-			text : '混合型图表'
-		},
-		tooltips: {
-			mode: 'index',
-			intersect: true
-		}
-	},
-	data : {
-		labels: ['三月', '四月', '五月', '六月', '七月', '八月'],
-		datasets : [ {
-			label : '得票数',
-			data : [ 12, 19, 3, 5, 2, 3 ],
-			backgroundColor : QINGE.chartjsColors.red,
-			borderColor: 'white',
-			borderWidth: 2
-		},{
-			type: 'line',
-			label : '投票数',
-			data : [ 22, 29, 13, 15, 12, 13 ],
-			backgroundColor : QINGE.chartjsColors.blue,
-			borderWidth: 2
-		} ]
-	},
-});
+		var mixedChart = new Chart(mixedChartCtx, {
+			type : 'bar',
+			options : {
+				title : {
+					display : true,
+					text : '混合型图表'
+				},
+				tooltips : {
+					mode : 'index',
+					intersect : true
+				}
+			},
+			data : {
+				labels : [ '三月', '四月', '五月', '六月', '七月', '八月' ],
+				datasets : [ {
+					label : '得票数',
+					data : [ 12, 19, 3, 5, 2, 3 ],
+					backgroundColor : QINGE.chartjsColors.red,
+					borderColor : 'white',
+					borderWidth : 2
+				}, {
+					type : 'line',
+					label : '投票数',
+					data : [ 22, 29, 13, 15, 12, 13 ],
+					backgroundColor : QINGE.chartjsColors.blue,
+					borderWidth : 2
+				} ]
+			},
+		});
 	}
 
 	// -----------------
@@ -333,6 +335,13 @@ var mixedChartChart = new Chart(mixedChartCtx, {
 			},
 			options : {
 				responsive : true,
+				scales : {
+					yAxes : [ {
+						ticks : {
+							stepSize : 3
+						}
+					} ]
+				},
 				tooltips : {
 					mode : 'index',
 					callbacks : {
@@ -349,6 +358,14 @@ var mixedChartChart = new Chart(mixedChartCtx, {
 				},
 			}
 		});
+	}
+
+	// -----------------
+	// - Chart.js——Point Style
+	// -----------------
+	var pointStyleCtx = $("#pointStyleChart");
+	if (pointStyleCtx.length > 0) {
+		var pointStyleChart = new Chart(pointStyleCtx, chartjs.createPointStyleConfig('triangle'));
 	}
 	// -----------------
 	// - Chart.js——Radar Chart
@@ -425,7 +442,8 @@ var mixedChartChart = new Chart(mixedChartCtx, {
 				labels : [ '几乎不可能', '看别人脸色', '天佑梅西' ],
 				datasets : [ {
 					label : '投票人数：',
-					backgroundColor : [ color(QINGE.chartjsColors.red).alpha(0.8).rgbString(), color(QINGE.chartjsColors.orange).alpha(0.8).rgbString(), color(QINGE.chartjsColors.green).alpha(0.8).rgbString() ],
+					backgroundColor : [ color(QINGE.chartjsColors.red).alpha(0.8).rgbString(), color(QINGE.chartjsColors.orange).alpha(0.8).rgbString(),
+							color(QINGE.chartjsColors.green).alpha(0.8).rgbString() ],
 					data : [ 20, 50, 30 ],
 				} ]
 			},
@@ -440,6 +458,250 @@ var mixedChartChart = new Chart(mixedChartCtx, {
 				}
 			}
 		});
+	}
+	// -----------------
+	// - Chart.js——笛卡尔类别轴min、max
+	// -----------------
+	var minMaxChartCtx = $("#minMaxChart");
+	if (minMaxChartCtx.length > 0) {
+		var minMaxChart = new Chart(minMaxChartCtx, {
+			type : 'line',
+			data : {
+				labels : [ '一月', '二月', '三月', '四月', '五月', '六月', '七月' ],
+				datasets : [ {
+					label : '红色',
+					borderColor : QINGE.chartjsColors.red,
+					backgroundColor : QINGE.chartjsColors.red,
+					data : [ 10, 30, 46, 2, 8, 50, 0 ],
+					fill : false,
+				}, {
+					label : '蓝色',
+					borderColor : QINGE.chartjsColors.blue,
+					backgroundColor : QINGE.chartjsColors.blue,
+					data : [ 7, 49, 46, 13, 25, 30, 22 ],
+					fill : false,
+				} ]
+			},
+			options : {
+				responsive : true,
+				scales : {
+					xAxes : [ {
+						ticks : {
+							min : '五月',
+							max : '七月'
+						}
+					} ]
+				},
+			}
+		});
+	}
+	// -----------------
+	// - Chart.js——笛卡尔线性轴的步长
+	// -----------------
+	var stepChartCtx = $("#stepChart");
+	if (stepChartCtx.length > 0) {
+		var stepChart = new Chart(stepChartCtx, {
+			type : 'line',
+			data : {
+				labels : [ '一月', '二月', '三月', '四月', '五月', '六月', '七月' ],
+				datasets : [ {
+					label : '红色',
+					borderColor : QINGE.chartjsColors.red,
+					backgroundColor : QINGE.chartjsColors.red,
+					data : [ 10, 30, 46, 2, 8, 50, 0 ],
+					fill : false,
+				}, ]
+			},
+			options : {
+				responsive : true,
+				scales : {
+					yAxes : [ {
+						ticks : {
+							stepSize : 4
+						}
+					} ]
+				},
+			}
+		});
+	}
+	// -----------------
+	// - Chart.js——Time Axes Chart
+	// -----------------
+	var timeAxesChartCtx = $("#timeAxesChart");
+	if (timeAxesChartCtx.length > 0) {
+		var timeFormat = 'YYYY年MM月DD日';
+		function newDate(days) {
+			return moment().add(days, 'd').toDate();
+		}
+
+		var timeAxesChart = new Chart(timeAxesChartCtx, {
+			type : 'bar',
+			data : {
+				labels : [ newDate(0), newDate(1), newDate(2), newDate(3), newDate(4), newDate(5), newDate(6), newDate(7) ],
+				datasets : [ {
+					label : '投票人数：',
+					backgroundColor : QINGE.chartjsColors.red,
+					data : [ 20, 50, 30, 60, 30, 20, 90, 80 ],
+				} ]
+			},
+			options : {
+				scales : {
+					xAxes : [ {
+						type : 'time',
+						time : {
+							unit : 'day',
+							displayFormats : {
+								day : timeFormat
+							},
+							tooltipFormat : timeFormat
+						},
+					} ],
+					yAxes : [ {
+						ticks : {
+							beginAtZero : true
+						}
+					} ]
+				},
+			}
+		});
+	}
+
+	// -----------------
+	// - Chart.js——轴标题
+	// -----------------
+	var labelingAxesChartCtx = $("#labelingAxesChart");
+	if (labelingAxesChartCtx.length > 0) {
+		var timeFormat = 'YYYY年MM月DD日';
+		function newDateString(days) {
+			return moment().add(days, 'd').format(timeFormat);
+		}
+
+		var labelingAxesChart = new Chart(labelingAxesChartCtx, {
+			type : 'bar',
+			data : {
+				labels : [ newDateString(0), newDateString(1), newDateString(2), newDateString(3), newDateString(4), newDateString(5), newDateString(6),
+						newDateString(7) ],
+				datasets : [ {
+					label : '投票人数：',
+					backgroundColor : QINGE.chartjsColors.red,
+					data : [ 20, 50, 30, 60, 30, 20, 90, 80 ],
+				} ]
+			},
+			options : {
+				scales : {
+					xAxes : [ {
+						scaleLabel : {
+							display : true,
+							labelString : '日期'
+						}
+					} ],
+					yAxes : [ {
+						scaleLabel : {
+							display : true,
+							labelString : '投票人数'
+						}
+					} ]
+				},
+			}
+		});
+	}
+
+	// -----------------
+	// - Chart.js——轴样式
+	// -----------------
+	var gridLineStyleCtx = $("#gridLineStyle");
+	if (gridLineStyleCtx.length > 0) {
+		var gridLineStyle = new Chart(gridLineStyleCtx, {
+			type : 'line',
+			data : {
+				labels : [ '一月', '二月', '三月', '四月', '五月', '六月', '七月' ],
+				datasets : [ {
+					label : '红色',
+					borderColor : QINGE.chartjsColors.red,
+					backgroundColor : QINGE.chartjsColors.red,
+					data : [ 10, 30, 46, 2, 8, 50, 0 ],
+					fill : false,
+				}, ]
+			},
+			options : {
+				responsive : true,
+				scales : {
+					yAxes : [ {
+						gridLines : {
+							color : 'blue'
+						}
+					} ],
+					xAxes : [ {
+						gridLines : {
+							display : false,
+						}
+					} ]
+				},
+			}
+		});
+	}
+
+	// -----------------
+	// - Chart.js——综合实例
+	// -----------------
+	var comboChartCtx = $("#comboChart");
+	if (comboChartCtx.length > 0) {
+		var color = Chart.helpers.color;
+var comboChart = new Chart(comboChartCtx, {
+	plugins : [ {
+		afterDatasetsDraw : function(chart) {
+			var ctx = chart.ctx;
+
+			chart.data.datasets.forEach(function(dataset, i) {
+				var meta = chart.getDatasetMeta(i);
+				if (!meta.hidden) {
+					meta.data.forEach(function(element, index) {
+						// 用指定的字体、黑色绘制文本
+						ctx.fillStyle = 'rgb(0, 0, 0)';
+
+						var fontSize = 16;
+						var fontStyle = 'normal';
+						var fontFamily = 'Helvetica Neue';
+						ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+						// 简单的转换一下
+						var dataString = dataset.data[index].toString() + "张";
+
+						// 确保对其方式
+						ctx.textAlign = 'center';
+						ctx.textBaseline = 'middle';
+
+						var padding = 5;
+						var position = element.tooltipPosition();
+						ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+					});
+				}
+			});
+		}
+	} ],
+	type : 'bar',
+	options : {
+		title : {
+			display : true,
+			text : '锦上添花'
+		},
+	},
+	data : {
+		labels : [ '三月', '四月', '五月', '六月', '七月', '八月' ],
+		datasets : [ {
+			label : '得票数',
+			data : [ 12, 19, 3, 5, 2, 3 ],
+			backgroundColor : color(QINGE.chartjsColors.red).alpha(0.2).rgbString(),
+			borderColor : QINGE.chartjsColors.red,
+		}, {
+			type : 'line',
+			label : '投票数',
+			data : [ 22, 29, 13, 15, 12, 13 ],
+			backgroundColor : color(QINGE.chartjsColors.blue).alpha(0.2).rgbString(),
+			borderColor : QINGE.chartjsColors.blue,
+		} ]
+	},
+});
 	}
 }
 

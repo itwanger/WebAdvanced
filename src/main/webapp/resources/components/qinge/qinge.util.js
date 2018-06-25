@@ -98,5 +98,37 @@ var chartjs = {
 					},
 				}
 			};
+		},
+		createPointStyleConfig : function(pointStyle) {
+			return {
+				type: 'line',
+				data: {
+					labels: ['一月', '二月', '三月', '四月', '五月', '六月', '七月'],
+					datasets: [{
+						label: '红色',
+						borderColor: QINGE.chartjsColors.red,
+						backgroundColor: QINGE.chartjsColors.red,
+						data: [10, 30, 46, 2, 8, 50, 0],
+						fill: false,
+						showLine: false // no line shown
+					}]
+				},
+				options: {
+					legend: {
+						display: false
+					},
+					title: {
+						display: true,
+						text: 'Point Style: ' + pointStyle
+					},
+					elements: {
+						point: {
+							pointStyle: pointStyle,
+							radius : 10,
+							hoverRadius : 15
+						}
+					}
+				}
+			};
 		}
 }
