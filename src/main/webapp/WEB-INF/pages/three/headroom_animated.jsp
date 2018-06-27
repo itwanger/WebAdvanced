@@ -896,6 +896,7 @@
 				"unpinned" : "slideUp"
 			}
 		};
+		
 		navbar_fixed_top.find("ul.navbar-nav li a").click(function(event) {
 			var $this = $(this),classes = $this.data("headroom-classes");
 			options = $.extend(defaults, {"classes" : classes});
