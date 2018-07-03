@@ -79,5 +79,10 @@ public class ThreeController {
 	public String headroomAnimated() {
 		return "three/headroom_animated";
 	}
+	
+	@RequestMapping("processbar")
+	public String processbar() {
+		return "three/processbar";
+	}
 
 }
