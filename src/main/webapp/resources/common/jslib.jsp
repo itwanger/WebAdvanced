@@ -27,6 +27,9 @@
 <script src="https://cdn.bootcss.com/bootstrap-star-rating/4.0.3/js/star-rating.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap-star-rating/4.0.3/js/locales/zh.js"></script>
 
+<!-- 一款真正的响应式灯箱插件 -->
+<script src="https://cdn.bootcss.com/magnific-popup.js/1.1.0/jquery.magnific-popup.js"></script>
+
 <!-- 好用的Bootstrap表单验证插件 -->
 <script src="https://cdn.bootcss.com/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.js"></script>
 <script src="https://cdn.bootcss.com/jquery.bootstrapvalidator/0.5.3/js/language/zh_CN.js"></script>
