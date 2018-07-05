@@ -168,6 +168,10 @@
 								<a href="${ctx}/four?p=layer1"> <i class="fa fa-circle-o"></i> 4.9 Layer
 								</a>
 							</li>
+							<li>
+								<a href="${ctx}/four?p=magnificPopup2"> <i class="fa fa-circle-o"></i> 4.10 Magnific Popup
+								</a>
+							</li>
 						</ul>
 					</li>
 					<li class="five">

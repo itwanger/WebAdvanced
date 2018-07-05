@@ -869,6 +869,50 @@ function initUI($p) {
 		$this.attr("src", $this.attr("src") + "?r=" + Math.random());
 		$kaptchaCode.val("");
 	});
+	
+	// -----------------
+	// - Magnific Popup——一款真正的响应式灯箱插件
+	// -----------------
+	$('.popup-youku').magnificPopup({
+		type : 'iframe',
+		iframe : {
+			patterns : {
+				youku : {
+					index : 'youku.com/',
+					id : function(url) {
+						var m = url.match(/id_(\S*)==./)[1];
+						return m;
+					},
+					src : 'http://player.youku.com/embed/%id%'
+				}
+			}
+		}
+	});
+	
+	$('.open-popup-link').magnificPopup({
+		type : 'inline',
+	});
+	
+	$('.ajax-popup-link').magnificPopup({
+		type : 'ajax',
+	});
+	
+	$('.popup-gallery').magnificPopup({
+		delegate : 'a',
+		type : 'image',
+		tLoading : '图像 #%curr% 加载中',
+		mainClass : 'mfp-img-mobile',
+		gallery : {
+			enabled : true,
+			navigateByImgClick : true,
+			tPrev : '上一个', // 左侧箭头标题
+			tNext : '下一个', // 右侧箭头标题
+			tCounter : '<span class="mfp-counter">%curr% / %total%</span>', // 计数器标记
+		},
+		image : {
+			tError : '<a href="%url%">当前图像 #%curr%</a> 加载失败.',
+		},
+	});
 
 }
 

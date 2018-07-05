@@ -52,7 +52,7 @@
 			<a href="${ctx}/resources/images/studio10_b.jpg" title="Light A Fire">
 				<img src="${ctx}/resources/images/studio10_s.jpg">
 			</a>
-			<a src="${ctx}/resources/images/studio3_b.jpg" title="Part of a Fool">
+			<a href="${ctx}/resources/images/studio3_b.jpg" title="Part of a Fool">
 				<img src="${ctx}/resources/images/studio3_s.jpg">
 			</a>
 			<a href="${ctx}/resources/images/studio26_b.jpg" title="All Out Of Love">
