@@ -18,7 +18,6 @@
 		<a class="image-popup-no-margins" href="${ctx}/resources/images/studio26_b.jpg">
 			<img src="${ctx}/resources/images/studio26_s.jpg">
 		</a>
-
 	</div>
 
 	<div class="bs-example">
@@ -45,6 +44,32 @@
 			<p>
 				<a class="popup-modal-dismiss" href="#">点此关闭</a>
 			</p>
+		</div>
+	</div>
+
+	<div class="bs-example">
+		<div class="popup-gallery">
+			<a href="${ctx}/resources/images/studio10_b.jpg" title="Light A Fire">
+				<img src="${ctx}/resources/images/studio10_s.jpg">
+			</a>
+			<a src="${ctx}/resources/images/studio3_b.jpg" title="Part of a Fool">
+				<img src="${ctx}/resources/images/studio3_s.jpg">
+			</a>
+			<a href="${ctx}/resources/images/studio26_b.jpg" title="All Out Of Love">
+				<img src="${ctx}/resources/images/studio26_s.jpg">
+			</a>
+		</div>
+	</div>
+
+	<div class="bs-example">
+		<div class="gallery">
+			<a href="path-to-image.jpg">打开图像1 (图库 #1)</a>
+			<a href="path-to-image.jpg">打开图像2 (图库 #1)</a>
+		</div>
+		<div class="gallery">
+			<a href="path-to-image.jpg">打开图像1 (图库 #2)</a>
+			<a href="${ctx}/resources/images/studio10_b.jpg">打开图像2 (图库 #2)</a>
+			<a href="${ctx}/four?p=magnificPopup-ajax" class="mfp-ajax">打开远程页面 (图库 #2). "mfp-ajax"类会强制当前项目为"ajax" 类型。</a>
 		</div>
 	</div>
 
@@ -138,6 +163,43 @@
 			$(document).on('click', '.popup-modal-dismiss', function(e) {
 				e.preventDefault();
 				$.magnificPopup.close();
+			});
+
+			$('.popup-gallery').magnificPopup({
+				delegate : 'a',
+				type : 'image',
+				tLoading : '图像 #%curr% 加载中',
+				mainClass : 'mfp-img-mobile',
+				gallery : {
+					enabled : true,
+					navigateByImgClick : true,
+					tPrev : '上一个', // 左侧箭头标题
+					tNext : '下一个', // 右侧箭头标题
+					tCounter : '<span class="mfp-counter">%curr% / %total%</span>', // 计数器标记
+					preload : [ 0, 1 ]
+				// Will preload 0 - before current, and 1 after the current image
+				},
+				image : {
+					tError : '<a href="%url%">当前图像 #%curr%</a> 加载失败.',
+					titleSrc : function(item) {
+						return item.el.attr('title') + '<small>网易云音乐推荐</small>';
+					}
+				},
+				callbacks : {
+					lazyLoad : function(item) {
+						console.log(item); // 应该被加载的数据对象
+					},
+				}
+			});
+			
+			$('.gallery').each(function() { // the containers for all your galleries
+			    $(this).magnificPopup({
+			        delegate: 'a', // the selector for gallery item
+			        type: 'image',
+			        gallery: {
+			          enabled:true
+			        }
+			    });
 			});
 		});
 	</script>
