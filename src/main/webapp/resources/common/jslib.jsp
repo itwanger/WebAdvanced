@@ -46,6 +46,10 @@
 <!-- Chart.js——简单而灵活的图表库 -->
 <script src="https://cdn.bootcss.com/Chart.js/2.7.2/Chart.js"></script>
 
+<!-- Select2——支持搜索、标记、远程数据和无限滚动的下拉框 -->
+<script src="https://cdn.bootcss.com/select2/4.0.5/js/select2.js"></script>
+<script src="https://cdn.bootcss.com/select2/4.0.5/js/i18n/zh-CN.js"></script>
+
 <!-- SlimScroll -->
 <script src="https://cdn.bootcss.com/jQuery-slimScroll/1.3.8/jquery.slimscroll.js"></script>
 <!-- AdminLTE -->

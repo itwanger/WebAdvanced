@@ -647,62 +647,68 @@ function initOnce() {
 	var comboChartCtx = $("#comboChart");
 	if (comboChartCtx.length > 0) {
 		var color = Chart.helpers.color;
-var comboChart = new Chart(comboChartCtx, {
-	plugins : [ {
-		afterDatasetsDraw : function(chart) {
-			var ctx = chart.ctx;
+		var comboChart = new Chart(comboChartCtx, {
+			plugins : [ {
+				afterDatasetsDraw : function(chart) {
+					var ctx = chart.ctx;
 
-			chart.data.datasets.forEach(function(dataset, i) {
-				var meta = chart.getDatasetMeta(i);
-				if (!meta.hidden) {
-					meta.data.forEach(function(element, index) {
-						// 用指定的字体、黑色绘制文本
-						ctx.fillStyle = 'rgb(0, 0, 0)';
+					chart.data.datasets.forEach(function(dataset, i) {
+						var meta = chart.getDatasetMeta(i);
+						if (!meta.hidden) {
+							meta.data.forEach(function(element, index) {
+								// 用指定的字体、黑色绘制文本
+								ctx.fillStyle = 'rgb(0, 0, 0)';
 
-						var fontSize = 16;
-						var fontStyle = 'normal';
-						var fontFamily = 'Helvetica Neue';
-						ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+								var fontSize = 16;
+								var fontStyle = 'normal';
+								var fontFamily = 'Helvetica Neue';
+								ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
 
-						// 简单的转换一下
-						var dataString = dataset.data[index].toString() + "张";
+								// 简单的转换一下
+								var dataString = dataset.data[index].toString() + "张";
 
-						// 确保对其方式
-						ctx.textAlign = 'center';
-						ctx.textBaseline = 'middle';
+								// 确保对其方式
+								ctx.textAlign = 'center';
+								ctx.textBaseline = 'middle';
 
-						var padding = 5;
-						var position = element.tooltipPosition();
-						ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+								var padding = 5;
+								var position = element.tooltipPosition();
+								ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+							});
+						}
 					});
 				}
-			});
-		}
-	} ],
-	type : 'bar',
-	options : {
-		title : {
-			display : true,
-			text : '锦上添花'
-		},
-	},
-	data : {
-		labels : [ '三月', '四月', '五月', '六月', '七月', '八月' ],
-		datasets : [ {
-			label : '得票数',
-			data : [ 12, 19, 3, 5, 2, 3 ],
-			backgroundColor : color(QINGE.chartjsColors.red).alpha(0.2).rgbString(),
-			borderColor : QINGE.chartjsColors.red,
-		}, {
-			type : 'line',
-			label : '投票数',
-			data : [ 22, 29, 13, 15, 12, 13 ],
-			backgroundColor : color(QINGE.chartjsColors.blue).alpha(0.2).rgbString(),
-			borderColor : QINGE.chartjsColors.blue,
-		} ]
-	},
-});
+			} ],
+			type : 'bar',
+			options : {
+				title : {
+					display : true,
+					text : '锦上添花'
+				},
+			},
+			data : {
+				labels : [ '三月', '四月', '五月', '六月', '七月', '八月' ],
+				datasets : [ {
+					label : '得票数',
+					data : [ 12, 19, 3, 5, 2, 3 ],
+					backgroundColor : color(QINGE.chartjsColors.red).alpha(0.2).rgbString(),
+					borderColor : QINGE.chartjsColors.red,
+				}, {
+					type : 'line',
+					label : '投票数',
+					data : [ 22, 29, 13, 15, 12, 13 ],
+					backgroundColor : color(QINGE.chartjsColors.blue).alpha(0.2).rgbString(),
+					borderColor : QINGE.chartjsColors.blue,
+				} ]
+			},
+		});
 	}
+
+	// -----------------
+	// - Select2的基本应用
+	// -----------------
+	$('.js-example-basic-single').select2();
+	$('.js-example-basic-multiple').select2();
 }
 
 /**
@@ -869,7 +875,7 @@ function initUI($p) {
 		$this.attr("src", $this.attr("src") + "?r=" + Math.random());
 		$kaptchaCode.val("");
 	});
-	
+
 	// -----------------
 	// - Magnific Popup——一款真正的响应式灯箱插件
 	// -----------------
@@ -888,15 +894,15 @@ function initUI($p) {
 			}
 		}
 	});
-	
+
 	$('.open-popup-link').magnificPopup({
 		type : 'inline',
 	});
-	
+
 	$('.ajax-popup-link').magnificPopup({
 		type : 'ajax',
 	});
-	
+
 	$('.popup-gallery').magnificPopup({
 		delegate : 'a',
 		type : 'image',
