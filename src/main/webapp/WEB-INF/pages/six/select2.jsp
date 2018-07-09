@@ -43,6 +43,10 @@
 		</optgroup>
 	</select>
 
+	<div class="bs-example">
+		<select class="js-example-data-ajax form-control"></select>
+	</div>
+
 	<%@ include file="/resources/common/jslib.jsp"%>
 </body>
 </html>
