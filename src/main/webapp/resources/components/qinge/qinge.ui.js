@@ -707,9 +707,51 @@ function initOnce() {
 	// -----------------
 	// - Select2的基本应用
 	// -----------------
-	$('.js-example-basic-single').select2();
-	$('.js-example-basic-multiple').select2();
+	function matchCustom(params, data) {
+		// 如果没有搜索条件，则返回所有数据。
+		if ($.trim(params.term) === '') {
+			return data;
+		}
 
+		// 跳过没有`children`的数据（只检索嵌套数据的子项）
+		if (typeof data.children === 'undefined') {
+			return null;
+		}
+
+		// `data.children` 包含我们正在匹配的实际选项
+		var filteredChildren = [];
+		$.each(data.children, function(idx, child) {
+			// `params.term` 是用于检索的关键字
+			// `data.text` 是数据对象要显示的文本
+			// `data.id` 是数据对象的唯一索引
+			if (child.text.toUpperCase().indexOf(params.term.toUpperCase()) > -1 || child.id.toUpperCase().indexOf(params.term.toUpperCase()) > -1) {
+				filteredChildren.push(child);
+			}
+		});
+
+		// 如果检索结果中有数据，则返回
+		if (filteredChildren.length) {
+			var modifiedData = $.extend({}, data, true);
+			modifiedData.children = filteredChildren;
+
+			// 返回复制后的数据
+			return modifiedData;
+		}
+
+		return null;
+	}
+	$('.js-example-basic-single').select2({
+		matcher : matchCustom
+	});
+
+	$(".js-example-placeholder-single").select2({
+		placeholder : "请选择",
+		allowClear : true
+	});
+	$('.js-example-basic-multiple').select2();
+	$(".js-example-placeholder-multiple").select2({
+		placeholder : "请选择"
+	});
 	function formatRepo(repo) {
 		if (repo.loading) {
 			return repo.text;
@@ -763,6 +805,41 @@ function initOnce() {
 		minimumInputLength : 1,
 		templateResult : formatRepo,
 		templateSelection : formatRepoSelection
+	});
+
+	var data = [ {
+		id : 0,
+		text : '小猪佩奇'
+	}, {
+		id : 1,
+		text : '小羊苏西'
+	}, {
+		id : 2,
+		text : '小狗丹尼'
+	} ];
+
+	$(".js-example-data-array").select2({
+		data : data
+	});
+
+	if ($("#mySelect2").length > 0) {
+		var data1 = {
+			id : 1,
+			text : '小猪佩奇'
+		};
+		var data2 = {
+				id : 2,
+				text : '小羊苏西'
+		};
+
+		var newOption1 = new Option(data1.text, data1.id, false, false);
+		var newOption2 = new Option(data2.text, data2.id, false, true);
+		$('#mySelect2').select2().append(newOption1).append(newOption2).trigger('change');
+	}
+	
+	$("#getSelectedData").click(function() {
+		console.debug($('.js-example-data-ajax').find(':selected'));
+		console.debug($('.js-example-data-ajax').select2('data'));
 	});
 }
 

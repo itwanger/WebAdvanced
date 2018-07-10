@@ -47,6 +47,22 @@
 		<select class="js-example-data-ajax form-control"></select>
 	</div>
 
+	<div class="bs-example">
+		<select class="js-example-data-array form-control"></select>
+	</div>
+
+	<select class="js-example-placeholder-single js-states form-control">
+		<option></option>
+	</select>
+	<select class="js-example-placeholder-multiple js-states form-control" multiple="multiple"></select>
+
+	<div class="bs-example">
+		<select id="mySelect2" class="form-control">
+		</select>
+	</div>
+	
+	<button id="getSelectedData">获取选中项</button>
+
 	<%@ include file="/resources/common/jslib.jsp"%>
 </body>
 </html>

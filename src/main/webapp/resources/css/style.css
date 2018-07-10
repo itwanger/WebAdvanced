@@ -651,7 +651,7 @@
     position: relative;
 }
 
-@charset "UTF-8";.select2-result-repository {
+.select2-result-repository {
     padding-top: 4px;
     padding-bottom: 3px
 }
