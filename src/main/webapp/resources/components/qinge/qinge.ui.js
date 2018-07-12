@@ -828,19 +828,42 @@ function initOnce() {
 			text : '小猪佩奇'
 		};
 		var data2 = {
-				id : 2,
-				text : '小羊苏西'
+			id : 2,
+			text : '小羊苏西'
 		};
 
 		var newOption1 = new Option(data1.text, data1.id, false, false);
 		var newOption2 = new Option(data2.text, data2.id, false, true);
 		$('#mySelect2').select2().append(newOption1).append(newOption2).trigger('change');
 	}
-	
+
 	$("#getSelectedData").click(function() {
 		console.debug($('.js-example-data-ajax').find(':selected'));
 		console.debug($('.js-example-data-ajax').select2('data'));
 	});
+
+var treeviewDefaultData = [ {
+	text : "河南省",
+	nodes : [ {
+		text : "洛阳市",
+		nodes : [ {
+			text : "涧西区"
+		}, {
+			text : "西工区"
+		} ]
+	}, {
+		text : "郑州市"
+	} ]
+}, {
+	text : "江苏省"
+}, {
+	text : "浙江省"
+} ];
+
+$('#treeview1').treeview({
+	data : treeviewDefaultData,
+	levels :3
+});
 }
 
 /**

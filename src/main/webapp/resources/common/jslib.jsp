@@ -50,6 +50,9 @@
 <script src="https://cdn.bootcss.com/select2/4.0.5/js/select2.js"></script>
 <script src="https://cdn.bootcss.com/select2/4.0.5/js/i18n/zh-CN.js"></script>
 
+<!-- Bootstrap-Treeview——一款非常酷的分层树结构插件 -->
+<script src="https://cdn.bootcss.com/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
+
 <!-- SlimScroll -->
 <script src="https://cdn.bootcss.com/jQuery-slimScroll/1.3.8/jquery.slimscroll.js"></script>
 <!-- AdminLTE -->
