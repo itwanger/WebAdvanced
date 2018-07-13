@@ -842,28 +842,102 @@ function initOnce() {
 		console.debug($('.js-example-data-ajax').select2('data'));
 	});
 
-var treeviewDefaultData = [ {
-	text : "河南省",
-	nodes : [ {
-		text : "洛阳市",
+	var treeviewDefaultData = [ {
+		text : "河南省",
 		nodes : [ {
-			text : "涧西区"
+			text : "洛阳市",
+			nodes : [ {
+				text : "涧西区"
+			}, {
+				text : "西工区"
+			} ]
 		}, {
-			text : "西工区"
+			text : "郑州市"
 		} ]
 	}, {
-		text : "郑州市"
-	} ]
-}, {
-	text : "江苏省"
-}, {
-	text : "浙江省"
-} ];
+		text : "江苏省"
+	}, {
+		text : "浙江省"
+	} ];
 
-$('#treeview1').treeview({
-	data : treeviewDefaultData,
-	levels :3
-});
+	$('#treeview1').treeview({
+		data : treeviewDefaultData,
+		levels : 3,
+		showCheckbox : true,
+		onNodeChecked : function(event, data) {
+			console.log(data)
+		}
+	});
+
+//	 $('#treeview1').treeview('checkAll', { silent: true }); //勾选所有的节点。
+	// $('#treeview1').treeview('checkNode',[1, { silent: true }]); //勾选指定的节点
+
+	// console.log($('#treeview1').treeview('getChecked'));// 返回被勾选节点的数组
+
+	// $('#treeview1').treeview('uncheckAll', { silent: true }); //取消勾选所有的节点。
+	// $('#treeview1').treeview('uncheckNode',[1, { silent: true }]);
+	// //取消勾选指定的节点
+
+	// console.log($('#treeview1').treeview('getUnchecked'));// 返回未勾选节点的数组
+
+	// $('#treeview1').treeview('toggleNodeChecked', [ 1, { silent: true } ]);
+	// // 切换节点的勾选状态。
+
+//	$('#treeview1').treeview('collapseAll', {
+//		silent : true
+//	});
+	// 折叠树的所有的节点
+	// $('#treeview1').treeview('collapseNode',[1, { silent: true }]); //
+	// 折叠指定节点和它的子节点
+	// $('#treeview1').treeview('collapseNode',[1, { silent: true,
+	// ignoreChildren: true }]); // 折叠指定节点并忽略其子节点
+
+	// console.log($('#treeview1').treeview('getCollapsed'));// 返回折叠节点的数组
+
+	// $('#treeview1').treeview('expandAll',{ silent: true }); // 展开所有节点
+	// $('#treeview1').treeview('expandAll', { levels: 1, silent: true }); //
+	// 只展开一级节点，两级或两级以上的节点并不展开（如果有的话）
+	// $('#treeview1').treeview('expandNode',[0, { silent: true }]); //
+	// 展开指定节点和它的子节点
+
+	// console.log($('#treeview1').treeview('getExpanded'));// 返返回所有展开节点的数组
+
+	// $('#treeview1').treeview('toggleNodeExpanded', [ 1, { silent: true } ]);
+	// 切换一个节点的展开和折叠状态。
+
+	// $('#treeview1').treeview('disableAll', { silent: true }); //禁用所有的节点。
+	// $('#treeview1').treeview('disableNode',[1, { silent: true }]); // 禁用指定的节点
+	// console.log($('#treeview1').treeview('getEnabled')); // 返回被禁用节点的数组
+
+	// $('#treeview1').treeview('enableAll', { silent: true }); //启用所有的节点
+	// $('#treeview1').treeview('enableNode',[1, { silent: true }]); // 启用指定的节点
+	// console.log($('#treeview1').treeview('getEnabled'));// 返回可用节点的数组
+
+	// $('#treeview1').treeview('toggleNodeDisabled', [ 1, { silent: true } ]);
+	// //切换一个节点的可用和不可用状态
+
+	// 返回指定节点ID的单一节点对象
+	// console.log($('#treeview1').treeview('getNode', 1));
+
+	// 返回指定节点的父节点，如果没有则返回undefined。
+	// console.log($('#treeview1').treeview('getParent', 1));
+
+	// 返回给定节点的兄弟节点的数组，如果没有则返回undefined。
+	// console.log($('#treeview1').treeview('getSiblings', 1));
+
+	// 显示一个树节点，展开从这个节点开始到根节点的所有节点。
+	// $('#treeview1').treeview('revealNode', [ 3, { silent: true } ]);
+
+//	var treeview1 = $('#treeview1').data('treeview');
+//	treeview1.search("洛阳", {
+//		ignoreCase : true, // 忽略大小写
+//		exactMatch : false, // false的时候采用模糊匹配，true的时候采用精确匹配
+//		revealResults : true, // 展开匹配的节点
+//	});
+	
+	$('#treeview1').on('nodeChecked', function(event, data) {
+		  console.log("jQuery的on方法");
+		});
 }
 
 /**
