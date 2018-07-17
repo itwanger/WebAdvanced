@@ -1,3 +1,9 @@
+/**
+ * 
+ */
+/**
+ * 
+ */
 function initOnce() {
 	// -----------------
 	// - 登录表单进行BootstrapValidator初始化
@@ -860,16 +866,147 @@ function initOnce() {
 		text : "浙江省"
 	} ];
 
+	var _parentCheck = function(event, children) {
+		// 获取树视图实例
+		var treeview =  $(event.target).data('treeview');
+		
+		$.each(children, function(index, child) {
+			// child为子节点，child.nodeId返回节点的ID
+			treeview.checkNode(child.nodeId, {
+				silent : true
+			});
+
+			// 如果当前子节点还有子节点，那么继续
+			if (child.nodes != null) {
+				_parentCheck(child.nodes);
+			}
+		});
+	}
+
+	var _childCheck = function(event, child) {
+		// 获取树视图实例
+		var treeview =  $(event.target).data('treeview');
+		
+		// 获取父节点
+		var parent = treeview.getParent(child.nodeId);
+		// 父节点存在的话，判断其是否应该选中
+		if (parent != undefined) {
+			// 是否全部选中
+			var isAllchecked = true;
+
+			// 获取兄弟节点
+			var siblings = treeview.getSiblings(child.nodeId);
+
+			// 如果兄弟节点中有一个节点是未勾选的状态，那么父节点就不应该勾选
+			for ( var i in siblings) {
+				if (!siblings[i].state.checked) {
+					isAllchecked = false;
+					break;
+				}
+			}
+
+			// 如果子节点全部勾选，那么父节点就应该勾选
+			if (isAllchecked) {
+				treeview.checkNode(parent.nodeId, {
+					silent : true
+				});
+
+				// 如果父节点还有父节点，那么继续
+				var grand = treeview.getParent(parent.nodeId);
+				if (parent != undefined) {
+					_childCheck(parent);
+				}
+			}
+		}
+	}
+
+	var _parentUncheck = function(event, children) {
+		// 获取树视图实例
+		var treeview =  $(event.target).data('treeview');
+		
+		// 遍历子节点，对其进行取消勾选
+		$.each(children, function(index, child) {
+			treeview.uncheckNode(child.nodeId, {
+				silent : true
+			});
+
+			// 如果当前子节点还有子节点，那么继续
+			if (child.nodes != null) {
+				_parentUncheck(child.nodes);
+			}
+		});
+	}
+
+	var _childUncheck = function(event, child) {
+		// 获取树视图实例
+		var treeview =  $(event.target).data('treeview');
+		
+		// 获取父节点
+		var parent = treeview.getParent(child.nodeId);
+		// 父节点存在的话，判断其是否应该选中
+		if (parent != undefined) {
+			// 是否全部取消选中
+			var isAllUnchecked = true;
+
+			// 获取兄弟节点
+			var siblings = treeview.getSiblings(child.nodeId);
+
+			// 如果兄弟节点中有一个节点是勾选的状态，那么父节点就不应该取消勾选
+			for ( var i in siblings) {
+				if (siblings[i].state.checked) {
+					isAllUnchecked = false;
+					break;
+				}
+			}
+
+			// 如果子节点全部取消勾选，那么父节点就应该取消勾选
+			if (isAllUnchecked) {
+				treeview.uncheckNode(parent.nodeId, {
+					silent : true
+				});
+
+				// 如果父节点还有父节点，那么继续
+				var grand = treeview.getParent(parent.nodeId);
+				if (parent != undefined) {
+					_childUncheck(parent);
+				}
+			}
+		}
+	}
+
 	$('#treeview1').treeview({
 		data : treeviewDefaultData,
 		levels : 3,
 		showCheckbox : true,
-		onNodeChecked : function(event, data) {
-			console.log(data)
-		}
+		// highlightSelected : false,
+		// onNodeSelected : function (event, node) {
+		// $('#treeview1').treeview('checkNode', [ node.nodeId]);
+		// },
+		// onNodeUnselected : function (event, node) {
+		// $('#treeview1').treeview('uncheckNode', [ node.nodeId]);
+		// },
+		onNodeChecked : function(event, node) {
+			// 勾选的是父节点
+			if (node.nodes != null) {
+				// 遍历子节点，对其进行勾选
+				_parentCheck(event, node.nodes);
+			} else {
+				// 勾选的是子节点
+				_childCheck(event, node);
+			}
+		},
+		onNodeUnchecked : function(event, node) {
+			// 取消勾选的是父节点
+			if (node.nodes != null) {
+				_parentUncheck(event, node.nodes);
+			} else {
+				// 取消勾选的是子节点
+				_childUncheck(event, node);
+			}
+		},
 	});
 
-//	 $('#treeview1').treeview('checkAll', { silent: true }); //勾选所有的节点。
+	// $('#treeview1').treeview('checkAll', { silent: true }); //勾选所有的节点。
 	// $('#treeview1').treeview('checkNode',[1, { silent: true }]); //勾选指定的节点
 
 	// console.log($('#treeview1').treeview('getChecked'));// 返回被勾选节点的数组
@@ -883,9 +1020,9 @@ function initOnce() {
 	// $('#treeview1').treeview('toggleNodeChecked', [ 1, { silent: true } ]);
 	// // 切换节点的勾选状态。
 
-//	$('#treeview1').treeview('collapseAll', {
-//		silent : true
-//	});
+	// $('#treeview1').treeview('collapseAll', {
+	// silent : true
+	// });
 	// 折叠树的所有的节点
 	// $('#treeview1').treeview('collapseNode',[1, { silent: true }]); //
 	// 折叠指定节点和它的子节点
@@ -916,6 +1053,15 @@ function initOnce() {
 	// $('#treeview1').treeview('toggleNodeDisabled', [ 1, { silent: true } ]);
 	// //切换一个节点的可用和不可用状态
 
+	// // 选择指定的节点
+	// $('#treeview1').treeview('selectNode', [ 1, { silent: true } ]);
+	// // 返回选择节点的数组
+	// console.log($('#treeview1').treeview('getSelected'));
+	// // 取消选择指定的节点
+	// $('#treeview1').treeview('unselectNode', [ 1, { silent: true } ]);
+	// // 返回未选择节点的数组
+	// console.log($('#treeview1').treeview('getUnselected'));
+
 	// 返回指定节点ID的单一节点对象
 	// console.log($('#treeview1').treeview('getNode', 1));
 
@@ -928,16 +1074,59 @@ function initOnce() {
 	// 显示一个树节点，展开从这个节点开始到根节点的所有节点。
 	// $('#treeview1').treeview('revealNode', [ 3, { silent: true } ]);
 
-//	var treeview1 = $('#treeview1').data('treeview');
-//	treeview1.search("洛阳", {
-//		ignoreCase : true, // 忽略大小写
-//		exactMatch : false, // false的时候采用模糊匹配，true的时候采用精确匹配
-//		revealResults : true, // 展开匹配的节点
-//	});
-	
-	$('#treeview1').on('nodeChecked', function(event, data) {
-		  console.log("jQuery的on方法");
-		});
+	// var treeview1 = $('#treeview1').data('treeview');
+	// treeview1.search("洛阳", {
+	// ignoreCase : true, // 忽略大小写
+	// exactMatch : false, // false的时候采用模糊匹配，true的时候采用精确匹配
+	// revealResults : true, // 展开匹配的节点
+	// });
+
+// $('#treeview1').on('nodeChecked', function(event, data) {
+// console.log("jQuery的on方法");
+// });
+
+var procity_tree = $("#treeview_procity");
+if (procity_tree.length > 0) {
+	$.ajax({
+		type : 'GET',
+		url : procity_tree.data("url"),
+		dataType : "json",
+		success : function(json) {
+			procity_tree.treeview({
+				data : json,
+				showCheckbox : true,
+				highlightSelected : false,
+				levels : 1,
+				onNodeSelected : function(event, node) {
+					procity_tree.treeview('checkNode', [ node.nodeId ]);
+				},
+				onNodeUnselected : function(event, node) {
+					procity_tree.treeview('uncheckNode', [ node.nodeId ]);
+				},
+				onNodeChecked : function(event, node) {
+					// 勾选的是父节点
+					if (node.nodes != null) {
+						// 遍历子节点，对其进行勾选
+						_parentCheck(event, node.nodes);
+					} else {
+						// 勾选的是子节点
+						_childCheck(event, node);
+					}
+				},
+				onNodeUnchecked : function(event, node) {
+					// 取消勾选的是父节点
+					if (node.nodes != null) {
+						_parentUncheck(event, node.nodes);
+					} else {
+						// 取消勾选的是子节点
+						_childUncheck(event, node);
+					}
+				},
+			});
+
+		}
+	});
+}
 }
 
 /**

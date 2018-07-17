@@ -1,7 +1,9 @@
 package com.cmower.spring.controller.six;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -20,8 +22,11 @@ import com.cmower.common.util.AjaxResponseUtils;
 import com.cmower.common.util.CipherUtils;
 import com.cmower.common.util.GeetestLib;
 import com.cmower.dal.AjaxResponse;
+import com.cmower.database.entity.Cities;
+import com.cmower.database.entity.Provinces;
 import com.cmower.database.entity.Users;
 import com.cmower.spring.controller.BaseController;
+import com.cmower.spring.service.ProcityService;
 import com.cmower.spring.service.UserService;
 import com.google.code.kaptcha.Producer;
 
@@ -30,6 +35,8 @@ import com.google.code.kaptcha.Producer;
 public class SixController extends BaseController {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private ProcityService procityService;
 	@Autowired
 	private Producer captchaProducer;
 
@@ -238,5 +245,46 @@ public class SixController extends BaseController {
 		result.put("valid", true);
 		return result;
 	}
+	
+@SuppressWarnings({ "rawtypes", "unchecked" })
+@RequestMapping("treeview/procity")
+@ResponseBody
+public  List<HashMap> treeviewProcity() {
+	logger.info("treeview获取省市级数据");
+
+	List<HashMap> data = new ArrayList<>();
+	List<Provinces> provinces = procityService.selectProvinces();
+	for (Provinces province : provinces) {
+		HashMap parent = new HashMap();
+		
+		// 树节点上要显示的文本
+		parent.put("text", province.getProname());
+		// 节点的唯一性
+		parent.put("id", province.getId());
+		// 省会编码
+		parent.put("procode", province.getProcode());
+
+		// 根据省会ID获取城市列表
+		List<Cities> citys = procityService.getCitiesByProvinceId(province.getId());
+		
+		List<HashMap> children = new ArrayList<>();
+		for (Cities city : citys) {
+			HashMap child = new HashMap();
+			child.put("text", city.getCname());
+			child.put("id", city.getId());
+			// 省会ID
+			child.put("proid", city.getProid());
+			// 城市编码
+			child.put("code", city.getCode());
+
+			children.add(child);
+		}
+		parent.put("nodes", children);
+
+		data.add(parent);
+	}
+
+	return data;
+}
 
 }

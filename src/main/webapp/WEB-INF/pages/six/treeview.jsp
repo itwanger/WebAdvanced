@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="container">
-		<div id="treeview1"></div>
+		<div id="treeview_procity" data-url="${ctx}/six/treeview/procity"></div>
 	</div>
 
 	<%@ include file="/resources/common/jslib.jsp"%>
