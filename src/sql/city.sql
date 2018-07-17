@@ -1,18 +1,3 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : 阿里筑梦商
-Source Server Version : 50704
-Source Host           : 47.100.118.243:3306
-Source Database       : zhumeng
-
-Target Server Type    : MYSQL
-Target Server Version : 50704
-File Encoding         : 65001
-
-Date: 2018-07-17 14:04:52
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------

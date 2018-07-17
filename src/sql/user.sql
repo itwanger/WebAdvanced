@@ -1,18 +1,3 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : tiangong
-Source Server Version : 50537
-Source Host           : localhost:3306
-Source Database       : cmower
-
-Target Server Type    : MYSQL
-Target Server Version : 50537
-File Encoding         : 65001
-
-Date: 2018-07-17 14:05:38
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------

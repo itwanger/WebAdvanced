@@ -1,25 +1,10 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : 阿里筑梦商
-Source Server Version : 50704
-Source Host           : 47.100.118.243:3306
-Source Database       : zhumeng
-
-Target Server Type    : MYSQL
-Target Server Version : 50704
-File Encoding         : 65001
-
-Date: 2018-07-17 14:04:59
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for provincial
+-- Table structure for province
 -- ----------------------------
-DROP TABLE IF EXISTS `provincial`;
-CREATE TABLE `provincial` (
+DROP TABLE IF EXISTS `province`;
+CREATE TABLE `province` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `proname` varchar(50) NOT NULL COMMENT '省级名称',
   `procode` varchar(45) NOT NULL COMMENT '省级代码',
@@ -28,7 +13,7 @@ CREATE TABLE `provincial` (
 ) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COMMENT='省会表';
 
 -- ----------------------------
--- Records of provincial
+-- Records of province
 -- ----------------------------
 INSERT INTO `provincial` VALUES ('1', '北京', 'BJ');
 INSERT INTO `provincial` VALUES ('2', '上海', 'SH');
