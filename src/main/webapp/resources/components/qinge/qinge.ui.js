@@ -227,10 +227,8 @@ function initOnce() {
 				datasets : [ {
 					label : '得票数',
 					data : [ 12, 19, 3, 5, 2, 3 ],
-					backgroundColor : [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)',
-							'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
-					borderColor : [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
-							'rgba(255, 159, 64, 1)' ],
+					backgroundColor : [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
+					borderColor : [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
 					borderWidth : 1,
 				} ]
 			},
@@ -448,8 +446,7 @@ function initOnce() {
 				labels : [ '几乎不可能', '看别人脸色', '天佑梅西' ],
 				datasets : [ {
 					label : '投票人数：',
-					backgroundColor : [ color(QINGE.chartjsColors.red).alpha(0.8).rgbString(), color(QINGE.chartjsColors.orange).alpha(0.8).rgbString(),
-							color(QINGE.chartjsColors.green).alpha(0.8).rgbString() ],
+					backgroundColor : [ color(QINGE.chartjsColors.red).alpha(0.8).rgbString(), color(QINGE.chartjsColors.orange).alpha(0.8).rgbString(), color(QINGE.chartjsColors.green).alpha(0.8).rgbString() ],
 					data : [ 20, 50, 30 ],
 				} ]
 			},
@@ -585,8 +582,7 @@ function initOnce() {
 		var labelingAxesChart = new Chart(labelingAxesChartCtx, {
 			type : 'bar',
 			data : {
-				labels : [ newDateString(0), newDateString(1), newDateString(2), newDateString(3), newDateString(4), newDateString(5), newDateString(6),
-						newDateString(7) ],
+				labels : [ newDateString(0), newDateString(1), newDateString(2), newDateString(3), newDateString(4), newDateString(5), newDateString(6), newDateString(7) ],
 				datasets : [ {
 					label : '投票人数：',
 					backgroundColor : QINGE.chartjsColors.red,
@@ -763,17 +759,16 @@ function initOnce() {
 			return repo.text;
 		}
 
-		var markup = "<div class='select2-result-repository clearfix'>" + "<div class='select2-result-repository__avatar'><img src='" + repo.owner.avatar_url
-				+ "' /></div>" + "<div class='select2-result-repository__meta'>" + "<div class='select2-result-repository__title'>" + repo.full_name + "</div>";
+		var markup = "<div class='select2-result-repository clearfix'>" + "<div class='select2-result-repository__avatar'><img src='" + repo.owner.avatar_url + "' /></div>" + "<div class='select2-result-repository__meta'>"
+				+ "<div class='select2-result-repository__title'>" + repo.full_name + "</div>";
 
 		if (repo.description) {
 			markup += "<div class='select2-result-repository__description'>" + repo.description + "</div>";
 		}
 
-		markup += "<div class='select2-result-repository__statistics'>" + "<div class='select2-result-repository__forks'><i class='fa fa-flash'></i> "
-				+ repo.forks_count + " Forks</div>" + "<div class='select2-result-repository__stargazers'><i class='fa fa-star'></i> " + repo.stargazers_count
-				+ " Stars</div>" + "<div class='select2-result-repository__watchers'><i class='fa fa-eye'></i> " + repo.watchers_count + " Watchers</div>"
-				+ "</div>" + "</div></div>";
+		markup += "<div class='select2-result-repository__statistics'>" + "<div class='select2-result-repository__forks'><i class='fa fa-flash'></i> " + repo.forks_count + " Forks</div>"
+				+ "<div class='select2-result-repository__stargazers'><i class='fa fa-star'></i> " + repo.stargazers_count + " Stars</div>" + "<div class='select2-result-repository__watchers'><i class='fa fa-eye'></i> " + repo.watchers_count
+				+ " Watchers</div>" + "</div>" + "</div></div>";
 
 		return markup;
 	}
@@ -844,8 +839,8 @@ function initOnce() {
 	}
 
 	$("#getSelectedData").click(function() {
-		console.debug($('.js-example-data-ajax').find(':selected'));
-		console.debug($('.js-example-data-ajax').select2('data'));
+		console.log($('.js-example-data-ajax').find(':selected'));
+		console.log($('.js-example-data-ajax').select2('data'));
 	});
 
 	var treeviewDefaultData = [ {
@@ -868,8 +863,8 @@ function initOnce() {
 
 	var _parentCheck = function(event, children) {
 		// 获取树视图实例
-		var treeview =  $(event.target).data('treeview');
-		
+		var treeview = $(event.target).data('treeview');
+
 		$.each(children, function(index, child) {
 			// child为子节点，child.nodeId返回节点的ID
 			treeview.checkNode(child.nodeId, {
@@ -885,8 +880,8 @@ function initOnce() {
 
 	var _childCheck = function(event, child) {
 		// 获取树视图实例
-		var treeview =  $(event.target).data('treeview');
-		
+		var treeview = $(event.target).data('treeview');
+
 		// 获取父节点
 		var parent = treeview.getParent(child.nodeId);
 		// 父节点存在的话，判断其是否应该选中
@@ -922,8 +917,8 @@ function initOnce() {
 
 	var _parentUncheck = function(event, children) {
 		// 获取树视图实例
-		var treeview =  $(event.target).data('treeview');
-		
+		var treeview = $(event.target).data('treeview');
+
 		// 遍历子节点，对其进行取消勾选
 		$.each(children, function(index, child) {
 			treeview.uncheckNode(child.nodeId, {
@@ -939,8 +934,8 @@ function initOnce() {
 
 	var _childUncheck = function(event, child) {
 		// 获取树视图实例
-		var treeview =  $(event.target).data('treeview');
-		
+		var treeview = $(event.target).data('treeview');
+
 		// 获取父节点
 		var parent = treeview.getParent(child.nodeId);
 		// 父节点存在的话，判断其是否应该选中
@@ -1081,52 +1076,72 @@ function initOnce() {
 	// revealResults : true, // 展开匹配的节点
 	// });
 
-// $('#treeview1').on('nodeChecked', function(event, data) {
-// console.log("jQuery的on方法");
-// });
+	// $('#treeview1').on('nodeChecked', function(event, data) {
+	// console.log("jQuery的on方法");
+	// });
 
-var procity_tree = $("#treeview_procity");
-if (procity_tree.length > 0) {
-	$.ajax({
-		type : 'GET',
-		url : procity_tree.data("url"),
-		dataType : "json",
-		success : function(json) {
-			procity_tree.treeview({
-				data : json,
-				showCheckbox : true,
-				highlightSelected : false,
-				levels : 1,
-				onNodeSelected : function(event, node) {
-					procity_tree.treeview('checkNode', [ node.nodeId ]);
-				},
-				onNodeUnselected : function(event, node) {
-					procity_tree.treeview('uncheckNode', [ node.nodeId ]);
-				},
-				onNodeChecked : function(event, node) {
-					// 勾选的是父节点
-					if (node.nodes != null) {
-						// 遍历子节点，对其进行勾选
-						_parentCheck(event, node.nodes);
-					} else {
-						// 勾选的是子节点
-						_childCheck(event, node);
-					}
-				},
-				onNodeUnchecked : function(event, node) {
-					// 取消勾选的是父节点
-					if (node.nodes != null) {
-						_parentUncheck(event, node.nodes);
-					} else {
-						// 取消勾选的是子节点
-						_childUncheck(event, node);
-					}
-				},
-			});
+	var procity_tree = $("#treeview_procity");
+	if (procity_tree.length > 0) {
+		$.ajax({
+			type : 'GET',
+			url : procity_tree.data("url"),
+			dataType : "json",
+			success : function(json) {
+				procity_tree.treeview({
+					data : json,
+					showCheckbox : true,
+					highlightSelected : false,
+					levels : 1,
+					onNodeSelected : function(event, node) {
+						procity_tree.treeview('checkNode', [ node.nodeId ]);
+					},
+					onNodeUnselected : function(event, node) {
+						procity_tree.treeview('uncheckNode', [ node.nodeId ]);
+					},
+					onNodeChecked : function(event, node) {
+						// 勾选的是父节点
+						if (node.nodes != null) {
+							// 遍历子节点，对其进行勾选
+							_parentCheck(event, node.nodes);
+						} else {
+							// 勾选的是子节点
+							_childCheck(event, node);
+						}
+					},
+					onNodeUnchecked : function(event, node) {
+						// 取消勾选的是父节点
+						if (node.nodes != null) {
+							_parentUncheck(event, node.nodes);
+						} else {
+							// 取消勾选的是子节点
+							_childUncheck(event, node);
+						}
+					},
+				});
+			}
+		});
+	}
 
+	$("#getData").click(function() {
+		var data = {
+			checkedData : []
+		}, checkedNodes = $('#treeview_procity').treeview('getChecked');
+
+		for (var i = 0; i < checkedNodes.length; i++) {
+			data.checkedData.push(checkedNodes[i].id);
 		}
+
+$.ajax({
+	type : 'POST',
+	url : $("#getData").data("url"),
+	data : {
+		ids : data.checkedData.join(",")
+	},
+	success : function(response) {
+		console.log(response);
+	}
+});
 	});
-}
 }
 
 /**

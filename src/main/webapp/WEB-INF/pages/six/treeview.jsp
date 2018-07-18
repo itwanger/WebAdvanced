@@ -9,6 +9,8 @@
 </head>
 <body>
 	<div class="container">
+		<button id="getData" data-url="${ctx}/six/treeview/submit">提交</button>
+		<div id="treeview1"></div>
 		<div id="treeview_procity" data-url="${ctx}/six/treeview/procity"></div>
 	</div>
 

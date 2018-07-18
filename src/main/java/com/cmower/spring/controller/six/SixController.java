@@ -245,46 +245,53 @@ public class SixController extends BaseController {
 		result.put("valid", true);
 		return result;
 	}
-	
-@SuppressWarnings({ "rawtypes", "unchecked" })
-@RequestMapping("treeview/procity")
-@ResponseBody
-public  List<HashMap> treeviewProcity() {
-	logger.info("treeview获取省市级数据");
 
-	List<HashMap> data = new ArrayList<>();
-	List<Provinces> provinces = procityService.selectProvinces();
-	for (Provinces province : provinces) {
-		HashMap parent = new HashMap();
-		
-		// 树节点上要显示的文本
-		parent.put("text", province.getProname());
-		// 节点的唯一性
-		parent.put("id", province.getId());
-		// 省会编码
-		parent.put("procode", province.getProcode());
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("treeview/procity")
+	@ResponseBody
+	public List<HashMap> treeviewProcity() {
+		logger.info("treeview获取省市级数据");
 
-		// 根据省会ID获取城市列表
-		List<Cities> citys = procityService.getCitiesByProvinceId(province.getId());
-		
-		List<HashMap> children = new ArrayList<>();
-		for (Cities city : citys) {
-			HashMap child = new HashMap();
-			child.put("text", city.getCname());
-			child.put("id", city.getId());
-			// 省会ID
-			child.put("proid", city.getProid());
-			// 城市编码
-			child.put("code", city.getCode());
+		List<HashMap> data = new ArrayList<>();
+		List<Provinces> provinces = procityService.selectProvinces();
+		for (Provinces province : provinces) {
+			HashMap parent = new HashMap();
 
-			children.add(child);
+			// 树节点上要显示的文本
+			parent.put("text", province.getProname());
+			// 节点的唯一性
+			parent.put("id", province.getId());
+			// 省会编码
+			parent.put("procode", province.getProcode());
+
+			// 根据省会ID获取城市列表
+			List<Cities> citys = procityService.getCitiesByProvinceId(province.getId());
+
+			List<HashMap> children = new ArrayList<>();
+			for (Cities city : citys) {
+				HashMap child = new HashMap();
+				child.put("text", city.getCname());
+				child.put("id", city.getId());
+				// 省会ID
+				child.put("proid", city.getProid());
+				// 城市编码
+				child.put("code", city.getCode());
+
+				children.add(child);
+			}
+			parent.put("nodes", children);
+
+			data.add(parent);
 		}
-		parent.put("nodes", children);
 
-		data.add(parent);
+		return data;
 	}
 
-	return data;
+@RequestMapping("treeview/submit")
+@ResponseBody
+public String treeviewSubmit() {
+	logger.debug(getPara("ids"));
+	return "数据已收到";
 }
 
 }
