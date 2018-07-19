@@ -48,7 +48,7 @@ public String hello() {
 
 	@RequestMapping("login")
 	public String login() {
-		return "six/login";
+		return "seven/login";
 	}
 
 	@RequestMapping("")

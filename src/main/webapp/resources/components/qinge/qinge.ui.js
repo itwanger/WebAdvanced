@@ -971,7 +971,7 @@ function initOnce() {
 
 	$('#treeview1').treeview({
 		data : treeviewDefaultData,
-		levels : 3,
+//		levels : 3,
 		showCheckbox : true,
 		// highlightSelected : false,
 		// onNodeSelected : function (event, node) {
@@ -1026,7 +1026,7 @@ function initOnce() {
 
 	// console.log($('#treeview1').treeview('getCollapsed'));// 返回折叠节点的数组
 
-	// $('#treeview1').treeview('expandAll',{ silent: true }); // 展开所有节点
+//	 $('#treeview1').treeview('expandAll',{ silent: true }); // 展开所有节点
 	// $('#treeview1').treeview('expandAll', { levels: 1, silent: true }); //
 	// 只展开一级节点，两级或两级以上的节点并不展开（如果有的话）
 	// $('#treeview1').treeview('expandNode',[0, { silent: true }]); //
@@ -1037,7 +1037,7 @@ function initOnce() {
 	// $('#treeview1').treeview('toggleNodeExpanded', [ 1, { silent: true } ]);
 	// 切换一个节点的展开和折叠状态。
 
-	// $('#treeview1').treeview('disableAll', { silent: true }); //禁用所有的节点。
+//	 $('#treeview1').treeview('disableAll', { silent: true }); //禁用所有的节点。
 	// $('#treeview1').treeview('disableNode',[1, { silent: true }]); // 禁用指定的节点
 	// console.log($('#treeview1').treeview('getEnabled')); // 返回被禁用节点的数组
 
@@ -1069,12 +1069,12 @@ function initOnce() {
 	// 显示一个树节点，展开从这个节点开始到根节点的所有节点。
 	// $('#treeview1').treeview('revealNode', [ 3, { silent: true } ]);
 
-	// var treeview1 = $('#treeview1').data('treeview');
-	// treeview1.search("洛阳", {
-	// ignoreCase : true, // 忽略大小写
-	// exactMatch : false, // false的时候采用模糊匹配，true的时候采用精确匹配
-	// revealResults : true, // 展开匹配的节点
-	// });
+//	 var treeview1 = $('#treeview1').data('treeview');
+//	 treeview1.search("洛阳", {
+//	 ignoreCase : true, // 忽略大小写
+//	 exactMatch : false, // false的时候采用模糊匹配，true的时候采用精确匹配
+//	 revealResults : true, // 展开匹配的节点
+//	 });
 
 	// $('#treeview1').on('nodeChecked', function(event, data) {
 	// console.log("jQuery的on方法");
