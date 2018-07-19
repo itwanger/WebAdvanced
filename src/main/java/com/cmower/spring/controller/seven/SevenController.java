@@ -39,6 +39,12 @@ public class SevenController extends BaseController {
 	private ProcityService procityService;
 	@Autowired
 	private Producer captchaProducer;
+	
+@RequestMapping("hello")
+@ResponseBody
+public String hello() {
+    return "hello " + getPara("content");
+}
 
 	@RequestMapping("login")
 	public String login() {

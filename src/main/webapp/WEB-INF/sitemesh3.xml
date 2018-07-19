@@ -8,6 +8,7 @@
 	<mapping path="/four*" exclue="true" />
 	<mapping path="/user*" exclue="true" />
 	<mapping path="/six*" exclue="true" />
+	<mapping path="/seven*" exclue="true" />
 
 	<content-processor>
 		<tag-rule-bundle class="com.cmower.common.tagrules.SidekeyTagRuleBundle" />
