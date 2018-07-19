@@ -184,6 +184,30 @@
 						</span>
 						</a>
 						<ul class="treeview-menu">
+							<li class="sitemesh">
+								<a href="${ctx}"> <i class="fa fa-circle-o"></i> SiteMesh
+								</a>
+							</li>
+							<li class="chartjs">
+								<a href="${ctx}/sitemesh?p=chartjs"> <i class="fa fa-circle-o"></i> Chart.js
+								</a>
+							</li>
+							<li class="select2">
+								<a href="${ctx}/sitemesh?p=select2"> <i class="fa fa-circle-o"></i> Select2
+								</a>
+							</li>
+							<li class="btreeview">
+								<a href="${ctx}/sitemesh?p=bootstrap-treeview"> <i class="fa fa-circle-o"></i> Bootstrap-Treeview
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li class="treeview seven">
+						<a href="#"> <i class="fa fa-book"></i> <span>第七章</span> <span class="pull-right-container"> <i
+								class="fa fa-angle-left pull-right"></i>
+						</span>
+						</a>
+						<ul class="treeview-menu">
 							<li>
 								<a href="${ctx}/six/login"> <i class="fa fa-circle-o"></i> BootstrapValidator
 								</a>
@@ -198,14 +222,6 @@
 							</li>
 							<li>
 								<a href="${ctx}/six?p=geetest"> <i class="fa fa-circle-o"></i> Geetest
-								</a>
-							</li>
-							<li class="sitemesh">
-								<a href="${ctx}"> <i class="fa fa-circle-o"></i> SiteMesh
-								</a>
-							</li>
-							<li class="chartjs">
-								<a href="${ctx}/sitemesh?p=chartjs"> <i class="fa fa-circle-o"></i> Chart.js
 								</a>
 							</li>
 						</ul>

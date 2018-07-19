@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>6.7 Chart.js——简单而灵活的图表库</title>
+<title>Chart.js——简单而灵活的图表库</title>
 </head>
 <sidekey>six-chartjs</sidekey>
 <body>
