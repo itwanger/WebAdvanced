@@ -17,7 +17,7 @@
 		<div class="login-box-body">
 			<p class="login-box-msg">更可靠的安全验证工具</p>
 
-			<form id="geetestForm" action="${ctx}/six/checkGeetest" data-geetest_url="${ctx}/six/geetest" method="post">
+			<form id="geetestForm" action="${ctx}/seven/checkGeetest" data-geetest_url="${ctx}/seven/geetest" method="post">
 				<div class="form-group has-feedback">
 					<input type="text" class="form-control" name="username" autocomplete="off" data-bv-notempty data-bv-blank placeholder="账号">
 					<span class="glyphicon glyphicon-envelope form-control-feedback"></span>

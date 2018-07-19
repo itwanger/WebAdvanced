@@ -209,19 +209,19 @@
 						</a>
 						<ul class="treeview-menu">
 							<li>
-								<a href="${ctx}/six/login"> <i class="fa fa-circle-o"></i> BootstrapValidator
+								<a href="${ctx}/seven/login"> <i class="fa fa-circle-o"></i> BootstrapValidator
 								</a>
 							</li>
 							<li>
-								<a href="${ctx}/six?p=validform"> <i class="fa fa-circle-o"></i> Validform
+								<a href="${ctx}/seven?p=validform"> <i class="fa fa-circle-o"></i> Validform
 								</a>
 							</li>
 							<li>
-								<a href="${ctx}/six/login"> <i class="fa fa-circle-o"></i> 验证码
+								<a href="${ctx}/seven/login"> <i class="fa fa-circle-o"></i> 验证码
 								</a>
 							</li>
 							<li>
-								<a href="${ctx}/six?p=geetest"> <i class="fa fa-circle-o"></i> Geetest
+								<a href="${ctx}/seven?p=geetest"> <i class="fa fa-circle-o"></i> Geetest
 								</a>
 							</li>
 						</ul>

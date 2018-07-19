@@ -17,7 +17,7 @@
 		<div class="login-box-body">
 			<p class="login-box-msg">登录系统，开启崭新旅程</p>
 
-			<form id="validForm" action="${ctx}/six/checkLogin" method="post">
+			<form id="validForm" action="${ctx}/seven/checkLogin" method="post">
 				<div class="form-group has-feedback">
 					<input type="text" class="form-control" name="username" datatype="*" nullmsg="请输入账号！" placeholder="账号">
 					<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
