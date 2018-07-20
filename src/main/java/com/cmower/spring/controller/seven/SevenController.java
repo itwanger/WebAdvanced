@@ -311,14 +311,23 @@ public AjaxResponse saveHeadimg(HttpServletRequest request) {
 
 	AjaxResponse response = AjaxResponseUtils.getFailureResponse();
 	
+	// 获取上上传文件的管理器类
 	UploadFileManager fileManager = getFiles(request);
-	UploadFile file = fileManager.save().getFile();
+	
+	// 获取上传文件
+	UploadFile file = fileManager.getFile();
+	
+	// 判断是否为空，如果客户端没有上传文件，则返回错误消息
 	if (file == null) {
 		response.setField("headimg");
 		response.setMessage("请上传头像");
 		return response;
 	}
+	
+	// 验证通过后对上传文件进行保存
+	fileManager.save();
 
+	// 将用户上传的头像路径保存到数据库中
 	Users user = this.userService.loadOne("wang");
 	Users update = new Users();
 	update.setId(user.getId());
@@ -326,6 +335,7 @@ public AjaxResponse saveHeadimg(HttpServletRequest request) {
 	this.userService.updateSelective(update);
 	
 	response = AjaxResponseUtils.getSuccessResponse();
+	// 返回客户端可以访问的文件路径+文件名
 	response.put("headimg", file.getCompleteName());
 	return response;
 }
