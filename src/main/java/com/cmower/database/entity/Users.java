@@ -6,6 +6,7 @@ import com.cmower.dal.DataEntity;
 public class Users extends DataEntity<Users> {
 	private String username;
 	private String password;
+	private String headimg;
 
 	private String roleName;
 	private Long roleId;
@@ -40,6 +41,14 @@ public class Users extends DataEntity<Users> {
 
 	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
+	}
+
+	public String getHeadimg() {
+		return headimg;
+	}
+
+	public void setHeadimg(String headimg) {
+		this.headimg = headimg;
 	}
 
 }

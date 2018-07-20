@@ -224,6 +224,10 @@
 								<a href="${ctx}/seven?p=geetest"> <i class="fa fa-circle-o"></i> Geetest
 								</a>
 							</li>
+							<li class="headimg">
+								<a href="${ctx}/sitemesh?p=headimg"> <i class="fa fa-circle-o"></i> 上传头像
+								</a>
+							</li>
 						</ul>
 					</li>
 					<li>

@@ -4,6 +4,10 @@ public class Constants {
 	public static final String SERVER_ERROR = "服务器访问太过频繁，请稍后再试。";
 	public static final String QUERY_ERROR = "请求信息有误，请检查。";
 	public static final String SESSION_KAPTCHA_CODE = "SESSION_KAPTCHA_CODE";
+	/**
+	 * 文件上传路径
+	 */
+	public static final String DEFAULT_UPLOAD = "upload";
 
 	public class StatusCode {
 		public static final int OK = 200;

@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
@@ -18,12 +19,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cmower.common.Constants;
 import com.cmower.common.Variables;
+import com.cmower.common.upload.UploadFileManager;
 import com.cmower.common.util.AjaxResponseUtils;
 import com.cmower.common.util.CipherUtils;
 import com.cmower.common.util.GeetestLib;
 import com.cmower.dal.AjaxResponse;
 import com.cmower.database.entity.Cities;
 import com.cmower.database.entity.Provinces;
+import com.cmower.database.entity.UploadFile;
 import com.cmower.database.entity.Users;
 import com.cmower.spring.controller.BaseController;
 import com.cmower.spring.service.ProcityService;
@@ -39,12 +42,12 @@ public class SevenController extends BaseController {
 	private ProcityService procityService;
 	@Autowired
 	private Producer captchaProducer;
-	
-@RequestMapping("hello")
-@ResponseBody
-public String hello() {
-    return "hello " + getPara("content");
-}
+
+	@RequestMapping("hello")
+	@ResponseBody
+	public String hello() {
+		return "hello " + getPara("content");
+	}
 
 	@RequestMapping("login")
 	public String login() {
@@ -104,7 +107,7 @@ public String hello() {
 		}
 
 		response = AjaxResponseUtils.getSuccessResponse();
-		response.setForwardUrl(Variables.ctx + "/six");
+		response.setForwardUrl(Variables.ctx + "/seven");
 		return response;
 	}
 
@@ -225,7 +228,7 @@ public String hello() {
 			}
 
 			response = AjaxResponseUtils.getSuccessResponse();
-			response.setForwardUrl(Variables.ctx + "/six");
+			response.setForwardUrl(Variables.ctx + "/seven");
 			return response;
 		} else {
 			response.setMessage("验证失败，请稍后再试");
@@ -293,11 +296,37 @@ public String hello() {
 		return data;
 	}
 
-@RequestMapping("treeview/submit")
+	@RequestMapping("treeview/submit")
+	@ResponseBody
+	public String treeviewSubmit() {
+		logger.debug(getPara("ids"));
+		return "数据已收到";
+	}
+	
+	
+@RequestMapping("saveHeadimg")
 @ResponseBody
-public String treeviewSubmit() {
-	logger.debug(getPara("ids"));
-	return "数据已收到";
-}
+public AjaxResponse saveHeadimg(HttpServletRequest request) {
+	logger.debug("用户头像上传");
 
+	AjaxResponse response = AjaxResponseUtils.getFailureResponse();
+	
+	UploadFileManager fileManager = getFiles(request);
+	UploadFile file = fileManager.save().getFile();
+	if (file == null) {
+		response.setField("headimg");
+		response.setMessage("请上传头像");
+		return response;
+	}
+
+	Users user = this.userService.loadOne("wang");
+	Users update = new Users();
+	update.setId(user.getId());
+	update.setHeadimg(file.getCompleteName());
+	this.userService.updateSelective(update);
+	
+	response = AjaxResponseUtils.getSuccessResponse();
+	response.put("headimg", file.getCompleteName());
+	return response;
+}
 }

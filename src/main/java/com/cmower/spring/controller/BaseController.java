@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cmower.common.exception.OrderException;
+import com.cmower.common.upload.MultipartRequest;
+import com.cmower.common.upload.UploadFileManager;
 
 public abstract class BaseController {
 	protected Logger logger = LoggerFactory.getLogger(getClass());
-	
+
 	@Autowired
 	protected HttpServletRequest request;
 
@@ -27,7 +29,7 @@ public abstract class BaseController {
 
 		return mav;
 	}
-	
+
 	/**
 	 * Remove Object in session.
 	 * 
@@ -59,7 +61,7 @@ public abstract class BaseController {
 		HttpSession session = request.getSession(false);
 		return session != null ? (T) session.getAttribute(key) : null;
 	}
-	
+
 	/**
 	 * Returns the value of a request parameter as a String, or null if the
 	 * parameter does not exist.
@@ -207,4 +209,10 @@ public abstract class BaseController {
 		return toBoolean(request.getParameter(name), defaultValue);
 	}
 
+	public UploadFileManager getFiles(HttpServletRequest request) {
+		// 当前request不能覆盖this.request，否则下一步request就取不到内容
+		if (request instanceof MultipartRequest == false)
+			request = new MultipartRequest(request);
+		return ((MultipartRequest) request).getFileManager();
+	}
 }

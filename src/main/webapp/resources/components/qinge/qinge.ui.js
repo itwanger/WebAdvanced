@@ -1,9 +1,3 @@
-/**
- * 
- */
-/**
- * 
- */
 function initOnce() {
 	// -----------------
 	// - 登录表单进行BootstrapValidator初始化
@@ -227,8 +221,10 @@ function initOnce() {
 				datasets : [ {
 					label : '得票数',
 					data : [ 12, 19, 3, 5, 2, 3 ],
-					backgroundColor : [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
-					borderColor : [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
+					backgroundColor : [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)',
+							'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
+					borderColor : [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+							'rgba(255, 159, 64, 1)' ],
 					borderWidth : 1,
 				} ]
 			},
@@ -446,7 +442,8 @@ function initOnce() {
 				labels : [ '几乎不可能', '看别人脸色', '天佑梅西' ],
 				datasets : [ {
 					label : '投票人数：',
-					backgroundColor : [ color(QINGE.chartjsColors.red).alpha(0.8).rgbString(), color(QINGE.chartjsColors.orange).alpha(0.8).rgbString(), color(QINGE.chartjsColors.green).alpha(0.8).rgbString() ],
+					backgroundColor : [ color(QINGE.chartjsColors.red).alpha(0.8).rgbString(), color(QINGE.chartjsColors.orange).alpha(0.8).rgbString(),
+							color(QINGE.chartjsColors.green).alpha(0.8).rgbString() ],
 					data : [ 20, 50, 30 ],
 				} ]
 			},
@@ -582,7 +579,8 @@ function initOnce() {
 		var labelingAxesChart = new Chart(labelingAxesChartCtx, {
 			type : 'bar',
 			data : {
-				labels : [ newDateString(0), newDateString(1), newDateString(2), newDateString(3), newDateString(4), newDateString(5), newDateString(6), newDateString(7) ],
+				labels : [ newDateString(0), newDateString(1), newDateString(2), newDateString(3), newDateString(4), newDateString(5), newDateString(6),
+						newDateString(7) ],
 				datasets : [ {
 					label : '投票人数：',
 					backgroundColor : QINGE.chartjsColors.red,
@@ -759,16 +757,17 @@ function initOnce() {
 			return repo.text;
 		}
 
-		var markup = "<div class='select2-result-repository clearfix'>" + "<div class='select2-result-repository__avatar'><img src='" + repo.owner.avatar_url + "' /></div>" + "<div class='select2-result-repository__meta'>"
-				+ "<div class='select2-result-repository__title'>" + repo.full_name + "</div>";
+		var markup = "<div class='select2-result-repository clearfix'>" + "<div class='select2-result-repository__avatar'><img src='" + repo.owner.avatar_url
+				+ "' /></div>" + "<div class='select2-result-repository__meta'>" + "<div class='select2-result-repository__title'>" + repo.full_name + "</div>";
 
 		if (repo.description) {
 			markup += "<div class='select2-result-repository__description'>" + repo.description + "</div>";
 		}
 
-		markup += "<div class='select2-result-repository__statistics'>" + "<div class='select2-result-repository__forks'><i class='fa fa-flash'></i> " + repo.forks_count + " Forks</div>"
-				+ "<div class='select2-result-repository__stargazers'><i class='fa fa-star'></i> " + repo.stargazers_count + " Stars</div>" + "<div class='select2-result-repository__watchers'><i class='fa fa-eye'></i> " + repo.watchers_count
-				+ " Watchers</div>" + "</div>" + "</div></div>";
+		markup += "<div class='select2-result-repository__statistics'>" + "<div class='select2-result-repository__forks'><i class='fa fa-flash'></i> "
+				+ repo.forks_count + " Forks</div>" + "<div class='select2-result-repository__stargazers'><i class='fa fa-star'></i> " + repo.stargazers_count
+				+ " Stars</div>" + "<div class='select2-result-repository__watchers'><i class='fa fa-eye'></i> " + repo.watchers_count + " Watchers</div>"
+				+ "</div>" + "</div></div>";
 
 		return markup;
 	}
@@ -971,7 +970,7 @@ function initOnce() {
 
 	$('#treeview1').treeview({
 		data : treeviewDefaultData,
-//		levels : 3,
+		// levels : 3,
 		showCheckbox : true,
 		// highlightSelected : false,
 		// onNodeSelected : function (event, node) {
@@ -1026,7 +1025,7 @@ function initOnce() {
 
 	// console.log($('#treeview1').treeview('getCollapsed'));// 返回折叠节点的数组
 
-//	 $('#treeview1').treeview('expandAll',{ silent: true }); // 展开所有节点
+	// $('#treeview1').treeview('expandAll',{ silent: true }); // 展开所有节点
 	// $('#treeview1').treeview('expandAll', { levels: 1, silent: true }); //
 	// 只展开一级节点，两级或两级以上的节点并不展开（如果有的话）
 	// $('#treeview1').treeview('expandNode',[0, { silent: true }]); //
@@ -1037,7 +1036,7 @@ function initOnce() {
 	// $('#treeview1').treeview('toggleNodeExpanded', [ 1, { silent: true } ]);
 	// 切换一个节点的展开和折叠状态。
 
-//	 $('#treeview1').treeview('disableAll', { silent: true }); //禁用所有的节点。
+	// $('#treeview1').treeview('disableAll', { silent: true }); //禁用所有的节点。
 	// $('#treeview1').treeview('disableNode',[1, { silent: true }]); // 禁用指定的节点
 	// console.log($('#treeview1').treeview('getEnabled')); // 返回被禁用节点的数组
 
@@ -1069,12 +1068,12 @@ function initOnce() {
 	// 显示一个树节点，展开从这个节点开始到根节点的所有节点。
 	// $('#treeview1').treeview('revealNode', [ 3, { silent: true } ]);
 
-//	 var treeview1 = $('#treeview1').data('treeview');
-//	 treeview1.search("洛阳", {
-//	 ignoreCase : true, // 忽略大小写
-//	 exactMatch : false, // false的时候采用模糊匹配，true的时候采用精确匹配
-//	 revealResults : true, // 展开匹配的节点
-//	 });
+	// var treeview1 = $('#treeview1').data('treeview');
+	// treeview1.search("洛阳", {
+	// ignoreCase : true, // 忽略大小写
+	// exactMatch : false, // false的时候采用模糊匹配，true的时候采用精确匹配
+	// revealResults : true, // 展开匹配的节点
+	// });
 
 	// $('#treeview1').on('nodeChecked', function(event, data) {
 	// console.log("jQuery的on方法");
@@ -1131,16 +1130,56 @@ function initOnce() {
 			data.checkedData.push(checkedNodes[i].id);
 		}
 
-$.ajax({
-	type : 'POST',
-	url : $("#getData").data("url"),
-	data : {
-		ids : data.checkedData.join(",")
-	},
-	success : function(response) {
-		console.log(response);
-	}
-});
+		$.ajax({
+			type : 'POST',
+			url : $("#getData").data("url"),
+			data : {
+				ids : data.checkedData.join(",")
+			},
+			success : function(response) {
+				console.log(response);
+			}
+		});
+	});
+
+	$('#headimgForm').bootstrapValidator({
+		fields : {
+			headimg : {
+				validators : {
+					notEmpty : {
+						message : '请选择一张图片'
+					},
+					file : {
+						extension : 'jpeg,jpg,png',
+						type : 'image/jpeg,image/png',
+						maxSize : 2097152, // 2048 * 1024
+						message : '请选择PNG/JPG/JPEG格式的图片，且不能超过2M'
+					}
+				}
+			},
+		}
+	}).on('success.form.bv', function(e) {
+		e.preventDefault();
+		var $form = $(e.target), bv = $form.data('bootstrapValidator'), data = new FormData($form[0]);
+		$.ajax({
+			type : $form.attr("method") || 'POST',
+			url : $form.attr("action"),
+			data : data,
+			cache : false,
+			dataType : "json",
+			// 发送数据到服务器时所使用的内容类型。默认为true，类型为："application/x-www-form-urlencoded"。
+			contentType : false,
+			// 布尔值，规定通过请求发送的数据是否转换为查询字符串。默认是 true。
+			processData : false,
+			success : function(json) {
+				if (json.statusCode == 200) {
+					$("#headimg").attr("src", json.mo.headimg);
+				} else {
+					bv.updateMessage(json.field, 'blank', json.message);
+					bv.updateStatus(json.field, 'INVALID', 'blank');
+				}
+			},
+		});
 	});
 }
 

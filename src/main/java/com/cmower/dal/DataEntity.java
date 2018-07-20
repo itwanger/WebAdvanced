@@ -10,6 +10,11 @@ public abstract class DataEntity<T> extends BaseEntity<T> implements Serializabl
 	protected Long update_date;
 	protected Integer del_flag;
 
+	public DataEntity(Long id) {
+		super();
+		this.id = id;
+	}
+
 	public DataEntity() {
 	}
 
