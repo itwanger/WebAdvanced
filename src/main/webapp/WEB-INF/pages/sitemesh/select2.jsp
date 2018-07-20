@@ -32,6 +32,56 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
+							<label>单选</label>
+							<select class="js-example-basic-single form-control">
+								<optgroup label="北直隶">
+									<option value="STF">顺天府</option>
+									<option value="BDF">保定府</option>
+								</optgroup>
+								<optgroup label="南直隶">
+									<option value="YTF">应天府</option>
+									<option value="SZF">苏州府</option>
+									<option value="FYF">凤阳府</option>
+								</optgroup>
+								<optgroup label="河南承宣布政使司">
+									<option value="KFF">开封府</option>
+									<option value="HNF">河南府</option>
+									<option value="NYF">南阳府</option>
+								</optgroup>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>多选</label>
+							<select class="js-example-basic-multiple form-control" multiple="multiple">
+								<optgroup label="北直隶">
+									<option value="STF">顺天府</option>
+									<option value="BDF">保定府</option>
+								</optgroup>
+								<optgroup label="南直隶">
+									<option value="YTF">应天府</option>
+									<option value="SZF">苏州府</option>
+									<option value="FYF">凤阳府</option>
+								</optgroup>
+								<optgroup label="河南承宣布政使司">
+									<option value="KFF">开封府</option>
+									<option value="HNF">河南府</option>
+									<option value="NYF">南阳府</option>
+								</optgroup>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>单选占位符</label>
+							<select class="js-example-placeholder-single js-states form-control">
+								<option></option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>多选占位符</label>
+							<select class="js-example-placeholder-multiple js-states form-control" multiple="multiple"></select>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
 							<label>Ajax</label>
 							<select class="js-example-data-ajax form-control"></select>
 						</div>
