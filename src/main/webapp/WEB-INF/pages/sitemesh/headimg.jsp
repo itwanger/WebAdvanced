@@ -31,26 +31,26 @@
 						</div>
 					</div>
 					<div class="box-body">
-<form id="headimgForm" action="${ctx}/seven/saveHeadimg" enctype="multipart/form-data" method="post" role="form">
-	<div class="box-body">
-		<div class="form-group">
-			<label>头像</label>
-			<input name="headimg" type="file" accept="image/*">
-		</div>
-	</div>
-	<!-- /.box-body -->
+						<form id="headimgForm" action="${ctx}/seven/saveHeadimg" enctype="multipart/form-data" method="post" role="form">
+							<div class="box-body">
+								<div class="form-group">
+									<label>头像</label> <input name="headimg" type="file" accept="image/*">
+								</div>
+							</div>
+							<!-- /.box-body -->
 
-	<div class="box-footer">
-		<button type="submit" class="btn btn-primary">提交</button>
-	</div>
-</form>
+							<div class="box-footer">
+								<button type="submit" class="btn btn-primary">提交</button>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="box box-primary">
 					<div class="box-body box-profile">
-						<img id="headimg" class="profile-user-img img-responsive img-circle" src="${ctx}/resources/images/cmower160x160.jpg" alt="用户头像">
+						<img id="headimg" class="profile-user-img img-responsive img-circle"
+							src="${ctx}/resources/images/cmower160x160.jpg" alt="用户头像">
 
 						<h3 class="profile-username text-center">沉默王二</h3>
 
@@ -58,21 +58,17 @@
 
 						<ul class="list-group list-group-unbordered">
 							<li class="list-group-item">
-								<b>博客等级</b>
-								<a class="pull-right">Level 7</a>
+								<b>博客等级</b> <a class="pull-right">Level 7</a>
 							</li>
 							<li class="list-group-item">
-								<b>访问量</b>
-								<a class="pull-right">129万+</a>
+								<b>访问量</b> <a class="pull-right">129万+</a>
 							</li>
 							<li class="list-group-item">
-								<b>排名</b>
-								<a class="pull-right">1458</a>
+								<b>排名</b> <a class="pull-right">1458</a>
 							</li>
 						</ul>
 
-						<a href="#" class="btn btn-primary btn-block">
-							<b>为他点赞</b>
+						<a href="#" class="btn btn-primary btn-block"> <b>为他点赞</b>
 						</a>
 					</div>
 					<!-- /.box-body -->

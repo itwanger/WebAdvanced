@@ -221,10 +221,8 @@ function initOnce() {
 				datasets : [ {
 					label : '得票数',
 					data : [ 12, 19, 3, 5, 2, 3 ],
-					backgroundColor : [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)',
-							'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
-					borderColor : [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
-							'rgba(255, 159, 64, 1)' ],
+					backgroundColor : [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
+					borderColor : [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
 					borderWidth : 1,
 				} ]
 			},
@@ -442,8 +440,7 @@ function initOnce() {
 				labels : [ '几乎不可能', '看别人脸色', '天佑梅西' ],
 				datasets : [ {
 					label : '投票人数：',
-					backgroundColor : [ color(QINGE.chartjsColors.red).alpha(0.8).rgbString(), color(QINGE.chartjsColors.orange).alpha(0.8).rgbString(),
-							color(QINGE.chartjsColors.green).alpha(0.8).rgbString() ],
+					backgroundColor : [ color(QINGE.chartjsColors.red).alpha(0.8).rgbString(), color(QINGE.chartjsColors.orange).alpha(0.8).rgbString(), color(QINGE.chartjsColors.green).alpha(0.8).rgbString() ],
 					data : [ 20, 50, 30 ],
 				} ]
 			},
@@ -579,8 +576,7 @@ function initOnce() {
 		var labelingAxesChart = new Chart(labelingAxesChartCtx, {
 			type : 'bar',
 			data : {
-				labels : [ newDateString(0), newDateString(1), newDateString(2), newDateString(3), newDateString(4), newDateString(5), newDateString(6),
-						newDateString(7) ],
+				labels : [ newDateString(0), newDateString(1), newDateString(2), newDateString(3), newDateString(4), newDateString(5), newDateString(6), newDateString(7) ],
 				datasets : [ {
 					label : '投票人数：',
 					backgroundColor : QINGE.chartjsColors.red,
@@ -757,17 +753,16 @@ function initOnce() {
 			return repo.text;
 		}
 
-		var markup = "<div class='select2-result-repository clearfix'>" + "<div class='select2-result-repository__avatar'><img src='" + repo.owner.avatar_url
-				+ "' /></div>" + "<div class='select2-result-repository__meta'>" + "<div class='select2-result-repository__title'>" + repo.full_name + "</div>";
+		var markup = "<div class='select2-result-repository clearfix'>" + "<div class='select2-result-repository__avatar'><img src='" + repo.owner.avatar_url + "' /></div>" + "<div class='select2-result-repository__meta'>"
+				+ "<div class='select2-result-repository__title'>" + repo.full_name + "</div>";
 
 		if (repo.description) {
 			markup += "<div class='select2-result-repository__description'>" + repo.description + "</div>";
 		}
 
-		markup += "<div class='select2-result-repository__statistics'>" + "<div class='select2-result-repository__forks'><i class='fa fa-flash'></i> "
-				+ repo.forks_count + " Forks</div>" + "<div class='select2-result-repository__stargazers'><i class='fa fa-star'></i> " + repo.stargazers_count
-				+ " Stars</div>" + "<div class='select2-result-repository__watchers'><i class='fa fa-eye'></i> " + repo.watchers_count + " Watchers</div>"
-				+ "</div>" + "</div></div>";
+		markup += "<div class='select2-result-repository__statistics'>" + "<div class='select2-result-repository__forks'><i class='fa fa-flash'></i> " + repo.forks_count + " Forks</div>"
+				+ "<div class='select2-result-repository__stargazers'><i class='fa fa-star'></i> " + repo.stargazers_count + " Stars</div>" + "<div class='select2-result-repository__watchers'><i class='fa fa-eye'></i> " + repo.watchers_count
+				+ " Watchers</div>" + "</div>" + "</div></div>";
 
 		return markup;
 	}
@@ -1181,6 +1176,27 @@ function initOnce() {
 			},
 		});
 	});
+
+$('#dropifyImg').change(function(e) {
+	var $this = $(this), file = e.target.files[0], data = new FormData();
+
+	data.append($this.attr("name"), file);
+
+	$.ajax({
+		data : data,
+		type : "POST",
+		url : $this.data("url"),
+		contentType : false,
+		processData : false,
+		success : function(json) {
+			if (json.statusCode == 200) {
+				$.msg(json.mo.imgUrl);
+			} else {
+				$.error(json.message);
+			}
+		},
+	});
+});
 }
 
 /**
@@ -1392,6 +1408,46 @@ function initUI($p) {
 		},
 	});
 
+	// -----------------
+	// - Dropify——基于H5的图片拖拽和预览插件
+	// -----------------
+	$('input.dropify').dropify({
+		// defaultFile : "/WebAdvanced/resources/images/cmower160x160.jpg",
+		// height : 300,
+		// maxFileSize : '1M',
+		// showRemove : false,
+		// showErrors : false,
+		// errorsPosition : 'outside',
+		// allowedFileExtensions : 'png jpg',
+		// maxFileSizePreview : '1K',
+		messages : {
+			'default' : '可拖放一个文件到这或者点击选择',
+			'replace' : '可拖放一个文件或者点击选择进行替换',
+			'remove' : '移除',
+			'error' : '哦，出错了！'
+		},
+		error : {
+			'fileSize' : '文件超出了最大限度，最大值为 ({{ value }} )。',
+			'minWidth' : '图像宽度过小，最小宽度为 ({{ value }}}px )。',
+			'maxWidth' : '图像宽度过大，最大宽度为 ({{ value }}}px )。',
+			'minHeight' : '图像高度过小，最小高度为 ({{ value }}}px )。',
+			'maxHeight' : '图像高度过大，最大高度为 ({{ value }}px )。',
+			'imageFormat' : '图像格式不符合要求，只允许 ({{ value }} )。',
+			'fileExtension' : '文件后缀不符合要求，只允许 ({{ value }} )。'
+		},
+	}).on('dropify.beforeClear', function(event, element) {
+		return $.confirm("您确定要删除 \"" + element.file.name + "\" 文件了吗?");
+	}).on('dropify.error.fileSize', function(event, element) {
+		console.log('文件大小超出！');
+	}).on('dropify.error.minWidth', function(event, element) {
+		console.log('图片不满足最小宽度！');
+	}).on('dropify.error.maxWidth', function(event, element) {
+		console.log('图片超出最大宽度！');
+	}).on('dropify.error.minHeight', function(event, element) {
+		console.log('图片不满足最小高度！');
+	}).on('dropify.error.maxHeight', function(event, element) {
+		console.log('图片超出最大高度！');
+	});
 }
 
 $(function() {

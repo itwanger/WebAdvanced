@@ -53,12 +53,15 @@
 <!-- Bootstrap-Treeview——一款非常酷的分层树结构插件 -->
 <script src="https://cdn.bootcss.com/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
 
+<!-- Dropify——基于H5的图片拖拽和预览插件 -->
+<script src="https://cdn.bootcss.com/Dropify/0.2.2/js/dropify.js"></script>
+
 <!-- SlimScroll -->
 <script src="https://cdn.bootcss.com/jQuery-slimScroll/1.3.8/jquery.slimscroll.js"></script>
 <!-- AdminLTE -->
 <script src="${ctx}/resources/components/adminlte/js/adminlte.js"></script>
 <script src="${ctx}/resources/components/adminlte/js/righter.js"></script>
 
-<script src="${ctx}/resources/components/qinge/qinge.core.js"></script>
-<script src="${ctx}/resources/components/qinge/qinge.util.js"></script>
-<script src="${ctx}/resources/components/qinge/qinge.ui.js"></script>
+<script src="${ctx}/resources/js/qinge.core.js"></script>
+<script src="${ctx}/resources/js/qinge.util.js"></script>
+<script src="${ctx}/resources/js/qinge.ui.js"></script>

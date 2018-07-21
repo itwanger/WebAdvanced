@@ -14,6 +14,7 @@
 <link href="https://cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.css" rel="stylesheet">
 <link href="https://cdn.bootcss.com/select2/4.0.5/css/select2.css" rel="stylesheet">
 <link href="https://cdn.bootcss.com/bootstrap-treeview/1.2.0/bootstrap-treeview.min.css" rel="stylesheet">
+<link href="https://cdn.bootcss.com/Dropify/0.2.2/css/dropify.css" rel="stylesheet">
 
 <!-- AdminLTE -->
 <link rel="stylesheet" href="${ctx}/resources/components/adminlte/css/AdminLTE.css">

@@ -339,4 +339,32 @@ public AjaxResponse saveHeadimg(HttpServletRequest request) {
 	response.put("headimg", file.getCompleteName());
 	return response;
 }
+
+@RequestMapping("saveDropifyImg")
+@ResponseBody
+public AjaxResponse saveDropifyImg(HttpServletRequest request) {
+	logger.debug("使用Dropify上传图片");
+
+	AjaxResponse response = AjaxResponseUtils.getFailureResponse();
+	
+	// 获取上上传文件的管理器类
+	UploadFileManager fileManager = getFiles(request);
+	
+	// 获取上传文件
+	UploadFile file = fileManager.getFile();
+	
+	// 判断是否为空，如果客户端没有上传文件，则返回错误消息
+	if (file == null) {
+		response.setMessage("请选择图片");
+		return response;
+	}
+	
+	// 验证通过后对上传文件进行保存
+	fileManager.save();
+
+	response = AjaxResponseUtils.getSuccessResponse();
+	// 返回客户端可以访问的文件路径+文件名
+	response.put("imgUrl", file.getCompleteName());
+	return response;
+}
 }

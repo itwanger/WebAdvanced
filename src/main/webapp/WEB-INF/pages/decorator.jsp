@@ -228,6 +228,10 @@
 								<a href="${ctx}/sitemesh?p=headimg"> <i class="fa fa-circle-o"></i> 上传头像
 								</a>
 							</li>
+							<li class="dropify">
+								<a href="${ctx}/sitemesh?p=dropify"> <i class="fa fa-circle-o"></i> Dropify
+								</a>
+							</li>
 						</ul>
 					</li>
 					<li>
