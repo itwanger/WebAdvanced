@@ -221,8 +221,10 @@ function initOnce() {
 				datasets : [ {
 					label : '得票数',
 					data : [ 12, 19, 3, 5, 2, 3 ],
-					backgroundColor : [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
-					borderColor : [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
+					backgroundColor : [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)',
+							'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
+					borderColor : [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+							'rgba(255, 159, 64, 1)' ],
 					borderWidth : 1,
 				} ]
 			},
@@ -440,7 +442,8 @@ function initOnce() {
 				labels : [ '几乎不可能', '看别人脸色', '天佑梅西' ],
 				datasets : [ {
 					label : '投票人数：',
-					backgroundColor : [ color(QINGE.chartjsColors.red).alpha(0.8).rgbString(), color(QINGE.chartjsColors.orange).alpha(0.8).rgbString(), color(QINGE.chartjsColors.green).alpha(0.8).rgbString() ],
+					backgroundColor : [ color(QINGE.chartjsColors.red).alpha(0.8).rgbString(), color(QINGE.chartjsColors.orange).alpha(0.8).rgbString(),
+							color(QINGE.chartjsColors.green).alpha(0.8).rgbString() ],
 					data : [ 20, 50, 30 ],
 				} ]
 			},
@@ -576,7 +579,8 @@ function initOnce() {
 		var labelingAxesChart = new Chart(labelingAxesChartCtx, {
 			type : 'bar',
 			data : {
-				labels : [ newDateString(0), newDateString(1), newDateString(2), newDateString(3), newDateString(4), newDateString(5), newDateString(6), newDateString(7) ],
+				labels : [ newDateString(0), newDateString(1), newDateString(2), newDateString(3), newDateString(4), newDateString(5), newDateString(6),
+						newDateString(7) ],
 				datasets : [ {
 					label : '投票人数：',
 					backgroundColor : QINGE.chartjsColors.red,
@@ -753,16 +757,17 @@ function initOnce() {
 			return repo.text;
 		}
 
-		var markup = "<div class='select2-result-repository clearfix'>" + "<div class='select2-result-repository__avatar'><img src='" + repo.owner.avatar_url + "' /></div>" + "<div class='select2-result-repository__meta'>"
-				+ "<div class='select2-result-repository__title'>" + repo.full_name + "</div>";
+		var markup = "<div class='select2-result-repository clearfix'>" + "<div class='select2-result-repository__avatar'><img src='" + repo.owner.avatar_url
+				+ "' /></div>" + "<div class='select2-result-repository__meta'>" + "<div class='select2-result-repository__title'>" + repo.full_name + "</div>";
 
 		if (repo.description) {
 			markup += "<div class='select2-result-repository__description'>" + repo.description + "</div>";
 		}
 
-		markup += "<div class='select2-result-repository__statistics'>" + "<div class='select2-result-repository__forks'><i class='fa fa-flash'></i> " + repo.forks_count + " Forks</div>"
-				+ "<div class='select2-result-repository__stargazers'><i class='fa fa-star'></i> " + repo.stargazers_count + " Stars</div>" + "<div class='select2-result-repository__watchers'><i class='fa fa-eye'></i> " + repo.watchers_count
-				+ " Watchers</div>" + "</div>" + "</div></div>";
+		markup += "<div class='select2-result-repository__statistics'>" + "<div class='select2-result-repository__forks'><i class='fa fa-flash'></i> "
+				+ repo.forks_count + " Forks</div>" + "<div class='select2-result-repository__stargazers'><i class='fa fa-star'></i> " + repo.stargazers_count
+				+ " Stars</div>" + "<div class='select2-result-repository__watchers'><i class='fa fa-eye'></i> " + repo.watchers_count + " Watchers</div>"
+				+ "</div>" + "</div></div>";
 
 		return markup;
 	}
@@ -1177,25 +1182,39 @@ function initOnce() {
 		});
 	});
 
-$('#dropifyImg').change(function(e) {
-	var $this = $(this), file = e.target.files[0], data = new FormData();
+	$('#dropifyImg').change(function(e) {
+		var $this = $(this), file = e.target.files[0], data = new FormData();
 
-	data.append($this.attr("name"), file);
+		data.append($this.attr("name"), file);
 
-	$.ajax({
-		data : data,
-		type : "POST",
-		url : $this.data("url"),
-		contentType : false,
-		processData : false,
-		success : function(json) {
-			if (json.statusCode == 200) {
-				$.msg(json.mo.imgUrl);
-			} else {
-				$.error(json.message);
-			}
-		},
+		$.ajax({
+			data : data,
+			type : "POST",
+			url : $this.data("url"),
+			contentType : false,
+			processData : false,
+			success : function(json) {
+				if (json.statusCode == 200) {
+					$.msg(json.mo.imgUrl);
+				} else {
+					$.error(json.message);
+				}
+			},
+		});
 	});
+
+$('#input-b1').fileinput({
+	language:'zh',
+	uploadUrl : '/WebAdvanced/seven/saveFile',
+//	minFileSize : 1000,
+//	maxFileSize : 1000,
+//	allowedFileTypes : ['image', 'html', 'text', 'video', 'audio', 'flash'],
+});
+
+$('#input-ajax-multiple').fileinput({
+	language:'zh',
+	uploadUrl : '/WebAdvanced/seven/saveFile',
+	minFileCount : 2,
 });
 }
 
