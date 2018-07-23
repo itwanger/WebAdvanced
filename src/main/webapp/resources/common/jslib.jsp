@@ -56,6 +56,10 @@
 <!-- Dropify——基于H5的图片拖拽和预览插件 -->
 <script src="https://cdn.bootcss.com/Dropify/0.2.2/js/dropify.js"></script>
 
+<!-- Bootstrap FileInput——增强版的HTML5文件输入框 -->
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.8/js/fileinput.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.8/js/locales/zh.js"></script>
+
 <!-- SlimScroll -->
 <script src="https://cdn.bootcss.com/jQuery-slimScroll/1.3.8/jquery.slimscroll.js"></script>
 <!-- AdminLTE -->

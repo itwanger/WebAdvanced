@@ -232,6 +232,10 @@
 								<a href="${ctx}/sitemesh?p=dropify"> <i class="fa fa-circle-o"></i> Dropify
 								</a>
 							</li>
+							<li class="fileinput">
+								<a href="${ctx}/sitemesh?p=bootstrap-fileinput"> <i class="fa fa-circle-o"></i> Bootstrap FileInput
+								</a>
+							</li>
 						</ul>
 					</li>
 					<li>
