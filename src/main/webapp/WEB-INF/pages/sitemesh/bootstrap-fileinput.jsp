@@ -25,10 +25,9 @@
 						<form id="bfForm" action="${ctx}/seven/saveFile" enctype="multipart/form-data" method="post" role="form">
 							<div class="form-group">
 								<input class="file" name="input-b2" type="file" 
-									data-language="zh" 
-									data-required="true" data-msg-file-required="请至少选择一个文件"
-									data-min-file-size="1000"
-									>
+									data-language="zh"  >
+<!-- 									data-required="true" data-msg-file-required="请至少选择一个文件" -->
+<!-- 									data-min-file-size="1000" -->
 							</div>
 							<div class="box-footer text-center">
 								<button type="submit" class="btn btn-lg btn-success">
@@ -69,6 +68,30 @@
 								</button>
 							</div>
 						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">Ajax上传（多选）</h3>
+					</div>
+					<div class="box-body">
+						<div class="form-group">
+							<input id="input-ajax-multiple" name="input-ajax-multiple[]" type="file" multiple>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">不显示文件预览</h3>
+					</div>
+					<div class="box-body">
+						<input id="input-b2" name="input-b2" type="file" class="file" data-language="zh" data-show-preview="false">
 					</div>
 				</div>
 			</div>

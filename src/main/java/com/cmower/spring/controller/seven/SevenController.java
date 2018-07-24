@@ -373,12 +373,12 @@ public AjaxResponse saveDropifyImg(HttpServletRequest request) {
 public AjaxResponse saveFile(HttpServletRequest request) {
 	logger.debug("使用Bootstrap FileInput上传文件");
 	
-	try {
-		Thread.sleep(10000);
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+//	try {
+//		Thread.sleep(10000);
+//	} catch (InterruptedException e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	}
 	
 	AjaxResponse response = AjaxResponseUtils.getFailureResponse();
 	
@@ -390,6 +390,7 @@ public AjaxResponse saveFile(HttpServletRequest request) {
 	
 	// 判断是否为空，如果客户端没有上传文件，则返回错误消息
 	if (file == null) {
+//		throw new Exception("jsp后缀的文件不安全，禁止上传");
 		response.setMessage("请选择文件");
 		return response;
 	}

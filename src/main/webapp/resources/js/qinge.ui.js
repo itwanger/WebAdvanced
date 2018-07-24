@@ -1206,9 +1206,15 @@ function initOnce() {
 $('#input-b1').fileinput({
 	language:'zh',
 	uploadUrl : '/WebAdvanced/seven/saveFile',
+//	showUpload : false,
+//	showClose : false,
+//	showUploadedThumbs : false,
+//	showBrowse : false,
+//	browseOnZoneClick : true,
 //	minFileSize : 1000,
 //	maxFileSize : 1000,
 //	allowedFileTypes : ['image', 'html', 'text', 'video', 'audio', 'flash'],
+	allowedFileExtensions : ['jpg', 'gif', 'png', 'txt'],
 });
 
 $('#input-ajax-multiple').fileinput({
