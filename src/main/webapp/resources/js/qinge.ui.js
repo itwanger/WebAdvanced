@@ -1224,15 +1224,17 @@ var previews3 = [ "/WebAdvanced/resources/images/Light A Fire.jpg", "<img src='/
 
 $('#input-ajax-multiple').fileinput({
 	language : 'zh',
-	uploadUrl : '/WebAdvanced/seven/saveAjaxFile',
-	// uploadThumbUrl : '/WebAdvanced/seven/saveThumbFile',
-	uploadAsync : true,
-	uploadExtraData : function(previewId, index) {
-		var obj = {
-			"previewId" : previewId
-		};
-		return obj;
-	},
+//	uploadUrl : '/WebAdvanced/seven/saveAjaxFile',
+//	uploadAsync : true,
+//	uploadExtraData : function(previewId, index) {
+//		var obj = {
+//			"previewId" : previewId
+//		};
+//		return obj;
+//	},
+	uploadUrl : '/WebAdvanced/seven/saveSyncAjaxFile',
+	uploadAsync : false,
+	uploadExtraData : {cmower:"沉默王二"},
 	initialPreviewAsData : true,
 	// minFileCount : 2,
 	maxFileCount : 2,
