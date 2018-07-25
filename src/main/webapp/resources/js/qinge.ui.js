@@ -1206,22 +1206,31 @@ function initOnce() {
 	$('#input-b1').fileinput({
 		language : 'zh',
 		uploadUrl : '/WebAdvanced/seven/saveFile',
-		// showUpload : false,
-		// showClose : false,
-		// showUploadedThumbs : false,
-		// showBrowse : false,
-		// browseOnZoneClick : true,
-		// minFileSize : 1000,
-		// maxFileSize : 1000,
-		// allowedFileTypes : ['image', 'html', 'text', 'video', 'audio',
-		// 'flash'],
-		allowedFileExtensions : [ 'jpg', 'gif', 'png', 'txt' ],
+	// showUpload : false,
+	// showClose : false,
+	// showUploadedThumbs : false,
+	// showBrowse : false,
+	// browseOnZoneClick : true,
+	// minFileSize : 1000,
+	// maxFileSize : 1000,
+	// allowedFileTypes : ['image', 'html', 'text', 'video', 'audio',
+	// 'flash'],
+	// allowedFileExtensions : [ 'jpg', 'gif', 'png', 'txt' ],
+
 	});
 
 	$('#input-ajax-multiple').fileinput({
 		language : 'zh',
 		uploadUrl : '/WebAdvanced/seven/saveFile',
-		minFileCount : 2,
+		// uploadThumbUrl : '/WebAdvanced/seven/saveThumbFile',
+		uploadAsync : false,
+		uploadExtraData : function(previewId, index) {
+			var obj = {
+				"previewId" : previewId
+			};
+			return obj;
+		}
+	// minFileCount : 2,
 	});
 
 	var previews1 = [
@@ -1231,40 +1240,45 @@ function initOnce() {
 	var previews2 = [
 			"<img src='/WebAdvanced/resources/images/Light A Fire.jpg' class='kv-preview-data file-preview-image' alt='Light A Fire' title='Light A Fire'>",
 			"<img src='/WebAdvanced/resources/images/Wisdom.jpg'  class='kv-preview-data file-preview-image' alt=Wisdom' title='Wisdom'>", ]
-var previews3 = [
-                 "/WebAdvanced/resources/images/Light A Fire.jpg",
-                 "<img src='/WebAdvanced/resources/images/Wisdom.jpg'  class='kv-preview-data file-preview-image' alt=Wisdom' title='Wisdom'>",
-                 "/WebAdvanced/resources/other/快乐每一天.mp3",
-                 "/WebAdvanced/resources/other/致读者的一封信.pdf",
-                 ]
+	var previews3 = [ "/WebAdvanced/resources/images/Light A Fire.jpg",
+			"<img src='/WebAdvanced/resources/images/Wisdom.jpg'  class='kv-preview-data file-preview-image' alt=Wisdom' title='Wisdom'>",
+			"/WebAdvanced/resources/other/快乐每一天.mp3", "/WebAdvanced/resources/other/致读者的一封信.pdf", ]
 
-$('#input-pd').fileinput({
-	language : 'zh',
-	 overwriteInitial:true,
-//	initialPreviewShowDelete : false,
-	initialPreviewAsData:true,
-	initialPreview : previews3,
-	initialPreviewConfig : [ {
-		caption : 'Light A Fire.jpg',
-		url : '/WebAdvanced/seven/deleteFile',
-		key : "Light A Fire",
-	}, {
-		previewAsData: false,
-		caption : 'Wisdom.jpg',
-		url : '/WebAdvanced/seven/deleteFile',
-		key : 'Wisdom',
-	},{
-		type: "audio",
-		filetype: "audio/mp3",
-		caption : '快乐每一天.mp3',
-		url : '/WebAdvanced/seven/deleteFile',
-		key : 'happy every day',
-	},{
-		type : "pdf",
-		caption : '致读者的一封信.pdf',
-		key : 'A letter to the reader',
-	},]
-});
+	$('#input-pd').fileinput({
+		language : 'zh',
+		previewZoomButtonIcons : {
+			prev : '<i class="fa fa-backward"></i>',
+			next : '<i class="fa fa-forward"></i>',
+			toggleheader : '<i class="fa fa-arrows-v"></i>',
+			fullscreen : '<i class="fa fa-arrows-alt"></i>',
+			borderless : '<i class="fa fa-expand"></i>',
+			close : '<i class="fa fa-times"></i>'
+		},
+		overwriteInitial : true,
+		// initialPreviewShowDelete : false,
+		initialPreviewAsData : true,
+		initialPreview : previews3,
+		initialPreviewConfig : [ {
+			caption : 'Light A Fire.jpg',
+			url : '/WebAdvanced/seven/deleteFile',
+			key : "Light A Fire",
+		}, {
+			previewAsData : false,
+			caption : 'Wisdom.jpg',
+			url : '/WebAdvanced/seven/deleteFile',
+			key : 'Wisdom',
+		}, {
+			type : "audio",
+			filetype : "audio/mp3",
+			caption : '快乐每一天.mp3',
+			url : '/WebAdvanced/seven/deleteFile',
+			key : 'happy every day',
+		}, {
+			type : "pdf",
+			caption : '致读者的一封信.pdf',
+			key : 'A letter to the reader',
+		}, ]
+	});
 }
 
 /**

@@ -375,13 +375,6 @@ public class SevenController extends BaseController {
 	public AjaxResponse saveFile(HttpServletRequest request) {
 		logger.debug("使用Bootstrap FileInput上传文件");
 
-		// try {
-		// Thread.sleep(10000);
-		// } catch (InterruptedException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-
 		AjaxResponse response = AjaxResponseUtils.getFailureResponse();
 
 		// 获取上上传文件的管理器类
@@ -403,6 +396,34 @@ public class SevenController extends BaseController {
 		response = AjaxResponseUtils.getSuccessResponse();
 		// 返回客户端可以访问的文件路径+文件名
 		response.put("fileUrl", file.getCompleteName());
+		return response;
+	}
+	@RequestMapping("saveThumbFile")
+	@ResponseBody
+	public AjaxResponse saveThumbFile(HttpServletRequest request) {
+		logger.debug("使用Bootstrap FileInput上传Thumb文件");
+		
+		AjaxResponse response = AjaxResponseUtils.getFailureResponse();
+		
+		// 获取上上传文件的管理器类
+		UploadFileManager fileManager = getFiles(request);
+		
+		// 获取上传文件
+		UploadFile file = fileManager.getFile();
+		
+		// 判断是否为空，如果客户端没有上传文件，则返回错误消息
+		if (file == null) {
+			// throw new Exception("jsp后缀的文件不安全，禁止上传");
+			response.setMessage("请选择文件");
+			return response;
+		}
+		
+		// 验证通过后对上传文件进行保存
+		fileManager.save();
+		
+		response = AjaxResponseUtils.getSuccessResponse();
+		// 返回客户端可以访问的文件路径+文件名
+		response.put("fileThumbUrl", file.getCompleteName());
 		return response;
 	}
 
