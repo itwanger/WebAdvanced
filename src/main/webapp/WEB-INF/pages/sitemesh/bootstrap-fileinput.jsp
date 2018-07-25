@@ -98,11 +98,11 @@
 			<div class="col-md-6">
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<h3 class="box-title">Ajax上传（多选）</h3>
+						<h3 class="box-title">预览初始化</h3>
 					</div>
 					<div class="box-body">
 						<div class="form-group">
-							<input id="input-ajax-multiple" name="input-ajax-multiple[]" type="file" multiple>
+							<input id="input-pd" name="input-pd[]" type="file" multiple>
 						</div>
 					</div>
 				</div>

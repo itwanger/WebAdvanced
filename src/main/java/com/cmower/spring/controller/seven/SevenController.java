@@ -1,6 +1,7 @@
 package com.cmower.spring.controller.seven;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,9 +20,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cmower.common.Constants;
 import com.cmower.common.Variables;
+import com.cmower.common.base.PathKit;
 import com.cmower.common.upload.UploadFileManager;
 import com.cmower.common.util.AjaxResponseUtils;
 import com.cmower.common.util.CipherUtils;
+import com.cmower.common.util.FileUtils;
 import com.cmower.common.util.GeetestLib;
 import com.cmower.dal.AjaxResponse;
 import com.cmower.database.entity.Cities;
@@ -302,105 +305,120 @@ public class SevenController extends BaseController {
 		logger.debug(getPara("ids"));
 		return "数据已收到";
 	}
-	
-	
-@RequestMapping("saveHeadimg")
-@ResponseBody
-public AjaxResponse saveHeadimg(HttpServletRequest request) {
-	logger.debug("用户头像上传");
 
-	AjaxResponse response = AjaxResponseUtils.getFailureResponse();
-	
-	// 获取上上传文件的管理器类
-	UploadFileManager fileManager = getFiles(request);
-	
-	// 获取上传文件
-	UploadFile file = fileManager.getFile();
-	
-	// 判断是否为空，如果客户端没有上传文件，则返回错误消息
-	if (file == null) {
-		response.setField("headimg");
-		response.setMessage("请上传头像");
+	@RequestMapping("saveHeadimg")
+	@ResponseBody
+	public AjaxResponse saveHeadimg(HttpServletRequest request) {
+		logger.debug("用户头像上传");
+
+		AjaxResponse response = AjaxResponseUtils.getFailureResponse();
+
+		// 获取上上传文件的管理器类
+		UploadFileManager fileManager = getFiles(request);
+
+		// 获取上传文件
+		UploadFile file = fileManager.getFile();
+
+		// 判断是否为空，如果客户端没有上传文件，则返回错误消息
+		if (file == null) {
+			response.setField("headimg");
+			response.setMessage("请上传头像");
+			return response;
+		}
+
+		// 验证通过后对上传文件进行保存
+		fileManager.save();
+
+		// 将用户上传的头像路径保存到数据库中
+		Users user = this.userService.loadOne("wang");
+		Users update = new Users();
+		update.setId(user.getId());
+		update.setHeadimg(file.getCompleteName());
+		this.userService.updateSelective(update);
+
+		response = AjaxResponseUtils.getSuccessResponse();
+		// 返回客户端可以访问的文件路径+文件名
+		response.put("headimg", file.getCompleteName());
 		return response;
 	}
-	
-	// 验证通过后对上传文件进行保存
-	fileManager.save();
 
-	// 将用户上传的头像路径保存到数据库中
-	Users user = this.userService.loadOne("wang");
-	Users update = new Users();
-	update.setId(user.getId());
-	update.setHeadimg(file.getCompleteName());
-	this.userService.updateSelective(update);
-	
-	response = AjaxResponseUtils.getSuccessResponse();
-	// 返回客户端可以访问的文件路径+文件名
-	response.put("headimg", file.getCompleteName());
-	return response;
-}
+	@RequestMapping("saveDropifyImg")
+	@ResponseBody
+	public AjaxResponse saveDropifyImg(HttpServletRequest request) {
+		logger.debug("使用Dropify上传图片");
 
-@RequestMapping("saveDropifyImg")
-@ResponseBody
-public AjaxResponse saveDropifyImg(HttpServletRequest request) {
-	logger.debug("使用Dropify上传图片");
+		AjaxResponse response = AjaxResponseUtils.getFailureResponse();
 
-	AjaxResponse response = AjaxResponseUtils.getFailureResponse();
-	
-	// 获取上上传文件的管理器类
-	UploadFileManager fileManager = getFiles(request);
-	
-	// 获取上传文件
-	UploadFile file = fileManager.getFile();
-	
-	// 判断是否为空，如果客户端没有上传文件，则返回错误消息
-	if (file == null) {
-		response.setMessage("请选择图片");
+		// 获取上上传文件的管理器类
+		UploadFileManager fileManager = getFiles(request);
+
+		// 获取上传文件
+		UploadFile file = fileManager.getFile();
+
+		// 判断是否为空，如果客户端没有上传文件，则返回错误消息
+		if (file == null) {
+			response.setMessage("请选择图片");
+			return response;
+		}
+
+		// 验证通过后对上传文件进行保存
+		fileManager.save();
+
+		response = AjaxResponseUtils.getSuccessResponse();
+		// 返回客户端可以访问的文件路径+文件名
+		response.put("imgUrl", file.getCompleteName());
 		return response;
 	}
-	
-	// 验证通过后对上传文件进行保存
-	fileManager.save();
 
-	response = AjaxResponseUtils.getSuccessResponse();
-	// 返回客户端可以访问的文件路径+文件名
-	response.put("imgUrl", file.getCompleteName());
-	return response;
-}
+	@RequestMapping("saveFile")
+	@ResponseBody
+	public AjaxResponse saveFile(HttpServletRequest request) {
+		logger.debug("使用Bootstrap FileInput上传文件");
 
-@RequestMapping("saveFile")
-@ResponseBody
-public AjaxResponse saveFile(HttpServletRequest request) {
-	logger.debug("使用Bootstrap FileInput上传文件");
-	
-//	try {
-//		Thread.sleep(10000);
-//	} catch (InterruptedException e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
-//	}
-	
-	AjaxResponse response = AjaxResponseUtils.getFailureResponse();
-	
-	// 获取上上传文件的管理器类
-	UploadFileManager fileManager = getFiles(request);
-	
-	// 获取上传文件
-	UploadFile file = fileManager.getFile();
-	
-	// 判断是否为空，如果客户端没有上传文件，则返回错误消息
-	if (file == null) {
-//		throw new Exception("jsp后缀的文件不安全，禁止上传");
-		response.setMessage("请选择文件");
+		// try {
+		// Thread.sleep(10000);
+		// } catch (InterruptedException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+
+		AjaxResponse response = AjaxResponseUtils.getFailureResponse();
+
+		// 获取上上传文件的管理器类
+		UploadFileManager fileManager = getFiles(request);
+
+		// 获取上传文件
+		UploadFile file = fileManager.getFile();
+
+		// 判断是否为空，如果客户端没有上传文件，则返回错误消息
+		if (file == null) {
+			// throw new Exception("jsp后缀的文件不安全，禁止上传");
+			response.setMessage("请选择文件");
+			return response;
+		}
+
+		// 验证通过后对上传文件进行保存
+		fileManager.save();
+
+		response = AjaxResponseUtils.getSuccessResponse();
+		// 返回客户端可以访问的文件路径+文件名
+		response.put("fileUrl", file.getCompleteName());
 		return response;
 	}
-	
-	// 验证通过后对上传文件进行保存
-	fileManager.save();
-	
-	response = AjaxResponseUtils.getSuccessResponse();
-	// 返回客户端可以访问的文件路径+文件名
-	response.put("fileUrl", file.getCompleteName());
-	return response;
-}
+
+	@RequestMapping("deleteFile")
+	@ResponseBody
+	public AjaxResponse deleteFile() {
+		logger.debug("使用Bootstrap FileInput删除文件");
+
+		AjaxResponse response = AjaxResponseUtils.getFailureResponse();
+
+		// 获取要删除的文件名
+		String fileName = getPara("fileName");
+		String saveDirectory = PathKit.getWebRootPath() + File.separator + Constants.DEFAULT_UPLOAD + File.separator;
+		FileUtils.deleteFile(saveDirectory + fileName);
+
+		response = AjaxResponseUtils.getSuccessResponse();
+		return response;
+	}
 }

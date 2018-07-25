@@ -56,6 +56,15 @@
 <!-- Dropify——基于H5的图片拖拽和预览插件 -->
 <script src="https://cdn.bootcss.com/Dropify/0.2.2/js/dropify.js"></script>
 
+
+
+<!-- 当你希望在上传之前调整图像大小时可以引入piexif.js -->
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.8/js/plugins/piexif.js"></script>
+<!-- 当你希望对预览区域的文件进行排序时可以引入sortable.js -->
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.8/js/plugins/sortable.js"></script>
+<!-- 当你希望在预览HTML文件时对其进行净化可以引入purify.js -->
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.8/js/plugins/purify.js"></script>
+
 <!-- Bootstrap FileInput——增强版的HTML5文件输入框 -->
 <script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.8/js/fileinput.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.8/js/locales/zh.js"></script>
