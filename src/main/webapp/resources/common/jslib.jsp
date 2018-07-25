@@ -57,7 +57,6 @@
 <script src="https://cdn.bootcss.com/Dropify/0.2.2/js/dropify.js"></script>
 
 
-
 <!-- 当你希望在上传之前调整图像大小时可以引入piexif.js -->
 <script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.8/js/plugins/piexif.js"></script>
 <!-- 当你希望对预览区域的文件进行排序时可以引入sortable.js -->
