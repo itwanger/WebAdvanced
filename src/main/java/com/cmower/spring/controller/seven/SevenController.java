@@ -33,6 +33,7 @@ import com.cmower.database.entity.UploadFile;
 import com.cmower.database.entity.Users;
 import com.cmower.spring.controller.BaseController;
 import com.cmower.spring.service.ProcityService;
+import com.cmower.spring.service.UploadFileService;
 import com.cmower.spring.service.UserService;
 import com.google.code.kaptcha.Producer;
 
@@ -43,6 +44,8 @@ public class SevenController extends BaseController {
 	private UserService userService;
 	@Autowired
 	private ProcityService procityService;
+	@Autowired
+	private UploadFileService uploadFileService;
 	@Autowired
 	private Producer captchaProducer;
 
@@ -398,34 +401,39 @@ public class SevenController extends BaseController {
 		response.put("fileUrl", file.getCompleteName());
 		return response;
 	}
-	@RequestMapping("saveThumbFile")
-	@ResponseBody
-	public AjaxResponse saveThumbFile(HttpServletRequest request) {
-		logger.debug("使用Bootstrap FileInput上传Thumb文件");
-		
-		AjaxResponse response = AjaxResponseUtils.getFailureResponse();
-		
-		// 获取上上传文件的管理器类
-		UploadFileManager fileManager = getFiles(request);
-		
-		// 获取上传文件
-		UploadFile file = fileManager.getFile();
-		
-		// 判断是否为空，如果客户端没有上传文件，则返回错误消息
-		if (file == null) {
-			// throw new Exception("jsp后缀的文件不安全，禁止上传");
-			response.setMessage("请选择文件");
-			return response;
-		}
-		
-		// 验证通过后对上传文件进行保存
-		fileManager.save();
-		
-		response = AjaxResponseUtils.getSuccessResponse();
-		// 返回客户端可以访问的文件路径+文件名
-		response.put("fileThumbUrl", file.getCompleteName());
-		return response;
+
+@SuppressWarnings({ "rawtypes", "unchecked" })
+@RequestMapping("saveAjaxFile")
+@ResponseBody
+public Object saveAjaxFile(HttpServletRequest request) {
+	logger.debug("使用Bootstrap FileInput内置Ajax上传文件");
+
+	String previewId = request.getParameter("previewId");
+	logger.debug("预览ID{}", previewId);
+
+	// 获取上上传文件的管理器类
+	UploadFileManager fileManager = getFiles(request);
+
+	// 获取上传文件
+	UploadFile file = fileManager.getFile();
+
+	// 判断是否为空，如果客户端没有上传文件，则返回错误消息
+	if (file == null) {
+		HashMap result = new HashMap();
+		result.put("error", "请选择正确的文件类型");
+		return result;
 	}
+
+	// 验证通过后对上传文件进行保存
+	fileManager.save();
+	
+	HashMap result = new HashMap();
+	String [] initialPreview = new String[1];
+	initialPreview[0] = file.getCompleteName();
+	result.put("initialPreview", initialPreview);
+	result.put("append", true);
+	return result;
+}
 
 	@RequestMapping("deleteFile")
 	@ResponseBody

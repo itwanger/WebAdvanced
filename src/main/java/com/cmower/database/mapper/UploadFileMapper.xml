@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cmower.database.mapper.UploadFileMapper">
+	<!-- CONFIG -->
+	<resultMap id="BaseResultMap" type="UploadFile">
+		<id column="id" property="id" />
+		<result column="uploadPath" property="uploadPath" />
+		<result column="originalFileName" property="originalFileName" />
+		<result column="fileSize" property="fileSize" />
+		<result column="fileName" property="fileName" />
+		<result column="completeName" property="completeName" />
+		<result column="parameterName" property="parameterName" />
+		<result column="tableName" property="tableName" />
+		<result column="related_id" property="related_id" />
+		<result column="create_date" property="create_date" />
+		<result column="update_date" property="update_date" />
+		<result column="del_flag" property="del_flag" />
+	</resultMap>
+	
+	<!--列 -->
+	<sql id="Base_Column_List">
+		f.*
+	</sql>
+	
+	<sql id="queryJoins">
+	</sql>
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		insert into upload_file (uploadPath,fileName,originalFileName,fileSize,parameterName,completeName,tableName,related_id,create_date,update_date)
+		values(#{uploadPath},#{fileName},#{originalFileName},#{fileSize},#{parameterName},#{completeName},#{tableName},#{related_id},#{create_date},#{update_date})
+	</insert>
+	
+	<select id="selectList" resultMap="BaseResultMap">
+		select 
+			<include refid="Base_Column_List" />
+		from upload_file as f where f.del_flag = 0
+			<if test="tableName != null and tableName != ''">and f.tableName = #{tableName}</if>
+			<if test="related_id != null and related_id != ''">and f.related_id = #{related_id}</if>
+			<if test="parameterName != null and parameterName != ''">and f.parameterName like CONCAT('%','${parameterName}','%')</if>
+		<include refid="queryJoins"/>
+		ORDER BY
+			f.update_date DESC
+		<if test="limitNum != null">limit #{limitNum}</if>
+	</select>
+	
+	<select id="loadOne" resultMap="BaseResultMap">
+		select 
+			<include refid="Base_Column_List" />
+		from upload_file as f
+			<include refid="queryJoins"/>
+		where f.del_flag = 0
+		<if test="tableName != null and tableName != ''">and f.tableName = #{tableName}</if>
+		<if test="related_id != null and related_id != ''">and f.related_id = #{related_id}</if>
+		<if test="parameterName != null and parameterName != ''">and f.parameterName = #{parameterName}</if>
+		order by f.update_date desc
+		limit 1
+	</select>
+	
+	<update id="delete" parameterType="UploadFile">
+		update upload_file
+		<set>
+			<if test="del_flag != null">
+				del_flag = #{del_flag},
+			</if>
+		</set>
+		where tableName = #{tableName} and related_id = #{related_id} and parameterName = #{parameterName}
+	</update>
+	
+</mapper>

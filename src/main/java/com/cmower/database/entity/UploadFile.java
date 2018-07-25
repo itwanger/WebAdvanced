@@ -61,6 +61,24 @@ public class UploadFile extends DataEntity<UploadFile> {
 	 * void transferTo(File dest); // 将文件内容传输到指定文件中
 	 */
 	private MultipartFile multipartFile;
+	private String tableName;
+	private String related_id;
+
+	public String getTableName() {
+		return tableName;
+	}
+
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
+	}
+
+	public String getRelated_id() {
+		return related_id;
+	}
+
+	public void setRelated_id(String related_id) {
+		this.related_id = related_id;
+	}
 
 	public UploadFile() {
 		super();
