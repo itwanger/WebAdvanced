@@ -221,8 +221,10 @@ function initOnce() {
 				datasets : [ {
 					label : '得票数',
 					data : [ 12, 19, 3, 5, 2, 3 ],
-					backgroundColor : [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
-					borderColor : [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
+					backgroundColor : [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)',
+							'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
+					borderColor : [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+							'rgba(255, 159, 64, 1)' ],
 					borderWidth : 1,
 				} ]
 			},
@@ -440,7 +442,8 @@ function initOnce() {
 				labels : [ '几乎不可能', '看别人脸色', '天佑梅西' ],
 				datasets : [ {
 					label : '投票人数：',
-					backgroundColor : [ color(QINGE.chartjsColors.red).alpha(0.8).rgbString(), color(QINGE.chartjsColors.orange).alpha(0.8).rgbString(), color(QINGE.chartjsColors.green).alpha(0.8).rgbString() ],
+					backgroundColor : [ color(QINGE.chartjsColors.red).alpha(0.8).rgbString(), color(QINGE.chartjsColors.orange).alpha(0.8).rgbString(),
+							color(QINGE.chartjsColors.green).alpha(0.8).rgbString() ],
 					data : [ 20, 50, 30 ],
 				} ]
 			},
@@ -576,7 +579,8 @@ function initOnce() {
 		var labelingAxesChart = new Chart(labelingAxesChartCtx, {
 			type : 'bar',
 			data : {
-				labels : [ newDateString(0), newDateString(1), newDateString(2), newDateString(3), newDateString(4), newDateString(5), newDateString(6), newDateString(7) ],
+				labels : [ newDateString(0), newDateString(1), newDateString(2), newDateString(3), newDateString(4), newDateString(5), newDateString(6),
+						newDateString(7) ],
 				datasets : [ {
 					label : '投票人数：',
 					backgroundColor : QINGE.chartjsColors.red,
@@ -753,16 +757,17 @@ function initOnce() {
 			return repo.text;
 		}
 
-		var markup = "<div class='select2-result-repository clearfix'>" + "<div class='select2-result-repository__avatar'><img src='" + repo.owner.avatar_url + "' /></div>" + "<div class='select2-result-repository__meta'>"
-				+ "<div class='select2-result-repository__title'>" + repo.full_name + "</div>";
+		var markup = "<div class='select2-result-repository clearfix'>" + "<div class='select2-result-repository__avatar'><img src='" + repo.owner.avatar_url
+				+ "' /></div>" + "<div class='select2-result-repository__meta'>" + "<div class='select2-result-repository__title'>" + repo.full_name + "</div>";
 
 		if (repo.description) {
 			markup += "<div class='select2-result-repository__description'>" + repo.description + "</div>";
 		}
 
-		markup += "<div class='select2-result-repository__statistics'>" + "<div class='select2-result-repository__forks'><i class='fa fa-flash'></i> " + repo.forks_count + " Forks</div>"
-				+ "<div class='select2-result-repository__stargazers'><i class='fa fa-star'></i> " + repo.stargazers_count + " Stars</div>" + "<div class='select2-result-repository__watchers'><i class='fa fa-eye'></i> " + repo.watchers_count
-				+ " Watchers</div>" + "</div>" + "</div></div>";
+		markup += "<div class='select2-result-repository__statistics'>" + "<div class='select2-result-repository__forks'><i class='fa fa-flash'></i> "
+				+ repo.forks_count + " Forks</div>" + "<div class='select2-result-repository__stargazers'><i class='fa fa-star'></i> " + repo.stargazers_count
+				+ " Stars</div>" + "<div class='select2-result-repository__watchers'><i class='fa fa-eye'></i> " + repo.watchers_count + " Watchers</div>"
+				+ "</div>" + "</div></div>";
 
 		return markup;
 	}
@@ -1198,67 +1203,113 @@ function initOnce() {
 		});
 	});
 
-	$('#input-b1').fileinput({
-		language : 'zh',
-		uploadUrl : '/WebAdvanced/seven/saveFile',
-	// showUpload : false,
-	// showClose : false,
-	// showUploadedThumbs : false,
-	// showBrowse : false,
-	// browseOnZoneClick : true,
-	// minFileSize : 1000,
-	// maxFileSize : 1000,
-	// allowedFileTypes : ['image', 'html', 'text', 'video', 'audio',
-	// 'flash'],
-	// allowedFileExtensions : [ 'jpg', 'gif', 'png', 'txt' ],
+	$('#bfForm').submit(function(e) {
+		e.preventDefault();
+		var $form = $(this), data = new FormData($form[0]);
 
+		$.ajax({
+			data : data,
+			type : "POST",
+			url : $form.attr("action"),
+			contentType : false,
+			processData : false,
+			success : function(json) {
+				if (json.statusCode == 200) {
+					$.msg(json.mo.imgUrl);
+				} else {
+					$.error(json.message);
+				}
+			},
+		});
 	});
 
-	var previews1 = [ "<img src='/WebAdvanced/resources/images/Light A Fire.jpg' class='kv-preview-data file-preview-image' alt='Light A Fire' title='Light A Fire'>",
+$('#input-b1').fileinput({
+	language : 'zh',
+	uploadUrl : '/WebAdvanced/seven/saveFile',
+	// dropZoneEnabled:false,
+	resizeImage : true,
+	maxImageWidth : 200,
+	maxImageHeight : 200,
+	resizePreference : 'width',
+// showUpload : false,
+// showClose : false,
+// showUploadedThumbs : false,
+// showBrowse : false,
+// browseOnZoneClick : true,
+// minFileSize : 1000,
+// maxFileSize : 1000,
+// allowedFileTypes : ['image', 'html', 'text', 'video', 'audio',
+// 'flash'],
+// allowedFileExtensions : [ 'jpg', 'gif', 'png', 'txt' ],
+
+});
+
+	$("#avatar-1").fileinput({
+		overwriteInitial : true,
+		maxFileSize : 1500,
+		showClose : false,
+		showCaption : false,
+		showUpload : false,
+		browseLabel : '',
+		removeLabel : '',
+		browseIcon : '<i class="glyphicon glyphicon-folder-open"></i>',
+		removeIcon : '<i class="glyphicon glyphicon-remove"></i>',
+		removeTitle : '取消或重新选择',
+		defaultPreviewContent : '<img src="/WebAdvanced/resources/images/cmower160x160.jpg" alt="沉默王二">',
+		allowedFileExtensions : [ "jpg", "png", "gif" ]
+	});
+
+	var previews1 = [
+			"<img src='/WebAdvanced/resources/images/Light A Fire.jpg' class='kv-preview-data file-preview-image' alt='Light A Fire' title='Light A Fire'>",
 			"<img src='/WebAdvanced/resources/images/Wisdom.jpg'  class='kv-preview-data file-preview-image' alt=Wisdom' title='Wisdom'>",
 			"<div class='kv-preview-data file-preview-other'>" + "<h3><i class='glyphicon glyphicon-file'></i></h3>" + "致读者的一封信.docx" + "</div>" ];
-	var previews2 = [ "<img src='/WebAdvanced/resources/images/Light A Fire.jpg' class='kv-preview-data file-preview-image' alt='Light A Fire' title='Light A Fire'>",
+	var previews2 = [
+			"<img src='/WebAdvanced/resources/images/Light A Fire.jpg' class='kv-preview-data file-preview-image' alt='Light A Fire' title='Light A Fire'>",
 			"<img src='/WebAdvanced/resources/images/Wisdom.jpg'  class='kv-preview-data file-preview-image' alt=Wisdom' title='Wisdom'>", ];
-var previews3 = [ "/WebAdvanced/resources/images/Light A Fire.jpg", "<img src='/WebAdvanced/resources/images/Wisdom.jpg'  class='kv-preview-data file-preview-image' alt=Wisdom' title='Wisdom'>", "/WebAdvanced/resources/other/快乐每一天.mp3",
-		"/WebAdvanced/resources/other/致读者的一封信.pdf", ];
+	var previews3 = [ "/WebAdvanced/resources/images/Light A Fire.jpg",
+			"<img src='/WebAdvanced/resources/images/Wisdom.jpg'  class='kv-preview-data file-preview-image' alt=Wisdom' title='Wisdom'>",
+			"/WebAdvanced/resources/other/快乐每一天.mp3", "/WebAdvanced/resources/other/致读者的一封信.pdf", ];
 
-$('#input-ajax-multiple').fileinput({
-	language : 'zh',
-//	uploadUrl : '/WebAdvanced/seven/saveAjaxFile',
-//	uploadAsync : true,
-//	uploadExtraData : function(previewId, index) {
-//		var obj = {
-//			"previewId" : previewId
-//		};
-//		return obj;
-//	},
-	uploadUrl : '/WebAdvanced/seven/saveSyncAjaxFile',
-	uploadAsync : false,
-	uploadExtraData : {cmower:"沉默王二"},
-	initialPreviewAsData : true,
-	// minFileCount : 2,
-	maxFileCount : 2,
-	overwriteInitial : false,
-//	initialPreviewShowDelete:false,
-	initialPreview : previews3,
-	initialPreviewConfig : [ {
-		caption : 'Light A Fire.jpg',
-		key : "Light A Fire",
-	}, {
-		previewAsData : false,
-		caption : 'Wisdom.jpg',
-		key : 'Wisdom',
-	}, {
-		type : "audio",
-		filetype : "audio/mp3",
-		caption : '快乐每一天.mp3',
-		key : 'happy every day',
-	}, {
-		type : "pdf",
-		caption : '致读者的一封信.pdf',
-		key : 'A letter to the reader',
-	}, ],
-});
+	$('#input-ajax-multiple').fileinput({
+		language : 'zh',
+		// uploadUrl : '/WebAdvanced/seven/saveAjaxFile',
+		// uploadAsync : true,
+		// uploadExtraData : function(previewId, index) {
+		// var obj = {
+		// "previewId" : previewId
+		// };
+		// return obj;
+		// },
+		uploadUrl : '/WebAdvanced/seven/saveSyncAjaxFile',
+		uploadAsync : false,
+		uploadExtraData : {
+			cmower : "沉默王二"
+		},
+		initialPreviewAsData : true,
+		// minFileCount : 2,
+		maxFileCount : 2,
+		overwriteInitial : false,
+		// initialPreviewShowDelete:false,
+		// reversePreviewOrder: true,
+		initialPreview : previews3,
+		initialPreviewConfig : [ {
+			caption : 'Light A Fire.jpg',
+			key : "Light A Fire",
+		}, {
+			previewAsData : false,
+			caption : 'Wisdom.jpg',
+			key : 'Wisdom',
+		}, {
+			type : "audio",
+			filetype : "audio/mp3",
+			caption : '快乐每一天.mp3',
+			key : 'happy every day',
+		}, {
+			type : "pdf",
+			caption : '致读者的一封信.pdf',
+			key : 'A letter to the reader',
+		}, ],
+	});
 
 	$('#input-pd').fileinput({
 		language : 'zh',

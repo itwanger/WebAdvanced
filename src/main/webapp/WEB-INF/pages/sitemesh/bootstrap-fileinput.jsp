@@ -24,10 +24,9 @@
 					<div class="box-body">
 						<form id="bfForm" action="${ctx}/seven/saveFile" enctype="multipart/form-data" method="post" role="form">
 							<div class="form-group">
-								<input class="file" name="input-b2" type="file" 
-									data-language="zh"  >
-<!-- 									data-required="true" data-msg-file-required="请至少选择一个文件" -->
-<!-- 									data-min-file-size="1000" -->
+								<input class="file" name="input-b2" type="file" data-language="zh" data-show-upload="false">
+								<!-- 									data-required="true" data-msg-file-required="请至少选择一个文件" -->
+								<!-- 									data-min-file-size="1000" -->
 							</div>
 							<div class="box-footer text-center">
 								<button type="submit" class="btn btn-lg btn-success">
@@ -115,21 +114,21 @@
 						<h3 class="box-title">RTL</h3>
 					</div>
 					<div class="box-body">
-<input id="input-b8" name="input-b8[]" multiple type="file" class="file" 
-	data-language="zh" 
-	data-rtl="true"
-	data-drop-zone-enabled="false">
+						<input id="input-b8" name="input-b8[]" multiple type="file" class="file" data-language="zh" data-rtl="true"
+							data-drop-zone-enabled="false">
 					</div>
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<h3 class="box-title">预览初始化</h3>
+						<h3 class="box-title">预览内容的占位符</h3>
 					</div>
 					<div class="box-body">
-						<div class="form-group">
-							<input id="input-pd" name="input-pd[]" type="file" multiple>
+						<div class="kv-avatar text-center">
+							<div class="file-loading">
+								<input id="avatar-1" name="avatar-1" type="file" required>
+							</div>
 						</div>
 					</div>
 				</div>
