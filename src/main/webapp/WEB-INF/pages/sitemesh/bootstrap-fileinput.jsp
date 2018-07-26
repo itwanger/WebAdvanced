@@ -134,6 +134,72 @@
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">文件被拖放（或通过浏览按钮选择文件）后自动上传至服务器端</h3>
+					</div>
+					<div class="box-body">
+						<input id="bf7841" name="bf7841[]" type="file" multiple>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">删除文件前提醒用户进行确认</h3>
+					</div>
+					<div class="box-body">
+						<div class="kv-avatar text-center">
+							<div class="file-loading">
+								<input id="bf7842" name="bf7842[]" type="file" multiple>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">基于Form表单上传文件前使用BootstrapValidator进行校验</h3>
+					</div>
+					<div class="box-body">
+						<form id="bf7843Form" action="${ctx}/seven/saveFile" enctype="multipart/form-data" method="post" role="form">
+							<div class="form-group">
+								<label >用户名</label>
+								<input type="text" class="form-control" name="username" placeholder="输入用户名">
+							</div>
+							<div class="form-group">
+								<label>头像</label>
+								<input id="bf7843" name="headimg" type="file">
+							</div>
+							<div class="box-footer text-center">
+								<button type="submit" class="btn btn-lg btn-success">
+									<i class="fa fa-upload"></i> 上传
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">删除文件前提醒用户进行确认</h3>
+					</div>
+					<div class="box-body">
+						<div class="kv-avatar text-center">
+							<div class="file-loading">
+								<input id="bf7844" name="bf7844[]" type="file" multiple>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</section>
 	<!-- /.content -->
 </body>

@@ -377,6 +377,9 @@ public class SevenController extends BaseController {
 	@ResponseBody
 	public AjaxResponse saveFile(HttpServletRequest request) {
 		logger.debug("使用Bootstrap FileInput上传文件");
+		
+		String username = request.getParameter("username");
+		logger.debug("username{}", username);
 
 		AjaxResponse response = AjaxResponseUtils.getFailureResponse();
 
@@ -388,7 +391,7 @@ public class SevenController extends BaseController {
 
 		// 判断是否为空，如果客户端没有上传文件，则返回错误消息
 		if (file == null) {
-			// throw new Exception("jsp后缀的文件不安全，禁止上传");
+			response.setField("headimg");
 			response.setMessage("请选择文件");
 			return response;
 		}
@@ -402,91 +405,93 @@ public class SevenController extends BaseController {
 		return response;
 	}
 
-@SuppressWarnings({ "rawtypes", "unchecked" })
-@RequestMapping("saveAjaxFile")
-@ResponseBody
-public Object saveAjaxFile(HttpServletRequest request) {
-	logger.debug("使用Bootstrap FileInput内置Ajax上传文件");
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("saveAjaxFile")
+	@ResponseBody
+	public Object saveAjaxFile(HttpServletRequest request) {
+		logger.debug("使用Bootstrap FileInput内置Ajax上传文件");
 
-	String previewId = request.getParameter("previewId");
-	logger.debug("预览ID{}", previewId);
+		String previewId = request.getParameter("previewId");
+		logger.debug("预览ID{}", previewId);
 
-	// 获取上上传文件的管理器类
-	UploadFileManager fileManager = getFiles(request);
+		// 获取上上传文件的管理器类
+		UploadFileManager fileManager = getFiles(request);
 
-	// 获取上传文件
-	UploadFile file = fileManager.getFile();
+		// 获取上传文件
+		UploadFile file = fileManager.getFile();
 
-	// 判断是否为空，如果客户端没有上传文件，则返回错误消息
-	if (file == null) {
-		HashMap result = new HashMap();
-		result.put("error", "请选择正确的文件类型");
-		return result;
-	}
-
-	// 验证通过后对上传文件进行保存
-	fileManager.save();
-	
-	HashMap result = new HashMap();
-	String [] initialPreview = new String[1];
-	initialPreview[0] = file.getCompleteName();
-	result.put("initialPreview", initialPreview);
-	result.put("append", true);
-	return result;
-}
-@SuppressWarnings({ "rawtypes", "unchecked" })
-@RequestMapping("saveSyncAjaxFile")
-@ResponseBody
-public Object saveSyncAjaxFile(HttpServletRequest request) {
-	logger.debug("使用Bootstrap FileInput内置Ajax上传文件");
-	
-	String cmower = request.getParameter("cmower");
-	logger.debug("额外参数{}", cmower);
-	
-	// 获取上上传文件的管理器类
-	UploadFileManager fileManager = getFiles(request);
-	
-	// 获取上传文件
-	List<UploadFile> list = fileManager.getFiles();
-	
-	// 判断是否为空，如果客户端没有上传文件，则返回错误消息
-	if (list == null || list.size() < 1) {
-		HashMap result = new HashMap();
-		result.put("error", "请选择上传文件");
-		return result;
-	}
-	
-	HashMap result = new HashMap();
-	
-	int [] errorkeys = new int[list.size()];
-	String [] initialPreviews = new String[list.size()];
-	ArrayList<HashMap> initialPreviewConfigs = new ArrayList<>();
-	for (int i = 0; i < list.size(); i++) {
-		HashMap initialPreviewConfig = new HashMap();
-		UploadFile uploadFile = list.get(i);
-		initialPreviewConfig.put("caption", uploadFile.getOriginalFileName());
-		initialPreviewConfig.put("key", i + 1);
-		initialPreviewConfigs.add(initialPreviewConfig);
-		
-		if (uploadFile.getFileSize() > 1 * 1024 * 1024) {
-			errorkeys[i] = i + 1;
+		// 判断是否为空，如果客户端没有上传文件，则返回错误消息
+		if (file == null) {
+			HashMap result = new HashMap();
+			result.put("error", "请选择正确的文件类型");
+			return result;
 		}
-		initialPreviews[i] = uploadFile.getCompleteName();
-		
+
+		// 验证通过后对上传文件进行保存
+		fileManager.save();
+
+		HashMap result = new HashMap();
+		String[] initialPreview = new String[1];
+		initialPreview[0] = file.getCompleteName();
+		result.put("initialPreview", initialPreview);
+		result.put("append", true);
+		return result;
 	}
-	
-	if (errorkeys[0] > 0) {
-		result.put("error", "文件大小超过1M");
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping("saveSyncAjaxFile")
+	@ResponseBody
+	public Object saveSyncAjaxFile(HttpServletRequest request) {
+		logger.debug("使用Bootstrap FileInput内置Ajax上传文件");
+
+		String cmower = request.getParameter("cmower");
+		logger.debug("额外参数{}", cmower);
+
+		// 获取上上传文件的管理器类
+		UploadFileManager fileManager = getFiles(request);
+
+		// 获取上传文件
+		List<UploadFile> list = fileManager.getFiles();
+
+		// 判断是否为空，如果客户端没有上传文件，则返回错误消息
+		if (list == null || list.size() < 1) {
+			HashMap result = new HashMap();
+			result.put("error", "请选择上传文件");
+			return result;
+		}
+
+		HashMap result = new HashMap();
+
+		int[] errorkeys = new int[list.size()];
+		String[] initialPreviews = new String[list.size()];
+		ArrayList<HashMap> initialPreviewConfigs = new ArrayList<>();
+		for (int i = 0; i < list.size(); i++) {
+			HashMap initialPreviewConfig = new HashMap();
+			UploadFile uploadFile = list.get(i);
+			initialPreviewConfig.put("caption", uploadFile.getOriginalFileName());
+			initialPreviewConfig.put("key", i + 1);
+			initialPreviewConfig.put("url", Variables.ctx + "/seven/deleteFile");
+			initialPreviewConfigs.add(initialPreviewConfig);
+
+			if (uploadFile.getFileSize() > 1 * 1024 * 1024) {
+				errorkeys[i] = i + 1;
+			}
+			initialPreviews[i] = uploadFile.getCompleteName();
+
+		}
+
+		if (errorkeys[0] > 0) {
+			result.put("error", "文件大小超过1M");
+		}
+
+		// 验证通过后对上传文件进行保存
+		fileManager.save();
+
+		result.put("initialPreview", initialPreviews);
+		result.put("initialPreviewConfig", initialPreviewConfigs);
+		result.put("append", true);
+		return result;
 	}
-	
-	// 验证通过后对上传文件进行保存
-	fileManager.save();
-	
-	result.put("initialPreview", initialPreviews);
-	result.put("initialPreviewConfig", initialPreviewConfigs);
-	result.put("append", true);
-	return result;
-}
 
 	@RequestMapping("deleteFile")
 	@ResponseBody

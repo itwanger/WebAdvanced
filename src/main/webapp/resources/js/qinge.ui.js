@@ -1223,26 +1223,26 @@ function initOnce() {
 		});
 	});
 
-$('#input-b1').fileinput({
-	language : 'zh',
-	uploadUrl : '/WebAdvanced/seven/saveFile',
-	// dropZoneEnabled:false,
-	resizeImage : true,
-	maxImageWidth : 200,
-	maxImageHeight : 200,
-	resizePreference : 'width',
-// showUpload : false,
-// showClose : false,
-// showUploadedThumbs : false,
-// showBrowse : false,
-// browseOnZoneClick : true,
-// minFileSize : 1000,
-// maxFileSize : 1000,
-// allowedFileTypes : ['image', 'html', 'text', 'video', 'audio',
-// 'flash'],
-// allowedFileExtensions : [ 'jpg', 'gif', 'png', 'txt' ],
+	$('#input-b1').fileinput({
+		language : 'zh',
+		uploadUrl : '/WebAdvanced/seven/saveFile',
+		// dropZoneEnabled:false,
+		resizeImage : true,
+		maxImageWidth : 200,
+		maxImageHeight : 200,
+		resizePreference : 'width',
+	// showUpload : false,
+	// showClose : false,
+	// showUploadedThumbs : false,
+	// showBrowse : false,
+	// browseOnZoneClick : true,
+	// minFileSize : 1000,
+	// maxFileSize : 1000,
+	// allowedFileTypes : ['image', 'html', 'text', 'video', 'audio',
+	// 'flash'],
+	// allowedFileExtensions : [ 'jpg', 'gif', 'png', 'txt' ],
 
-});
+	});
 
 	$("#avatar-1").fileinput({
 		overwriteInitial : true,
@@ -1309,6 +1309,16 @@ $('#input-b1').fileinput({
 			caption : '致读者的一封信.pdf',
 			key : 'A letter to the reader',
 		}, ],
+	}).on('change', function(event) {
+		console.log("change");
+	}).on('fileselect', function(event, numFiles, label) {
+		console.log("fileselect");
+	}).on('filebatchselected', function(event, files) {
+		console.log('File batch selected triggered');
+	}).on('fileclear', function(event) {
+		console.log("fileclear");
+	}).on('fileloaded', function(event, file, previewId, index, reader) {
+		console.log("fileloaded");
 	});
 
 	$('#input-pd').fileinput({
@@ -1346,6 +1356,107 @@ $('#input-b1').fileinput({
 			key : 'A letter to the reader',
 		}, ],
 	});
+
+	var $bf7841 = $("#bf7841");
+	$bf7841.fileinput({
+		language : 'zh',
+		uploadUrl : "/WebAdvanced/seven/saveSyncAjaxFile",
+		uploadAsync : false,// 同步上传
+		showUpload : false, // 不显示上传按钮
+		showRemove : false, // 不显示移除按钮
+		minFileCount : 1,
+		maxFileCount : 5,
+		initialPreviewAsData : true
+	}).on("filebatchselected", function(event, files) {
+		$bf7841.fileinput("upload");
+	});
+
+	var $bf7842 = $("#bf7842");
+	$bf7842.fileinput({
+		language : 'zh',
+		uploadUrl : "/WebAdvanced/seven/saveSyncAjaxFile",
+		uploadAsync : false,// 同步上传
+		showUpload : false, // 不显示上传按钮
+		showRemove : false, // 不显示移除按钮
+		minFileCount : 1,
+		maxFileCount : 5,
+		initialPreviewAsData : true
+	}).on("filebatchselected", function(event, files) {
+		$bf7842.fileinput("upload");
+	}).on("filebeforedelete", function(jqXHR) {
+		return new Promise(function(resolve, reject) {
+			$.confirm("你确定要删除当前文件吗？", function() {
+				resolve();
+			});
+		});
+	});
+	
+	$("#bf7843").fileinput({
+		language : 'zh',
+		minFileCount : 1,
+		showUpload : false, // 不显示上传按钮
+		showRemove : false, // 不显示移除按钮
+		initialPreviewAsData : true,
+		allowedFileTypes : ['image'],
+		allowedFileExtensions : [ 'jpg', 'png' ],
+	}).on("filebatchselected", function(event, files) {
+		var bv = $('#bf7843Form').data('bootstrapValidator')
+		bv.revalidateField('headimg');
+	});
+
+	$('#bf7843Form').bootstrapValidator({
+		fields : {
+			username : {
+				validators : {
+					notEmpty : {// 用户名不能为空
+						message : '请输入用户名'
+					},
+				}
+			},
+			headimg : {
+				validators : {
+					callback : {
+						message : ' 11', // 设置BootstrapValidator的验证信息为空白字符
+						callback : function(input) {
+							// 获取Bootstrap FileInput的错误信息
+							
+							return $.trim(error) === '';
+						}
+					}
+				}
+			},
+		}
+	}).on('success.form.bv', function(e) {
+		e.preventDefault();
+		
+		var $form = $(e.target), bv = $form.data('bootstrapValidator'), data = new FormData($form[0]), error = $form.find('.kv-fileinput-error').html();
+		
+		if($.trim(error) != '') {
+			return;
+		}
+		
+		$.ajax({
+			type : $form.attr("method") || 'POST',
+			url : $form.attr("action"),
+			data : data,
+			cache : false,
+			dataType : "json",
+			// 发送数据到服务器时所使用的内容类型。默认为true，类型为："application/x-www-form-urlencoded"。
+			contentType : false,
+			// 布尔值，规定通过请求发送的数据是否转换为查询字符串。默认是 true。
+			processData : false,
+			success : function(json) {
+				if (json.statusCode == 200) {
+					$.msg(json.mo.headimg);
+				} else {
+					bv.updateMessage(json.field, 'blank', json.message);
+					bv.updateStatus(json.field, 'INVALID', 'blank');
+				}
+			},
+		});
+	});
+	
+	
 }
 
 /**
