@@ -108,6 +108,33 @@
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">RTL</h3>
+					</div>
+					<div class="box-body">
+<input id="input-b8" name="input-b8[]" multiple type="file" class="file" 
+	data-language="zh" 
+	data-rtl="true"
+	data-drop-zone-enabled="false">
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">预览初始化</h3>
+					</div>
+					<div class="box-body">
+						<div class="form-group">
+							<input id="input-pd" name="input-pd[]" type="file" multiple>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</section>
 	<!-- /.content -->
 </body>

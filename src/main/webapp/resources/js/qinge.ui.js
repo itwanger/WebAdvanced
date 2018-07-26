@@ -1239,21 +1239,19 @@ $('#input-ajax-multiple').fileinput({
 	// minFileCount : 2,
 	maxFileCount : 2,
 	overwriteInitial : false,
+//	initialPreviewShowDelete:false,
 	initialPreview : previews3,
 	initialPreviewConfig : [ {
 		caption : 'Light A Fire.jpg',
-		url : '/WebAdvanced/seven/deleteFile',
 		key : "Light A Fire",
 	}, {
 		previewAsData : false,
 		caption : 'Wisdom.jpg',
-		url : '/WebAdvanced/seven/deleteFile',
 		key : 'Wisdom',
 	}, {
 		type : "audio",
 		filetype : "audio/mp3",
 		caption : '快乐每一天.mp3',
-		url : '/WebAdvanced/seven/deleteFile',
 		key : 'happy every day',
 	}, {
 		type : "pdf",
