@@ -174,7 +174,7 @@
 							</div>
 							<div class="form-group">
 								<label>头像</label>
-								<input id="bf7843" name="headimg" type="file">
+								<input id="bf7843" name="headimg" type="file" multiple accept="image/*">
 							</div>
 							<div class="box-footer text-center">
 								<button type="submit" class="btn btn-lg btn-success">

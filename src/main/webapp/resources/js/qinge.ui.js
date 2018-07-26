@@ -1391,70 +1391,67 @@ function initOnce() {
 		});
 	});
 	
-	$("#bf7843").fileinput({
-		language : 'zh',
-		minFileCount : 1,
-		showUpload : false, // 不显示上传按钮
-		showRemove : false, // 不显示移除按钮
-		initialPreviewAsData : true,
-		allowedFileTypes : ['image'],
-		allowedFileExtensions : [ 'jpg', 'png' ],
-	}).on("filebatchselected", function(event, files) {
-		var bv = $('#bf7843Form').data('bootstrapValidator')
-		bv.revalidateField('headimg');
-	});
+var $bf7843 = $("#bf7843"), $bf7843Form = $('#bf7843Form');
+$bf7843.fileinput({
+	language : 'zh',
+	required: true,
+	showUpload : false, // 不显示上传按钮
+	showRemove : false, // 不显示移除按钮
+	initialPreviewAsData : true,
+	allowedFileTypes : ['image'],
+	allowedFileExtensions : [ 'jpg', 'png' ],
+}).on("filebatchselected", function(event, files) {
+	var bv = $bf7843Form.data('bootstrapValidator');
+	bv.revalidateField('headimg');
+});
 
-	$('#bf7843Form').bootstrapValidator({
-		fields : {
-			username : {
-				validators : {
-					notEmpty : {// 用户名不能为空
-						message : '请输入用户名'
-					},
-				}
-			},
-			headimg : {
-				validators : {
-					callback : {
-						message : ' 11', // 设置BootstrapValidator的验证信息为空白字符
-						callback : function(input) {
-							// 获取Bootstrap FileInput的错误信息
-							
-							return $.trim(error) === '';
-						}
+$bf7843Form.bootstrapValidator({
+	fields : {
+		username : {
+			validators : {
+				notEmpty : {// 用户名不能为空
+					message : '请输入用户名'
+				},
+			}
+		},
+		headimg : {
+			validators : {
+				callback : {
+					message : ' ', // 设置BootstrapValidator的验证信息为空白字符
+					callback : function(input) {
+						// 获取Bootstrap FileInput的错误信息
+						var error = $bf7843Form.find('.kv-fileinput-error').html();
+						return $.trim(error) === '';
 					}
 				}
-			},
-		}
-	}).on('success.form.bv', function(e) {
-		e.preventDefault();
-		
-		var $form = $(e.target), bv = $form.data('bootstrapValidator'), data = new FormData($form[0]), error = $form.find('.kv-fileinput-error').html();
-		
-		if($.trim(error) != '') {
-			return;
-		}
-		
-		$.ajax({
-			type : $form.attr("method") || 'POST',
-			url : $form.attr("action"),
-			data : data,
-			cache : false,
-			dataType : "json",
-			// 发送数据到服务器时所使用的内容类型。默认为true，类型为："application/x-www-form-urlencoded"。
-			contentType : false,
-			// 布尔值，规定通过请求发送的数据是否转换为查询字符串。默认是 true。
-			processData : false,
-			success : function(json) {
-				if (json.statusCode == 200) {
-					$.msg(json.mo.headimg);
-				} else {
-					bv.updateMessage(json.field, 'blank', json.message);
-					bv.updateStatus(json.field, 'INVALID', 'blank');
-				}
-			},
-		});
+			}
+		},
+	}
+}).on('success.form.bv', function(e) {
+	e.preventDefault();
+	
+	var $form = $(e.target), bv = $form.data('bootstrapValidator'), data = new FormData($form[0]);
+	
+	$.ajax({
+		type : $form.attr("method") || 'POST',
+		url : $form.attr("action"),
+		data : data,
+		cache : false,
+		dataType : "json",
+		// 发送数据到服务器时所使用的内容类型。默认为true，类型为："application/x-www-form-urlencoded"。
+		contentType : false,
+		// 布尔值，规定通过请求发送的数据是否转换为查询字符串。默认是 true。
+		processData : false,
+		success : function(json) {
+			if (json.statusCode == 200) {
+				$.msg(json.mo.fileUrl);
+			} else {
+				bv.updateMessage(json.field, 'blank', json.message);
+				bv.updateStatus(json.field, 'INVALID', 'blank');
+			}
+		},
 	});
+});
 	
 	
 }
