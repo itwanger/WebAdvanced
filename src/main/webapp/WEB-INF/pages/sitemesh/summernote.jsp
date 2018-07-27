@@ -45,7 +45,16 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-6"></div>
+			<div class="col-md-6">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">监听事件</h3>
+					</div>
+					<div class="box-body">
+						<div id="summernote6"></div>
+					</div>
+				</div>
+			</div>
 			<div class="col-md-6">
 				<div class="box box-primary">
 					<div class="box-header with-border">
@@ -78,6 +87,27 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="row">
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title">Summernote的扩展应用实例</h3>
+				</div>
+				<div class="box-body">
+					<form id="bv795Form" action="${ctx}/seven/saveDetail" method="post" role="form">
+						<div class="form-group">
+							<textarea class="form-control"  name="detail">${detail}</textarea>
+						</div>
+						<div class="box-footer text-center">
+							<button type="submit" class="btn btn-lg btn-success">
+								<i class="fa fa-upload"></i> 提交
+							</button>
+						</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
 	</section>
 	<!-- /.content -->
 </body>

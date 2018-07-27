@@ -69,6 +69,11 @@
 <script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.8/js/locales/zh.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.8/themes/explorer-fa/theme.js"></script>
 
+<!-- 一款在线的支持语法高亮的代码编辑器 -->
+<script src="https://cdn.bootcss.com/codemirror/5.38.0/codemirror.js"></script>
+<script src="https://cdn.bootcss.com/codemirror/5.38.0/mode/xml/xml.js"></script>
+
+
 <!-- Summernote——超级简洁的富文本编辑器 -->
 <script src="https://cdn.bootcss.com/summernote/0.8.10/summernote.js"></script>
 <script src="https://cdn.bootcss.com/summernote/0.8.10/lang/summernote-zh-CN.js"></script>

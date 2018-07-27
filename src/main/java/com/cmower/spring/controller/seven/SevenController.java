@@ -377,7 +377,7 @@ public class SevenController extends BaseController {
 	@ResponseBody
 	public AjaxResponse saveFile(HttpServletRequest request) {
 		logger.debug("使用Bootstrap FileInput上传文件");
-		
+
 		String username = request.getParameter("username");
 		logger.debug("username{}", username);
 
@@ -508,4 +508,59 @@ public class SevenController extends BaseController {
 		response = AjaxResponseUtils.getSuccessResponse();
 		return response;
 	}
+
+	@RequestMapping("saveSummernoteImg")
+	@ResponseBody
+	public AjaxResponse saveSummernoteImg(HttpServletRequest request) {
+		logger.debug("上传summernote选择图像");
+
+		AjaxResponse response = AjaxResponseUtils.getFailureResponse();
+
+		// 获取上上传文件的管理器类
+		UploadFileManager fileManager = getFiles(request);
+
+		// 获取上传文件
+		UploadFile file = fileManager.getFile();
+
+		// 判断是否为空，如果客户端没有上传文件，则返回错误消息
+		if (file == null) {
+			response.setMessage("请选择文件");
+			return response;
+		}
+
+		// 验证通过后对上传文件进行保存
+		fileManager.save();
+
+		response = AjaxResponseUtils.getSuccessResponse();
+		// 返回客户端可以访问的文件路径+文件名
+		response.put("imgUrl", file.getCompleteName());
+		response.put("parameterName", file.getParameterName());
+		return response;
+	}
+
+@RequestMapping("saveDetail")
+@ResponseBody
+public AjaxResponse saveDetail() {
+	logger.debug("保存summernote数据");
+
+	AjaxResponse response = AjaxResponseUtils.getFailureResponse();
+
+	String detail = getPara("detail");
+
+	if (StringUtils.isEmpty(detail)) {
+		response.setMessage("请填写详情");
+		response.setField("detail");
+		return response;
+	}
+
+	Users user = this.userService.loadOne("wang");
+	Users update = new Users();
+	update.setId(user.getId());
+	update.setDetail(detail);
+	this.userService.updateSelective(update);
+
+	response = AjaxResponseUtils.getSuccessResponse();
+	response.setMessage("详情保存完毕");
+	return response;
+}
 }

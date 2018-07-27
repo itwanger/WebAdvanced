@@ -1503,13 +1503,13 @@ function initOnce() {
 				[ 'style', [ 'bold', 'italic', 'underline', 'clear' ] ], [ 'font', [ 'strikethrough', 'superscript', 'subscript' ] ],
 						[ 'fontsize', [ 'fontsize' ] ], [ 'color', [ 'color' ] ], [ 'para', [ 'ul', 'ol', 'paragraph' ] ], [ 'height', [ 'height' ] ] ],
 			});
-$('#summernote3').summernote({
-	lang : 'zh-CN',
-	airMode : true,
-	popover : {
-		air : [ [ 'color', [ 'color' ] ], [ 'font', [ 'bold', 'underline', 'clear' ] ] ]
-	}
-});
+	$('#summernote3').summernote({
+		lang : 'zh-CN',
+		airMode : true,
+		popover : {
+			air : [ [ 'color', [ 'color' ] ], [ 'font', [ 'bold', 'underline', 'clear' ] ] ]
+		}
+	});
 	$('#summernote4').summernote({
 		lang : 'zh-CN',
 		fontNames : [ '黑体', '宋体', '楷体', '微软雅黑', 'Merriweather' ],
@@ -1518,13 +1518,165 @@ $('#summernote3').summernote({
 	$('#summernote-height').summernote({
 		height : 150
 	});
-	
-	
+	$('#summernote6').summernote({
+		lang : 'zh-CN',
+		callbacks : {
+			onInit : function() {
+				console.log('Summernote初始化完毕。');
+			},
+			onEnter : function() {
+				console.log('回车键按下');
+			},
+			onFocus : function() {
+				console.log('编辑区域获得焦点');
+			},
+			onBlur : function() {
+				console.log('编辑区失去焦点');
+			},
+			onKeyup : function(e) {
+				console.log('键已释放:', e.keyCode);
+			},
+			onKeydown : function(e) {
+				console.log('键已按下:', e.keyCode);
+			},
+			onPaste : function(e) {
+				console.log('粘贴');
+			},
+			onImageUpload : function(files) {
+				var $files = $(files);
+
+				// 通过each方法遍历每一个file
+				$files.each(function(i) {
+					var file = this;
+					var data = new FormData();
+					data.append("summernote_img_" + i, file);
+
+					$.ajax({
+						data : data,
+						type : "POST",
+						url : '/WebAdvanced/seven/saveSummernoteImg',
+						contentType : false,
+						processData : false,
+						success : function(json) {
+							if (json.statusCode == 200) {
+								$('#summernote6').summernote('insertImage', json.mo.imgUrl, json.mo.parameterName);
+							} else {
+								$.error(json.message);
+							}
+						},
+					});
+				});
+				// 插入图像
+				$('#summernote6').summernote('insertNode', imgNode);
+			},
+			onChange : function(contents) {
+				// 内容发生变动
+				console.log('onChange:', contents);
+			}
+		}
+	});
 
 	var markupStr = '一个人在20岁时如果不是激进派，那他一辈子都不会有出息；<br>假如他到了30岁还是个激进派，那他也不会有什么出息。';
 	$('#summernote').summernote('code', markupStr);
-	
+
 	$('#summernote5').summernote('editor.insertText', '学，然后知不足');
+
+	// @param {String} text - 链接文本
+	// @param {String} url - 链接URL
+	// @param {Boolean} isNewWindow - 是否在新窗口打开链接
+	$('#summernote5').summernote('createLink', {
+		url : 'https://github.com/qinggee',
+		'text' : 'This is my House !!!',
+		isNewWindow : true
+	});
+
+	$('#summernote5').summernote('insertImage', '/WebAdvanced/resources/images/Light A Fire.jpg', function($image) {
+		$image.css('width', $image.width() / 2); // 宽度减半
+		$image.attr('data-filename', 'cmower');// 定义文件名为cmower
+	});
+
+	$.ajax({
+		url : 'https://api.github.com/emojis',
+		async : false
+	}).then(function(data) {
+		// Object.keys() 方法会返回一个由一个给定对象的自身可枚举属性组成的数组，数组中属性名的排列顺序和使用 for...in
+		// 循环遍历该对象时返回的顺序一致 。
+		window.emojis = Object.keys(data);
+		window.emojiUrls = data;
+	});
+
+var $bv795Form = $("#bv795Form"), $summernoteDetail = $bv795Form.find("[name=detail]");
+
+$summernoteDetail.summernote({
+	lang : 'zh-CN',
+	placeholder : '键入英文冒号:和任意字母开头，可提示Emoji表情',
+	hint : {
+		match : /:([\-+\w]+)$/,
+		search : function(keyword, callback) {
+			// $.grep使用指定的函数过滤数组中的元素，并返回过滤后的数组。
+			callback($.grep(emojis, function(item) {
+				return item.indexOf(keyword) === 0;
+			}));
+		},
+		template : function(item) {
+			var content = emojiUrls[item];
+			return '<img src="' + content + '" width="20" /> :' + item + ':';
+		},
+		content : function(item) {
+			var url = emojiUrls[item];
+			if (url) {
+				return $('<img />').attr('src', url).css('width', 20)[0];
+			}
+			return '';
+		}
+	},
+	callbacks : {
+		onInit : function() {
+			$bv795Form.bootstrapValidator({
+				fields : {
+					detail : {
+						// 切记，Summernote会将textarea设为不可见，要使用excluded=false设置该字段要进行验证
+						excluded : false,
+						validators : {
+							callback : {
+								message : '内容不允许为空',
+								callback : function(input) {
+									var flag = $summernoteDetail.summernote('isEmpty');
+									return !flag;
+								}
+							}
+						}
+					},
+				}
+			}).on('success.form.bv', function(e) {
+				e.preventDefault();
+
+				var $form = $(e.target), bv = $form.data('bootstrapValidator');
+
+				$.ajax({
+					type : $form.attr("method") || 'POST',
+					url : $form.attr("action"),
+					data : $form.serializeArray(),
+					cache : false,
+					dataType : "json",
+					success : function(json) {
+						if (json.statusCode == 200) {
+							$.msg(json.message);
+						} else {
+							bv.updateMessage(json.field, 'blank', json.message);
+							bv.updateStatus(json.field, 'INVALID', 'blank');
+						}
+					},
+				});
+			});
+		},
+		onChange : function(contents) {
+			var bv = $bv795Form.data('bootstrapValidator');
+			bv.revalidateField('detail');
+		}
+	}
+});
+
 }
 
 /**

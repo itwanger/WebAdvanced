@@ -8,6 +8,8 @@
 		<result column="password" property="password" />
 		<result column="roleName" property="roleName" />
 		<result column="roleId" property="roleId" />
+		<result column="detail" property="detail" />
+		<result column="headimg" property="headimg" />
 		<result column="create_date" property="create_date" />
 		<result column="update_date" property="update_date" />
 		<result column="del_flag" property="del_flag" />
@@ -15,10 +17,9 @@
 
 	<!--列 -->
 	<sql id="Base_Column_List">
-		u.id, u.username, u.password,
+		u.*,
 		r.name as roleName,
-		r.id as roleId,
-		u.create_date, u.update_date, u.del_flag
+		r.id as roleId
 	</sql>
 	
 	<sql id="queryJoins">
@@ -46,6 +47,12 @@
 			</if>
 			<if test="password != null">
 				password = #{password},
+			</if>
+			<if test="detail != null">
+				detail = #{detail},
+			</if>
+			<if test="headimg != null">
+				headimg = #{headimg},
 			</if>
 			<if test="del_flag != null">
 				del_flag = #{del_flag},

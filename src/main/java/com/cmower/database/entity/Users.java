@@ -7,6 +7,7 @@ public class Users extends DataEntity<Users> {
 	private String username;
 	private String password;
 	private String headimg;
+	private String detail;
 
 	private String roleName;
 	private Long roleId;
@@ -49,6 +50,14 @@ public class Users extends DataEntity<Users> {
 
 	public void setHeadimg(String headimg) {
 		this.headimg = headimg;
+	}
+
+	public String getDetail() {
+		return detail;
+	}
+
+	public void setDetail(String detail) {
+		this.detail = detail;
 	}
 
 }
