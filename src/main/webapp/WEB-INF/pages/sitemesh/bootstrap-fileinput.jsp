@@ -188,14 +188,34 @@
 			<div class="col-md-6">
 				<div class="box box-primary">
 					<div class="box-header with-border">
-						<h3 class="box-title">删除文件前提醒用户进行确认</h3>
+						<h3 class="box-title">切换主题</h3>
 					</div>
 					<div class="box-body">
-						<div class="kv-avatar text-center">
+								<input id="bf7845" name="bf7845[]" type="file" multiple>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">多文件上传 </h3>
+					</div>
+					<div class="box-body">
+						<input id="bf7846" name="bf7846[]" type="file" multiple webkitdirectory>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">拖放文件夹 </h3>
+					</div>
+					<div class="box-body">
 							<div class="file-loading">
-								<input id="bf7844" name="bf7844[]" type="file" multiple>
+								<input id="bf7847" name="bf7847[]" type="file" multiple>
 							</div>
-						</div>
 					</div>
 				</div>
 			</div>

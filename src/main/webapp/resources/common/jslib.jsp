@@ -67,6 +67,7 @@
 <!-- Bootstrap FileInput——增强版的HTML5文件输入框 -->
 <script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.8/js/fileinput.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.8/js/locales/zh.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.8/themes/explorer-fa/theme.js"></script>
 
 <!-- SlimScroll -->
 <script src="https://cdn.bootcss.com/jQuery-slimScroll/1.3.8/jquery.slimscroll.js"></script>
