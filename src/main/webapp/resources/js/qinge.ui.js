@@ -221,8 +221,10 @@ function initOnce() {
 				datasets : [ {
 					label : '得票数',
 					data : [ 12, 19, 3, 5, 2, 3 ],
-					backgroundColor : [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
-					borderColor : [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)' ],
+					backgroundColor : [ 'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)',
+							'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)' ],
+					borderColor : [ 'rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)',
+							'rgba(255, 159, 64, 1)' ],
 					borderWidth : 1,
 				} ]
 			},
@@ -440,7 +442,8 @@ function initOnce() {
 				labels : [ '几乎不可能', '看别人脸色', '天佑梅西' ],
 				datasets : [ {
 					label : '投票人数：',
-					backgroundColor : [ color(QINGE.chartjsColors.red).alpha(0.8).rgbString(), color(QINGE.chartjsColors.orange).alpha(0.8).rgbString(), color(QINGE.chartjsColors.green).alpha(0.8).rgbString() ],
+					backgroundColor : [ color(QINGE.chartjsColors.red).alpha(0.8).rgbString(), color(QINGE.chartjsColors.orange).alpha(0.8).rgbString(),
+							color(QINGE.chartjsColors.green).alpha(0.8).rgbString() ],
 					data : [ 20, 50, 30 ],
 				} ]
 			},
@@ -576,7 +579,8 @@ function initOnce() {
 		var labelingAxesChart = new Chart(labelingAxesChartCtx, {
 			type : 'bar',
 			data : {
-				labels : [ newDateString(0), newDateString(1), newDateString(2), newDateString(3), newDateString(4), newDateString(5), newDateString(6), newDateString(7) ],
+				labels : [ newDateString(0), newDateString(1), newDateString(2), newDateString(3), newDateString(4), newDateString(5), newDateString(6),
+						newDateString(7) ],
 				datasets : [ {
 					label : '投票人数：',
 					backgroundColor : QINGE.chartjsColors.red,
@@ -753,16 +757,17 @@ function initOnce() {
 			return repo.text;
 		}
 
-		var markup = "<div class='select2-result-repository clearfix'>" + "<div class='select2-result-repository__avatar'><img src='" + repo.owner.avatar_url + "' /></div>" + "<div class='select2-result-repository__meta'>"
-				+ "<div class='select2-result-repository__title'>" + repo.full_name + "</div>";
+		var markup = "<div class='select2-result-repository clearfix'>" + "<div class='select2-result-repository__avatar'><img src='" + repo.owner.avatar_url
+				+ "' /></div>" + "<div class='select2-result-repository__meta'>" + "<div class='select2-result-repository__title'>" + repo.full_name + "</div>";
 
 		if (repo.description) {
 			markup += "<div class='select2-result-repository__description'>" + repo.description + "</div>";
 		}
 
-		markup += "<div class='select2-result-repository__statistics'>" + "<div class='select2-result-repository__forks'><i class='fa fa-flash'></i> " + repo.forks_count + " Forks</div>"
-				+ "<div class='select2-result-repository__stargazers'><i class='fa fa-star'></i> " + repo.stargazers_count + " Stars</div>" + "<div class='select2-result-repository__watchers'><i class='fa fa-eye'></i> " + repo.watchers_count
-				+ " Watchers</div>" + "</div>" + "</div></div>";
+		markup += "<div class='select2-result-repository__statistics'>" + "<div class='select2-result-repository__forks'><i class='fa fa-flash'></i> "
+				+ repo.forks_count + " Forks</div>" + "<div class='select2-result-repository__stargazers'><i class='fa fa-star'></i> " + repo.stargazers_count
+				+ " Stars</div>" + "<div class='select2-result-repository__watchers'><i class='fa fa-eye'></i> " + repo.watchers_count + " Watchers</div>"
+				+ "</div>" + "</div></div>";
 
 		return markup;
 	}
@@ -1254,13 +1259,16 @@ function initOnce() {
 		allowedFileExtensions : [ "jpg", "png", "gif" ]
 	});
 
-	var previews1 = [ "<img src='/WebAdvanced/resources/images/Light A Fire.jpg' class='kv-preview-data file-preview-image' alt='Light A Fire' title='Light A Fire'>",
+	var previews1 = [
+			"<img src='/WebAdvanced/resources/images/Light A Fire.jpg' class='kv-preview-data file-preview-image' alt='Light A Fire' title='Light A Fire'>",
 			"<img src='/WebAdvanced/resources/images/Wisdom.jpg'  class='kv-preview-data file-preview-image' alt=Wisdom' title='Wisdom'>",
 			"<div class='kv-preview-data file-preview-other'>" + "<h3><i class='glyphicon glyphicon-file'></i></h3>" + "致读者的一封信.docx" + "</div>" ];
-	var previews2 = [ "<img src='/WebAdvanced/resources/images/Light A Fire.jpg' class='kv-preview-data file-preview-image' alt='Light A Fire' title='Light A Fire'>",
+	var previews2 = [
+			"<img src='/WebAdvanced/resources/images/Light A Fire.jpg' class='kv-preview-data file-preview-image' alt='Light A Fire' title='Light A Fire'>",
 			"<img src='/WebAdvanced/resources/images/Wisdom.jpg'  class='kv-preview-data file-preview-image' alt=Wisdom' title='Wisdom'>", ];
-	var previews3 = [ "/WebAdvanced/resources/images/Light A Fire.jpg", "<img src='/WebAdvanced/resources/images/Wisdom.jpg'  class='kv-preview-data file-preview-image' alt=Wisdom' title='Wisdom'>", "/WebAdvanced/resources/other/快乐每一天.mp3",
-			"/WebAdvanced/resources/other/致读者的一封信.pdf", ];
+	var previews3 = [ "/WebAdvanced/resources/images/Light A Fire.jpg",
+			"<img src='/WebAdvanced/resources/images/Wisdom.jpg'  class='kv-preview-data file-preview-image' alt=Wisdom' title='Wisdom'>",
+			"/WebAdvanced/resources/other/快乐每一天.mp3", "/WebAdvanced/resources/other/致读者的一封信.pdf", ];
 
 	$('#input-ajax-multiple').fileinput({
 		language : 'zh',
@@ -1445,7 +1453,8 @@ function initOnce() {
 		});
 	});
 
-	var previews4 = [ "/WebAdvanced/resources/images/Light A Fire.jpg", "/WebAdvanced/resources/images/Wisdom.jpg", "/WebAdvanced/resources/images/Ship In The Sand.jpg", ];
+	var previews4 = [ "/WebAdvanced/resources/images/Light A Fire.jpg", "/WebAdvanced/resources/images/Wisdom.jpg",
+			"/WebAdvanced/resources/images/Ship In The Sand.jpg", ];
 
 	$("#bf7845").fileinput({
 		language : 'zh',
@@ -1486,6 +1495,36 @@ function initOnce() {
 		hideThumbnailContent : true
 	});
 
+	$('#summernote').summernote(
+			{
+				lang : 'zh-CN',
+				toolbar : [
+				// [组名, [按钮列表]]
+				[ 'style', [ 'bold', 'italic', 'underline', 'clear' ] ], [ 'font', [ 'strikethrough', 'superscript', 'subscript' ] ],
+						[ 'fontsize', [ 'fontsize' ] ], [ 'color', [ 'color' ] ], [ 'para', [ 'ul', 'ol', 'paragraph' ] ], [ 'height', [ 'height' ] ] ],
+			});
+$('#summernote3').summernote({
+	lang : 'zh-CN',
+	airMode : true,
+	popover : {
+		air : [ [ 'color', [ 'color' ] ], [ 'font', [ 'bold', 'underline', 'clear' ] ] ]
+	}
+});
+	$('#summernote4').summernote({
+		lang : 'zh-CN',
+		fontNames : [ '黑体', '宋体', '楷体', '微软雅黑', 'Merriweather' ],
+		fontNamesIgnoreCheck : [ 'Merriweather' ]
+	});
+	$('#summernote-height').summernote({
+		height : 150
+	});
+	
+	
+
+	var markupStr = '一个人在20岁时如果不是激进派，那他一辈子都不会有出息；<br>假如他到了30岁还是个激进派，那他也不会有什么出息。';
+	$('#summernote').summernote('code', markupStr);
+	
+	$('#summernote5').summernote('editor.insertText', '学，然后知不足');
 }
 
 /**

@@ -236,6 +236,10 @@
 								<a href="${ctx}/sitemesh?p=bootstrap-fileinput"> <i class="fa fa-circle-o"></i> Bootstrap FileInput
 								</a>
 							</li>
+							<li class="summernote">
+								<a href="${ctx}/sitemesh?p=summernote"> <i class="fa fa-circle-o"></i> Summernote
+								</a>
+							</li>
 						</ul>
 					</li>
 					<li>

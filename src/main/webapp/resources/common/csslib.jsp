@@ -18,6 +18,7 @@
 <link href="https://cdn.bootcss.com/bootstrap-fileinput/4.4.8/css/fileinput.css" rel="stylesheet">
 <link href="https://cdn.bootcss.com/bootstrap-fileinput/4.4.8/css/fileinput-rtl.css" rel="stylesheet">
 <link href="https://cdn.bootcss.com/bootstrap-fileinput/4.4.8/themes/explorer-fa/theme.css" rel="stylesheet">
+<link href="https://cdn.bootcss.com/summernote/0.8.10/summernote.css" rel="stylesheet">
 
 <!-- AdminLTE -->
 <link rel="stylesheet" href="${ctx}/resources/components/adminlte/css/AdminLTE.css">
