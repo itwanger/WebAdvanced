@@ -240,6 +240,10 @@
 								<a href="${ctx}/sitemesh?p=summernote"> <i class="fa fa-circle-o"></i> Summernote
 								</a>
 							</li>
+							<li class="queryForm">
+								<a href="${ctx}/sitemesh?p=query-form"> <i class="fa fa-circle-o"></i> 查询类表单
+								</a>
+							</li>
 						</ul>
 					</li>
 					<li>

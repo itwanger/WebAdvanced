@@ -1,5 +1,7 @@
 package com.cmower.spring.controller.sitemesh;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,10 +23,14 @@ public class SitemeshController extends BaseController {
 		if ("summernote".equals(p)) {
 			Users user = this.userService.loadOne("wang");
 			model.addAttribute("detail", user.getDetail());
+		} else if ("query-form".equals(p)) {
+			Users param = new Users();
+			param.setRealname(getPara("realname"));
+			List<Users> list = this.userService.selectList(param);
+			model.addAttribute("list", list);
+			model.addAttribute("param", param);
 		}
 		
 		return "sitemesh/" + p;
 	}
-
-
 }

@@ -8,6 +8,9 @@ public class Users extends DataEntity<Users> {
 	private String password;
 	private String headimg;
 	private String detail;
+	private String brief;
+	private String realname;
+	private Integer status;
 
 	private String roleName;
 	private Long roleId;
@@ -58,6 +61,30 @@ public class Users extends DataEntity<Users> {
 
 	public void setDetail(String detail) {
 		this.detail = detail;
+	}
+
+	public String getRealname() {
+		return realname;
+	}
+
+	public void setRealname(String realname) {
+		this.realname = realname;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public String getBrief() {
+		return brief;
+	}
+
+	public void setBrief(String brief) {
+		this.brief = brief;
 	}
 
 }

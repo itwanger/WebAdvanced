@@ -1,5 +1,7 @@
 package com.cmower.spring.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +35,10 @@ public class UserService {
 		Users param = new Users();
 		param.setUsername(username);
 		return this.userMapper.loadOne(param);
+	}
+
+	public List<Users> selectList(Users param) {
+		return this.userMapper.selectList(param);
 	}
 
 }

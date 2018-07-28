@@ -10,6 +10,8 @@
 		<result column="roleId" property="roleId" />
 		<result column="detail" property="detail" />
 		<result column="headimg" property="headimg" />
+		<result column="status" property="status" />
+		<result column="brief" property="brief" />
 		<result column="create_date" property="create_date" />
 		<result column="update_date" property="update_date" />
 		<result column="del_flag" property="del_flag" />
@@ -81,6 +83,20 @@
 		where u.del_flag = 0
 		<if test="username != null">
 			and username = #{username}
+		</if>
+	</select>
+	
+	<select id="selectList" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from user as u
+		<include refid="queryJoins" />
+		where u.del_flag = 0
+		<if test="username != null and username != ''">
+			and username like CONCAT('%','${username}','%')
+		</if>
+		<if test="realname != null and realname != ''">
+			and realname like CONCAT('%','${realname}','%')
 		</if>
 	</select>
 

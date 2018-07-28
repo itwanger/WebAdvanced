@@ -723,3 +723,7 @@
     font-family: monospace;
     font-weight: normal;
 }
+
+.table tbody tr td {
+    vertical-align: middle!important;
+}
