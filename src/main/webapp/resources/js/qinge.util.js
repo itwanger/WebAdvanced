@@ -49,17 +49,18 @@ var chartjs = {
 				data: {
 					labels: ['一月', '二月', '三月', '四月', '五月', '六月', '七月'],
 					datasets: [{
-						label: '红色',
+						label: '虚线',
 						borderColor: QINGE.chartjsColors.red,
 						backgroundColor: QINGE.chartjsColors.red,
 						data: [10, 30, 46, 2, 8, 50, 0],
 						fill: false,
 					}, {
-						label: '蓝色',
+						label: '实线',
 						borderColor: QINGE.chartjsColors.blue,
 						backgroundColor: QINGE.chartjsColors.blue,
 						data: [7, 49, 46, 13, 25, 30, 22],
 						fill: false,
+						borderDash: [5, 5],
 					}]
 				},
 				options: {
@@ -78,17 +79,18 @@ var chartjs = {
 				data: {
 					labels: ['一月', '二月', '三月', '四月', '五月', '六月', '七月'],
 					datasets: [{
-						label: '红色',
+						label: '实线',
 						borderColor: QINGE.chartjsColors.red,
 						backgroundColor: QINGE.chartjsColors.red,
 						data: [10, 30, 46, 2, 8, 50, 0],
 						fill: false,
 					}, {
-						label: '蓝色',
+						label: '虚线',
 						borderColor: QINGE.chartjsColors.blue,
 						backgroundColor: QINGE.chartjsColors.blue,
 						data: [7, 49, 46, 13, 25, 30, 22],
 						fill: false,
+						borderDash: [5, 5],
 					}]
 				},
 				options: {
