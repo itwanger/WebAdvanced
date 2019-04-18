@@ -35,7 +35,7 @@
 <script src="https://cdn.bootcss.com/jquery.bootstrapvalidator/0.5.3/js/language/zh_CN.js"></script>
 
 <!-- Validform -->
-<script src="${ctx}//resources/components/validform/js/Validform_v5.3.2.js"></script>
+<script src="${ctx}/resources/components/validform/js/Validform_v5.3.2.js"></script>
 
 <!-- Layer——更友好的Web弹层组件 -->
 <script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
